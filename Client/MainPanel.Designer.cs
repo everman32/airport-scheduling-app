@@ -60,7 +60,7 @@ namespace Client
             this.buttonConnectClient.UseVisualStyleBackColor = true;
             this.buttonConnectClient.Click += new System.EventHandler(this.buttonConnectClient_Click);
             // 
-            // MainForm
+            // MainPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -69,8 +69,9 @@ namespace Client
             this.Controls.Add(this.buttonConnectClient);
             this.Controls.Add(this.textBoxPort);
             this.Controls.Add(this.labelPort);
-            this.Name = "MainForm";
+            this.Name = "MainPanel";
             this.Text = "MainForm";
+            this.Load += new System.EventHandler(this.MainPanel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

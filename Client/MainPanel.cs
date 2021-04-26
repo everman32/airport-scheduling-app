@@ -40,10 +40,13 @@ namespace Client
             client.connectClient(port);
             buttonConnectClient.Enabled = false;
             textBoxPort.Enabled = false;
-            LoginRegisterPanel loginRegisterPanel= new LoginRegisterPanel();
+            LoginRegisterPanel loginRegisterPanel= new LoginRegisterPanel(this);
+            Hide();
             loginRegisterPanel.Show();
+        }
 
-
+        private void MainPanel_Load(object sender, EventArgs e)
+        {
 
         }
     }

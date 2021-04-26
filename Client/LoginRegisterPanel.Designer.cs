@@ -31,6 +31,7 @@ namespace Client
         {
             this.buttonAuthorizationPanel = new System.Windows.Forms.Button();
             this.buttonRegisterPanel = new System.Windows.Forms.Button();
+            this.buttonBackMainForm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonAuthorizationPanel
@@ -41,6 +42,7 @@ namespace Client
             this.buttonAuthorizationPanel.TabIndex = 0;
             this.buttonAuthorizationPanel.Text = "Авторизация";
             this.buttonAuthorizationPanel.UseVisualStyleBackColor = true;
+            this.buttonAuthorizationPanel.Click += new System.EventHandler(this.buttonAuthorizationPanel_Click);
             // 
             // buttonRegisterPanel
             // 
@@ -51,15 +53,28 @@ namespace Client
             this.buttonRegisterPanel.Text = "Регистрация";
             this.buttonRegisterPanel.UseVisualStyleBackColor = true;
             // 
+            // buttonBackMainForm
+            // 
+            this.buttonBackMainForm.Location = new System.Drawing.Point(12, 133);
+            this.buttonBackMainForm.Name = "buttonBackMainForm";
+            this.buttonBackMainForm.Size = new System.Drawing.Size(75, 23);
+            this.buttonBackMainForm.TabIndex = 2;
+            this.buttonBackMainForm.Text = "<< Назад";
+            this.buttonBackMainForm.UseVisualStyleBackColor = true;
+            this.buttonBackMainForm.Click += new System.EventHandler(this.buttonBackMainForm_Click);
+            // 
             // LoginRegisterPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.RosyBrown;
             this.ClientSize = new System.Drawing.Size(334, 168);
+            this.Controls.Add(this.buttonBackMainForm);
             this.Controls.Add(this.buttonRegisterPanel);
             this.Controls.Add(this.buttonAuthorizationPanel);
             this.Name = "LoginRegisterPanel";
             this.Text = "LoginRegisterPanel";
+            this.Load += new System.EventHandler(this.LoginRegisterPanel_Load);
             this.ResumeLayout(false);
 
         }
@@ -68,5 +83,6 @@ namespace Client
 
         private System.Windows.Forms.Button buttonAuthorizationPanel;
         private System.Windows.Forms.Button buttonRegisterPanel;
+        private System.Windows.Forms.Button buttonBackMainForm;
     }
 }
