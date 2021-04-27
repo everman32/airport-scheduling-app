@@ -61,6 +61,7 @@ namespace Client
             this.buttonLogin.TabIndex = 2;
             this.buttonLogin.Text = "Войти";
             this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // textBoxLogin
             // 
@@ -119,6 +120,7 @@ namespace Client
             this.Controls.Add(this.txt213);
             this.Name = "LoginPanel";
             this.Text = "LoginPanel";
+            this.Load += new System.EventHandler(this.LoginPanel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

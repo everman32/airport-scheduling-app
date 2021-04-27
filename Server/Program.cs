@@ -10,28 +10,36 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            int port;
-            Console.Write("Введите порт для прослушивания сервером: ");
-            for (; ; )
+            try
             {
-                try
+                SQLCommander.ConnectToDatabase();
+                int port;
+                Console.Write("Введите порт для прослушивания сервером: ");
+                for (; ; )
                 {
-                    port = Convert.ToInt32(Console.ReadLine());
-                    if (port > 0 && port < 65535)
+                    try
                     {
-                    break;
+                        port = Convert.ToInt32(Console.ReadLine());
+                        if (port > 0 && port < 65535)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Порт должен быть в диапазоне от 0 до 65535");
+                        }
                     }
-                    else
+                    catch
                     {
-                        Console.WriteLine("Порт должен быть в диапазоне от 0 до 65535");
+                        Console.WriteLine("Порт должен быть целым положительным числом");
                     }
                 }
-                catch
-                {
-                    Console.WriteLine("Порт должен быть целым положительным числом");
-                }
+                Server.Run(port);
             }
-            Server.Run(port);
+            catch (Exception exception)
+            {
+                Console.WriteLine("Не удалось подключиться к базе данных " + exception.Message);
+            }
         }
     }
 }

@@ -12,7 +12,6 @@ namespace Server
 {
     class Server
     {
-
         static TcpListener listener;
        static public void Run(int port)
         {
