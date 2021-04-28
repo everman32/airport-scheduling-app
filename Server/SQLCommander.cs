@@ -17,22 +17,25 @@ namespace Server
             sqlConnection = new SqlConnection();
             sqlConnection.ConnectionString = @"Data Source = .\SQLEXPRESS; Initial Catalog = Airport; Integrated Security = True;";
             sqlConnection.Open();
-            /*
-            Console.WriteLine("База данных Airport подключена");*/
+            
+            Console.WriteLine("База данных Airport подключена");
         }
-        static public string CheckLogin(StringBuilder login, StringBuilder password)
+        static public DataTable CheckLogin(string login, string password)
         {
             SqlCommand sqlCommand = new SqlCommand();
-            string query;
-            query = sqlCommand.CommandText = "SELECT * FROM Account WHERE Login='" + login + "' AND Password='" + password + "' ";
-            SqlDataAdapter adapter = new SqlDataAdapter(query, sqlConnection);
-            DataTable dtbl = new DataTable();
-            adapter.Fill(dtbl);
+            sqlCommand.CommandText = "SELECT * FROM [Account] WHERE (Login='" + login.Normalize() + "' AND Password='" + password.Normalize() + "') ";
+            sqlCommand.Connection = sqlConnection;
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+            /*
             if (dtbl.Rows.Count == 1)
             {
                 return "1";
             }
             return "0";
+            */
+            return dataTable;
         }
 
 

@@ -8,16 +8,16 @@ using System.Windows.Forms;
 
 namespace Client
 {
-    public partial class AdminPanel : Form
+    public partial class AvianavigationSpecialistForm : Form
     {
         public Form form;
-        public AdminPanel(LoginPanel loginPanel)
+        public AvianavigationSpecialistForm(LoginForm loginForm)
         {
             InitializeComponent();
-            form = loginPanel;
+            form = loginForm;
         }
 
-        private void buttonBackLogin_Click(object sender, EventArgs e)
+        private void buttonBackLogReg_Click(object sender, EventArgs e)
         {
             Hide();
             form.Show();

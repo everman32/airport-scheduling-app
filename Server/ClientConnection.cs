@@ -5,9 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Data.SqlClient;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Data;
+using System.IO;
 
 namespace Server
 {
+    [Serializable]
     class ClientConnection
     {
         public TcpClient client;
@@ -70,33 +74,36 @@ namespace Server
                     if (command == "Login")
                     {
                         data = new byte[64];
-                        StringBuilder login = new StringBuilder();
+                        builder = new StringBuilder();
                         bytes = 0;
 
                         do
                         {
                             bytes = stream.Read(data, 0, data.Length);
-                            login.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                            builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
                         }
                         while (stream.DataAvailable);
 
+                        string login = builder.ToString();
+
                         data = new byte[64];
-                        StringBuilder password = new StringBuilder();
+                        builder = new StringBuilder();
                         bytes = 0;
 
                         do
                         {
                             bytes = stream.Read(data, 0, data.Length);
-                            password.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                            builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
                         }
                         while (stream.DataAvailable);
 
-                       string checkLogin=SQLCommander.CheckLogin(login, password);
+                        string password = builder.ToString();
 
-                        data = new byte[64];
-                        data = Encoding.Unicode.GetBytes(checkLogin);
+                       DataTable dataTable=SQLCommander.CheckLogin(login, password);
 
-                        stream.Write(data, 0, data.Length);
+                        byte[]auth_data=GetBinaryFormatData(dataTable);
+
+                        stream.Write(auth_data, 0, auth_data.Length);
 
                         }
                     /*
@@ -120,5 +127,17 @@ namespace Server
             }
             */
         }
+        static byte[] GetBinaryFormatData(DataTable dataTable)
+        {
+            BinaryFormatter bFormat = new BinaryFormatter();
+            byte[] outList = null;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bFormat.Serialize(ms, dataTable);
+                outList = ms.ToArray();
+            }
+            return outList;
+        }
     }
+    
 }

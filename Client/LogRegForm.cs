@@ -8,10 +8,10 @@ using System.Windows.Forms;
 
 namespace Client
 {
-    public partial class LoginRegisterPanel : Form
+    public partial class LogRegForm : Form
     {
         public Form mainPanel;
-        public LoginRegisterPanel(MainPanel main)
+        public LogRegForm(MainForm main)
         {
             InitializeComponent();
             mainPanel = main;
@@ -30,8 +30,8 @@ namespace Client
 
         private void buttonAuthorizationPanel_Click(object sender, EventArgs e)
         {
-            LoginPanel loginPanel;
-            loginPanel = new LoginPanel(this);
+            LoginForm loginPanel;
+            loginPanel = new LoginForm(this);
             Hide();
             loginPanel.Show();
         }

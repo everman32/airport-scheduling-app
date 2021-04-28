@@ -1,7 +1,7 @@
 ﻿
 namespace Client
 {
-    partial class LoginPanel
+    partial class LoginForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,33 +29,18 @@ namespace Client
         /// </summary>
         private void InitializeComponent()
         {
-            this.txt213 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.textBoxLogin = new System.Windows.Forms.TextBox();
             this.textBoxPass = new System.Windows.Forms.TextBox();
             this.labelLogin = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.buttonBackLoginRegister = new System.Windows.Forms.Button();
+            this.labelPass = new System.Windows.Forms.Label();
+            this.buttonBackLogRegForm = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // txt213
-            // 
-            this.txt213.Location = new System.Drawing.Point(1018, 317);
-            this.txt213.Name = "txt213";
-            this.txt213.Size = new System.Drawing.Size(100, 23);
-            this.txt213.TabIndex = 0;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(1019, 385);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 23);
-            this.textBox2.TabIndex = 1;
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(116, 144);
+            this.buttonLogin.Enabled = false;
+            this.buttonLogin.Location = new System.Drawing.Point(162, 179);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(110, 27);
             this.buttonLogin.TabIndex = 2;
@@ -65,61 +50,62 @@ namespace Client
             // 
             // textBoxLogin
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(116, 42);
+            this.textBoxLogin.Location = new System.Drawing.Point(162, 77);
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(110, 23);
             this.textBoxLogin.TabIndex = 3;
+            this.textBoxLogin.TextChanged += new System.EventHandler(this.textBoxLogin_TextChanged);
             // 
             // textBoxPass
             // 
-            this.textBoxPass.Location = new System.Drawing.Point(116, 104);
+            this.textBoxPass.Location = new System.Drawing.Point(162, 139);
             this.textBoxPass.Name = "textBoxPass";
+            this.textBoxPass.PasswordChar = '*';
             this.textBoxPass.Size = new System.Drawing.Size(110, 23);
             this.textBoxPass.TabIndex = 4;
+            this.textBoxPass.TextChanged += new System.EventHandler(this.textBoxPass_TextChanged);
             // 
             // labelLogin
             // 
             this.labelLogin.AutoSize = true;
-            this.labelLogin.Location = new System.Drawing.Point(50, 45);
+            this.labelLogin.Location = new System.Drawing.Point(96, 80);
             this.labelLogin.Name = "labelLogin";
             this.labelLogin.Size = new System.Drawing.Size(44, 15);
             this.labelLogin.TabIndex = 5;
             this.labelLogin.Text = "Логин:";
             // 
-            // label2
+            // labelPass
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(50, 107);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 15);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Пароль:";
+            this.labelPass.AutoSize = true;
+            this.labelPass.Location = new System.Drawing.Point(96, 142);
+            this.labelPass.Name = "labelPass";
+            this.labelPass.Size = new System.Drawing.Size(52, 15);
+            this.labelPass.TabIndex = 6;
+            this.labelPass.Text = "Пароль:";
             // 
-            // buttonBackLoginRegister
+            // buttonBackLogRegForm
             // 
-            this.buttonBackLoginRegister.Location = new System.Drawing.Point(16, 164);
-            this.buttonBackLoginRegister.Name = "buttonBackLoginRegister";
-            this.buttonBackLoginRegister.Size = new System.Drawing.Size(75, 23);
-            this.buttonBackLoginRegister.TabIndex = 7;
-            this.buttonBackLoginRegister.Text = "<< Назад";
-            this.buttonBackLoginRegister.UseVisualStyleBackColor = true;
-            this.buttonBackLoginRegister.Click += new System.EventHandler(this.buttonBackLoginRegister_Click);
+            this.buttonBackLogRegForm.Location = new System.Drawing.Point(44, 243);
+            this.buttonBackLogRegForm.Name = "buttonBackLogRegForm";
+            this.buttonBackLogRegForm.Size = new System.Drawing.Size(75, 23);
+            this.buttonBackLogRegForm.TabIndex = 7;
+            this.buttonBackLogRegForm.Text = "<< Назад";
+            this.buttonBackLogRegForm.UseVisualStyleBackColor = true;
+            this.buttonBackLogRegForm.Click += new System.EventHandler(this.buttonBackLoginRegister_Click);
             // 
-            // LoginPanel
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(326, 198);
-            this.Controls.Add(this.buttonBackLoginRegister);
-            this.Controls.Add(this.label2);
+            this.ClientSize = new System.Drawing.Size(413, 304);
+            this.Controls.Add(this.buttonBackLogRegForm);
+            this.Controls.Add(this.labelPass);
             this.Controls.Add(this.labelLogin);
             this.Controls.Add(this.textBoxPass);
             this.Controls.Add(this.textBoxLogin);
             this.Controls.Add(this.buttonLogin);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.txt213);
-            this.Name = "LoginPanel";
-            this.Text = "LoginPanel";
+            this.Name = "LoginForm";
+            this.Text = "LoginForm";
             this.Load += new System.EventHandler(this.LoginPanel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -127,14 +113,11 @@ namespace Client
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txt213;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.TextBox textBoxLogin;
         private System.Windows.Forms.TextBox textBoxPass;
         private System.Windows.Forms.Label labelLogin;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button buttonBackLoginRegister;
+        private System.Windows.Forms.Label labelPass;
+        private System.Windows.Forms.Button buttonBackLogRegForm;
     }
 }

@@ -11,9 +11,9 @@ using System.Net.Sockets;
 
 namespace Client
 {
-    public partial class MainPanel : Form
+    public partial class MainForm : Form
     {
-        public MainPanel()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -36,11 +36,11 @@ namespace Client
                 return;
             }
 
-            Client client = new Client();
-            client.connectClient(port);
+            Client client = new Client("127.0.0.1",port);
+            client.connectClient();
             buttonConnectClient.Enabled = false;
             textBoxPort.Enabled = false;
-            LoginRegisterPanel loginRegisterPanel= new LoginRegisterPanel(this);
+            LogRegForm loginRegisterPanel= new LogRegForm(this);
             Hide();
             loginRegisterPanel.Show();
         }
@@ -48,6 +48,21 @@ namespace Client
         private void MainPanel_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private bool textBoxPortCheck_empty()
+        {
+                    if (textBoxPort.Text==string.Empty )
+                    {
+                        buttonConnectClient.Enabled = false;
+                        return false;
+                    }
+            buttonConnectClient.Enabled = true;
+            return true;
+        }
+        private void textBoxPort_TextChanged(object sender, EventArgs e)
+        {
+            if 
         }
     }
 }

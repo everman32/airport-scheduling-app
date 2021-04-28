@@ -1,7 +1,7 @@
 ﻿
 namespace Client
 {
-    partial class LoginRegisterPanel
+    partial class LogRegForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,29 +29,29 @@ namespace Client
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonAuthorizationPanel = new System.Windows.Forms.Button();
-            this.buttonRegisterPanel = new System.Windows.Forms.Button();
+            this.buttonLogForm = new System.Windows.Forms.Button();
+            this.buttonRegForm = new System.Windows.Forms.Button();
             this.buttonBackMainForm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // buttonAuthorizationPanel
+            // buttonLogForm
             // 
-            this.buttonAuthorizationPanel.Location = new System.Drawing.Point(117, 38);
-            this.buttonAuthorizationPanel.Name = "buttonAuthorizationPanel";
-            this.buttonAuthorizationPanel.Size = new System.Drawing.Size(99, 29);
-            this.buttonAuthorizationPanel.TabIndex = 0;
-            this.buttonAuthorizationPanel.Text = "Авторизация";
-            this.buttonAuthorizationPanel.UseVisualStyleBackColor = true;
-            this.buttonAuthorizationPanel.Click += new System.EventHandler(this.buttonAuthorizationPanel_Click);
+            this.buttonLogForm.Location = new System.Drawing.Point(117, 38);
+            this.buttonLogForm.Name = "buttonLogForm";
+            this.buttonLogForm.Size = new System.Drawing.Size(99, 29);
+            this.buttonLogForm.TabIndex = 0;
+            this.buttonLogForm.Text = "Авторизация";
+            this.buttonLogForm.UseVisualStyleBackColor = true;
+            this.buttonLogForm.Click += new System.EventHandler(this.buttonAuthorizationPanel_Click);
             // 
-            // buttonRegisterPanel
+            // buttonRegForm
             // 
-            this.buttonRegisterPanel.Location = new System.Drawing.Point(117, 94);
-            this.buttonRegisterPanel.Name = "buttonRegisterPanel";
-            this.buttonRegisterPanel.Size = new System.Drawing.Size(99, 29);
-            this.buttonRegisterPanel.TabIndex = 1;
-            this.buttonRegisterPanel.Text = "Регистрация";
-            this.buttonRegisterPanel.UseVisualStyleBackColor = true;
+            this.buttonRegForm.Location = new System.Drawing.Point(117, 94);
+            this.buttonRegForm.Name = "buttonRegForm";
+            this.buttonRegForm.Size = new System.Drawing.Size(99, 29);
+            this.buttonRegForm.TabIndex = 1;
+            this.buttonRegForm.Text = "Регистрация";
+            this.buttonRegForm.UseVisualStyleBackColor = true;
             // 
             // buttonBackMainForm
             // 
@@ -63,17 +63,17 @@ namespace Client
             this.buttonBackMainForm.UseVisualStyleBackColor = true;
             this.buttonBackMainForm.Click += new System.EventHandler(this.buttonBackMainForm_Click);
             // 
-            // LoginRegisterPanel
+            // LogRegForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.RosyBrown;
             this.ClientSize = new System.Drawing.Size(334, 168);
             this.Controls.Add(this.buttonBackMainForm);
-            this.Controls.Add(this.buttonRegisterPanel);
-            this.Controls.Add(this.buttonAuthorizationPanel);
-            this.Name = "LoginRegisterPanel";
-            this.Text = "LoginRegisterPanel";
+            this.Controls.Add(this.buttonRegForm);
+            this.Controls.Add(this.buttonLogForm);
+            this.Name = "LogRegForm";
+            this.Text = "LogRegForm";
             this.Load += new System.EventHandler(this.LoginRegisterPanel_Load);
             this.ResumeLayout(false);
 
@@ -81,8 +81,8 @@ namespace Client
 
         #endregion
 
-        private System.Windows.Forms.Button buttonAuthorizationPanel;
-        private System.Windows.Forms.Button buttonRegisterPanel;
+        private System.Windows.Forms.Button buttonLogForm;
+        private System.Windows.Forms.Button buttonRegForm;
         private System.Windows.Forms.Button buttonBackMainForm;
     }
 }

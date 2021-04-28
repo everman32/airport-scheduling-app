@@ -1,7 +1,7 @@
 ﻿
 namespace Client
 {
-    partial class AdminPanel
+    partial class AdminForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,33 +29,33 @@ namespace Client
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonBackLogin = new System.Windows.Forms.Button();
+            this.buttonBackLogForm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // buttonBackLogin
+            // buttonBackLogForm
             // 
-            this.buttonBackLogin.Location = new System.Drawing.Point(22, 367);
-            this.buttonBackLogin.Name = "buttonBackLogin";
-            this.buttonBackLogin.Size = new System.Drawing.Size(75, 23);
-            this.buttonBackLogin.TabIndex = 0;
-            this.buttonBackLogin.Text = "<< Назад";
-            this.buttonBackLogin.UseVisualStyleBackColor = true;
-            this.buttonBackLogin.Click += new System.EventHandler(this.buttonBackLogin_Click);
+            this.buttonBackLogForm.Location = new System.Drawing.Point(22, 367);
+            this.buttonBackLogForm.Name = "buttonBackLogForm";
+            this.buttonBackLogForm.Size = new System.Drawing.Size(80, 39);
+            this.buttonBackLogForm.TabIndex = 0;
+            this.buttonBackLogForm.Text = "<< Назад";
+            this.buttonBackLogForm.UseVisualStyleBackColor = true;
+            this.buttonBackLogForm.Click += new System.EventHandler(this.buttonBackLogin_Click);
             // 
-            // AdminPanel
+            // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(516, 418);
-            this.Controls.Add(this.buttonBackLogin);
-            this.Name = "AdminPanel";
-            this.Text = "AdminPanel";
+            this.Controls.Add(this.buttonBackLogForm);
+            this.Name = "AdminForm";
+            this.Text = "AdminForm";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button buttonBackLogin;
+        private System.Windows.Forms.Button buttonBackLogForm;
     }
 }

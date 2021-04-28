@@ -1,7 +1,7 @@
 ﻿
 namespace Client
 {
-    partial class MainPanel
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -49,6 +49,7 @@ namespace Client
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(108, 23);
             this.textBoxPort.TabIndex = 1;
+            this.textBoxPort.TextChanged += new System.EventHandler(this.textBoxPort_TextChanged);
             // 
             // buttonConnectClient
             // 
@@ -60,7 +61,7 @@ namespace Client
             this.buttonConnectClient.UseVisualStyleBackColor = true;
             this.buttonConnectClient.Click += new System.EventHandler(this.buttonConnectClient_Click);
             // 
-            // MainPanel
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -69,7 +70,7 @@ namespace Client
             this.Controls.Add(this.buttonConnectClient);
             this.Controls.Add(this.textBoxPort);
             this.Controls.Add(this.labelPort);
-            this.Name = "MainPanel";
+            this.Name = "MainForm";
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainPanel_Load);
             this.ResumeLayout(false);
