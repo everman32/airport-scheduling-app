@@ -44,11 +44,11 @@ namespace Server
                 }
                 while (stream.DataAvailable);
                 string message = builder.ToString();
+                Array.Clear(data, 0, data.Length);
                 Console.WriteLine(message);
 
                 for (; ; )
                 {
-                    data = new byte[64];
                     builder = new StringBuilder();
                     bytes = 0;
 
@@ -61,8 +61,8 @@ namespace Server
 
                     if
                         ((builder.ToString() == "Login") ||
-                                        (builder.ToString() == "Register") /*||
-                                        (builder.ToString() == "DELETE COMPANY") ||
+                                        (builder.ToString() == "Register")||
+                                        (builder.ToString() == "Select clients")/* ||
                                         (builder.ToString() == "UPDATE COMPANY") ||
                                         (builder.ToString() == "SELECT SEEKER") ||
                                         (builder.ToString() == "ADD SEEKER") ||
@@ -75,10 +75,15 @@ namespace Server
                     {
                         ClientConnection.ReceiveAuthorize(stream);  
                     }
-                    if (command =="Register")
+                    else if (command =="Register")
                     {
                         ClientConnection.ReceiveRegister(stream);
                     }
+                    else if (command == "Select clients")
+                    {
+                        ClientConnection.SendClients(stream);
+                    }
+                    
                     /*
                     message = "Ваше сообщение доставлено";
                     data = Encoding.Unicode.GetBytes(message);
@@ -113,79 +118,84 @@ namespace Server
         }
         static void ReceiveAuthorize(NetworkStream stream)
         {
-            byte[]data = new byte[64];
+            byte[]Login = new byte[64];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
 
             do
             {
-                bytes = stream.Read(data, 0, data.Length);
-                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                bytes = stream.Read(Login, 0, Login.Length);
+                builder.Append(Encoding.Unicode.GetString(Login, 0, bytes));
             }
             while (stream.DataAvailable);
             string login = builder.ToString();
 
-            data = new byte[64];
+            byte[] Password = new byte[64];
             builder = new StringBuilder();
             bytes = 0;
 
             do
             {
-                bytes = stream.Read(data, 0, data.Length);
-                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                bytes = stream.Read(Password, 0, Password.Length);
+                builder.Append(Encoding.Unicode.GetString(Password, 0, bytes));
             }
             while (stream.DataAvailable);
             string password = builder.ToString();
 
             DataTable dataTable = SQLCommander.SelectAccount(login, password);
-            byte[] auth_data = GetBinaryFormatData(dataTable);
-            stream.Write(auth_data, 0, auth_data.Length);
+            byte[] data = GetBinaryFormatData(dataTable);
+            stream.Write(data, 0, data.Length);
         }
 
         static void ReceiveRegister(NetworkStream stream)
         {
-            byte[] data = new byte[64];
+            byte[] Login = new byte[64];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
 
             do
             {
-                bytes = stream.Read(data, 0, data.Length);
-                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                bytes = stream.Read(Login, 0, Login.Length);
+                builder.Append(Encoding.Unicode.GetString(Login, 0, bytes));
             }
             while (stream.DataAvailable);
             string login = builder.ToString();
 
-            data = new byte[64];
+            byte[]Password = new byte[64];
             builder = new StringBuilder();
             bytes = 0;
 
             do
             {
-                bytes = stream.Read(data, 0, data.Length);
-                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                bytes = stream.Read(Password, 0, Password.Length);
+                builder.Append(Encoding.Unicode.GetString(Password, 0, bytes));
             }
             while (stream.DataAvailable);
             string password = builder.ToString();
 
-            data = new byte[64];
+            byte[]TypeAccount = new byte[64];
             builder = new StringBuilder();
             bytes = 0;
 
             do
             {
-                bytes = stream.Read(data, 0, data.Length);
-                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                bytes = stream.Read(TypeAccount, 0, TypeAccount.Length);
+                builder.Append(Encoding.Unicode.GetString(TypeAccount, 0, bytes));
             }
             while (stream.DataAvailable);
             string typeAccount = builder.ToString();
 
             DataTable dataTable = SQLCommander.InsertAccount(login, password,typeAccount);
-            byte[] reg_data = GetBinaryFormatData(dataTable);
-            stream.Write(reg_data, 0, reg_data.Length);
+            byte[] data = GetBinaryFormatData(dataTable);
+            stream.Write(data, 0, data.Length);
         }
 
-
+        static void SendClients(NetworkStream stream)
+        {
+            DataTable dataTable = SQLCommander.SelectClients();
+            byte[] data = GetBinaryFormatData(dataTable);
+            stream.Write(data, 0, data.Length);
+        }
 
 
 

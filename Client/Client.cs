@@ -27,22 +27,19 @@ namespace Client
             byte[] data = Encoding.Unicode.GetBytes("Клиент подключён");
             stream.Write(data, 0, data.Length);
         }
-        static public void SendRequestToServer(string request)
+        static public void SendRequestToServer(string Request)
         {
-            byte[] data = Encoding.Unicode.GetBytes(request);
-            stream.Write(data,0,data.Length);
+            byte[] request = Encoding.Unicode.GetBytes(Request);
+            stream.Write(request, 0, request.Length);
         }
-        static public DataTable SendAuthorizeServer(string login, string password)
+        static public DataTable SendAuthorizeServer(string Login, string Password)
         {
-            {
-                byte[] data = Encoding.Unicode.GetBytes(login);
-                stream.Write(data, 0, data.Length);
-            }
-            {
-                byte[] data = Encoding.Unicode.GetBytes(password);
-                stream.Write(data, 0, data.Length);
-            }
-            {
+                byte[] login = Encoding.Unicode.GetBytes(Login);
+                stream.Write(login, 0, login.Length);
+
+                byte[]password= Encoding.Unicode.GetBytes(Password);
+                stream.Write(password, 0, password.Length);
+
                 byte[] data = new byte[10000];
                 int bytes = 0;
 
@@ -52,24 +49,20 @@ namespace Client
                 }
                 while (stream.DataAvailable);
                 DataTable dataTable = GetDataTable(data);
+                Array.Clear(data,0,data.Length);
                 return dataTable;
-            }
         }
-        static public DataTable SendRegisterServer(string login, string password,int typeAccount)
+        static public DataTable SendRegisterServer(string Login, string Password,int TypeAccount)
         {
-            {
-                byte[] data = Encoding.Unicode.GetBytes(login);
-                stream.Write(data, 0, data.Length);
-            }
-            {
-                byte[] data = Encoding.Unicode.GetBytes(password);
-                stream.Write(data, 0, data.Length);
-            }
-            {
-                byte[] data = Encoding.Unicode.GetBytes(typeAccount.ToString());
-                stream.Write(data, 0, data.Length);
-            }
-            {
+                byte[] login = Encoding.Unicode.GetBytes(Login);
+                stream.Write(login, 0, login.Length);
+
+                byte[] password = Encoding.Unicode.GetBytes(Password);
+                stream.Write(password, 0, password.Length);
+
+                byte[] typeAccount = Encoding.Unicode.GetBytes(TypeAccount.ToString());
+                stream.Write(typeAccount, 0, typeAccount.Length);
+
                 byte[] data = new byte[10000];
                 int bytes = 0;
 
@@ -79,10 +72,26 @@ namespace Client
                 }
                 while (stream.DataAvailable);
                 DataTable dataTable = GetDataTable(data);
+                Array.Clear(data, 0, data.Length);
                 return dataTable;
-            }
         }
-        static private DataTable GetDataTable(byte[] data)
+
+        static public DataTable SendSelectClients()
+        {
+            byte[]data = new byte[10000];
+            int bytes = 0;
+
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+
+            static private DataTable GetDataTable(byte[] data)
         {
             DataTable dataTable = null;
             BinaryFormatter bFormat = new BinaryFormatter();

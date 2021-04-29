@@ -55,6 +55,18 @@ namespace Server
             return dataTable;
         }
 
+        static public DataTable SelectClients()
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT * FROM [Client]";
+            sqlCommand.Connection = sqlConnection;
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+
+            return dataTable;
+        }
+
 
 
 
