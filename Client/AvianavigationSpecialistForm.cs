@@ -16,6 +16,11 @@ namespace Client
             InitializeComponent();
             form = loginForm;
         }
+        public AvianavigationSpecialistForm(RegistrationForm registrationForm)
+        {
+            InitializeComponent();
+            form = registrationForm;
+        }
 
         private void buttonBackLogReg_Click(object sender, EventArgs e)
         {

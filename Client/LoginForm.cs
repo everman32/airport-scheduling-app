@@ -32,7 +32,7 @@ namespace Client
         {
             Client.SendRequestToServer("Login");
 
-            DataTable dataTable = Client.SendAuthToServerReceive(textBoxLogin.Text, textBoxPass.Text);
+            DataTable dataTable = Client.SendAuthorizeServer(textBoxLogin.Text, textBoxPass.Text);
             if (dataTable.Rows.Count == 1)
             {
                 if (dataTable.Rows[0][2].ToString() == "1")
@@ -51,6 +51,7 @@ namespace Client
                 }
                 Client.login = textBoxLogin.Text;
                 Client.password = textBoxPass.Text;
+                MessageBox.Show("Авторизация выполнена. Вы вошли как " + Client.login);
             }
         else if (dataTable.Rows.Count == 0)
             {

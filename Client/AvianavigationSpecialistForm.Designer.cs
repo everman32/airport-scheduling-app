@@ -46,10 +46,11 @@ namespace Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.BurlyWood;
             this.ClientSize = new System.Drawing.Size(514, 357);
             this.Controls.Add(this.buttonBackLogForm);
             this.Name = "AvianavigationSpecialistForm";
-            this.Text = "AvianavigationSpecialistForm";
+            this.Text = "Окно авинавигационного специалиста";
             this.ResumeLayout(false);
 
         }

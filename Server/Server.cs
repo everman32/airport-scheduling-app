@@ -28,8 +28,7 @@ namespace Server
                     ClientConnection clientobj = new ClientConnection(client);
 
                     Thread clientThread = new Thread(new ThreadStart(clientobj.connectClient));
-                    clientThread.Start();
-                        
+                    clientThread.Start();     
                 }
             }
             catch (Exception exception)

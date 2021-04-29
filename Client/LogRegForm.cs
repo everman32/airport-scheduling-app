@@ -35,5 +35,13 @@ namespace Client
             Hide();
             loginPanel.Show();
         }
+
+        private void buttonRegForm_Click(object sender, EventArgs e)
+        {
+            RegistrationForm registrationForm;
+            registrationForm = new RegistrationForm(this);
+            Hide();
+            registrationForm.Show();
+        }
     }
 }

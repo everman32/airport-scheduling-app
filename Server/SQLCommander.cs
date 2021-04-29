@@ -20,24 +20,40 @@ namespace Server
             
             Console.WriteLine("База данных Airport подключена");
         }
-        static public DataTable CheckLogin(string login, string password)
+        static public DataTable SelectAccount(string login, string password)
         {
             SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "SELECT * FROM [Account] WHERE (Login='" + login.Normalize() + "' AND Password='" + password.Normalize() + "') ";
+            sqlCommand.CommandText = "SELECT * FROM [Account] WHERE (Login='" + login.Normalize() + "' AND Password='" + password.Normalize() + "')";
             sqlCommand.Connection = sqlConnection;
             SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
             DataTable dataTable = new DataTable();
             adapter.Fill(dataTable);
-            /*
-            if (dtbl.Rows.Count == 1)
-            {
-                return "1";
-            }
-            return "0";
-            */
+            
             return dataTable;
         }
 
+        static public DataTable InsertAccount(string login, string password,string typeAccount)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "INSERT INTO [Account] (Login,Password,TypeAccount) VALUES (@Login,@Password,@TypeAccount)";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@Login", login);
+            sqlCommand.Parameters.AddWithValue("@Password", password);
+            sqlCommand.Parameters.AddWithValue("@TypeAccount", typeAccount);
+
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                dataTable = SQLCommander.SelectAccount(login, password);
+            }
+            catch
+            {
+                return dataTable;
+            }
+            return dataTable;
+        }
 
 
 

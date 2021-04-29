@@ -97,6 +97,7 @@ namespace Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.DarkKhaki;
             this.ClientSize = new System.Drawing.Size(413, 304);
             this.Controls.Add(this.buttonBackLogRegForm);
             this.Controls.Add(this.labelPass);
@@ -105,7 +106,7 @@ namespace Client
             this.Controls.Add(this.textBoxLogin);
             this.Controls.Add(this.buttonLogin);
             this.Name = "LoginForm";
-            this.Text = "LoginForm";
+            this.Text = "Окно авторизации";
             this.Load += new System.EventHandler(this.LoginPanel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

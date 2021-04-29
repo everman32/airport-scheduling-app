@@ -46,10 +46,11 @@ namespace Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightGreen;
             this.ClientSize = new System.Drawing.Size(516, 418);
             this.Controls.Add(this.buttonBackLogForm);
             this.Name = "AdminForm";
-            this.Text = "AdminForm";
+            this.Text = "Окно администратора";
             this.ResumeLayout(false);
 
         }

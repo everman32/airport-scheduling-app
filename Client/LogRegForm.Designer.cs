@@ -52,6 +52,7 @@ namespace Client
             this.buttonRegForm.TabIndex = 1;
             this.buttonRegForm.Text = "Регистрация";
             this.buttonRegForm.UseVisualStyleBackColor = true;
+            this.buttonRegForm.Click += new System.EventHandler(this.buttonRegForm_Click);
             // 
             // buttonBackMainForm
             // 
@@ -73,7 +74,7 @@ namespace Client
             this.Controls.Add(this.buttonRegForm);
             this.Controls.Add(this.buttonLogForm);
             this.Name = "LogRegForm";
-            this.Text = "LogRegForm";
+            this.Text = "Окно выбора действия";
             this.Load += new System.EventHandler(this.LoginRegisterPanel_Load);
             this.ResumeLayout(false);
 

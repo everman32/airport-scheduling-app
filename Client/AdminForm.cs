@@ -16,6 +16,11 @@ namespace Client
             InitializeComponent();
             form = loginForm;
         }
+        public AdminForm(RegistrationForm registrationForm)
+        {
+            InitializeComponent();
+            form = registrationForm;
+        }
 
         private void buttonBackLogin_Click(object sender, EventArgs e)
         {

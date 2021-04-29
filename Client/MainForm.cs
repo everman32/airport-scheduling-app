@@ -35,14 +35,21 @@ namespace Client
                 MessageBox.Show("Порт должен быть целым положительным числом");
                 return;
             }
+            try
+            {
+                Client client = new Client("127.0.0.1", port);
+                client.connectClient();
 
-            Client client = new Client("127.0.0.1",port);
-            client.connectClient();
-            buttonConnectClient.Enabled = false;
-            textBoxPort.Enabled = false;
-            LogRegForm loginRegisterPanel= new LogRegForm(this);
-            Hide();
-            loginRegisterPanel.Show();
+                buttonConnectClient.Enabled = false;
+                textBoxPort.Enabled = false;
+                LogRegForm loginRegisterPanel = new LogRegForm(this);
+                Hide();
+                loginRegisterPanel.Show();
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось подключиться к серверу по порту " + port);
+            }
         }
 
         private void MainPanel_Load(object sender, EventArgs e)
@@ -62,7 +69,12 @@ namespace Client
         }
         private void textBoxPort_TextChanged(object sender, EventArgs e)
         {
-            if 
+            textBoxPortCheck_empty();
+        }
+
+        private void buttonShutdown_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

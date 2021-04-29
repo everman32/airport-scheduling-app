@@ -32,6 +32,7 @@ namespace Client
             this.labelPort = new System.Windows.Forms.Label();
             this.textBoxPort = new System.Windows.Forms.TextBox();
             this.buttonConnectClient = new System.Windows.Forms.Button();
+            this.buttonShutdown = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelPort
@@ -53,6 +54,7 @@ namespace Client
             // 
             // buttonConnectClient
             // 
+            this.buttonConnectClient.Enabled = false;
             this.buttonConnectClient.Location = new System.Drawing.Point(238, 78);
             this.buttonConnectClient.Name = "buttonConnectClient";
             this.buttonConnectClient.Size = new System.Drawing.Size(108, 45);
@@ -61,17 +63,28 @@ namespace Client
             this.buttonConnectClient.UseVisualStyleBackColor = true;
             this.buttonConnectClient.Click += new System.EventHandler(this.buttonConnectClient_Click);
             // 
+            // buttonShutdown
+            // 
+            this.buttonShutdown.Location = new System.Drawing.Point(31, 82);
+            this.buttonShutdown.Name = "buttonShutdown";
+            this.buttonShutdown.Size = new System.Drawing.Size(75, 36);
+            this.buttonShutdown.TabIndex = 3;
+            this.buttonShutdown.Text = "Выход";
+            this.buttonShutdown.UseVisualStyleBackColor = true;
+            this.buttonShutdown.Click += new System.EventHandler(this.buttonShutdown_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PowderBlue;
             this.ClientSize = new System.Drawing.Size(377, 135);
+            this.Controls.Add(this.buttonShutdown);
             this.Controls.Add(this.buttonConnectClient);
             this.Controls.Add(this.textBoxPort);
             this.Controls.Add(this.labelPort);
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "Главное окно";
             this.Load += new System.EventHandler(this.MainPanel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -83,6 +96,7 @@ namespace Client
         private System.Windows.Forms.Label labelPort;
         private System.Windows.Forms.TextBox textBoxPort;
         private System.Windows.Forms.Button buttonConnectClient;
+        private System.Windows.Forms.Button buttonShutdown;
     }
 }
 
