@@ -16,56 +16,23 @@ namespace Client
             InitializeComponent();
             form = logRegForm;
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            textBoxComboBoxCheck_empty();
-        }
-
-        private void labelTypeAccount_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private bool textBoxComboBoxCheck_empty()
-        {
-            foreach (Control c in this.Controls)
-            {
-                if (c.GetType() == typeof(TextBox))
-                    if (c.Text == string.Empty || comboBoxTypeAccount.SelectedIndex == -1)
-                    {
-                        buttonRegistration.Enabled = false;
-                        return false;
-                    }
-            }
-            buttonRegistration.Enabled = true;
-            return true;
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            textBoxComboBoxCheck_empty();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            textBoxComboBoxCheck_empty();
-        }
-
         private void buttonRegistration_Click(object sender, EventArgs e)
         {
             Client.SendRequestToServer("Register");
 
-            int typeAccount=0;
-            if (comboBoxTypeAccount.SelectedIndex==0)
+            int accessRight=0;
+            if (comboBoxAccessRight.SelectedIndex==0)
             {
-                typeAccount = 1;
+                accessRight = 1;
             }
-            else if (comboBoxTypeAccount.SelectedIndex == 1)
+            else if (comboBoxAccessRight.SelectedIndex == 1)
             {
-                typeAccount = 2;
+                accessRight = 2;
             }
-            DataTable dataTable = Client.SendRegisterServer(textBoxLogin.Text, textBoxPass.Text,typeAccount);
+            string selected_login = textBoxLogin.Text;
+            string selected_password = textBoxPass.Text;
+           
+            DataTable dataTable = Client.ReceiveRegisterData(selected_login, selected_password, accessRight);
             if (dataTable.Rows.Count == 1)
             {
                 if (dataTable.Rows[0][2].ToString() == "1")
@@ -73,14 +40,14 @@ namespace Client
                     AdminForm adminPanel = new AdminForm(this);
                     Hide();
                     adminPanel.Show();
-                    Client.typeaccount = 1;
+                    Client.accessRight = 1;
                 }
                 else if (dataTable.Rows[0][2].ToString() == "2")
                 {
                     AvianavigationSpecialistForm dispatcherForm = new AvianavigationSpecialistForm(this);
                     Hide();
                     dispatcherForm.Show();
-                    Client.typeaccount = 2;
+                    Client.accessRight = 2;
                 }
                 Client.login = textBoxLogin.Text;
                 Client.password = textBoxPass.Text;
@@ -91,11 +58,51 @@ namespace Client
                 MessageBox.Show("Не удалось зарегистрироваться, пользователь с таким логином уже существует"); ;
             }
         }
-
         private void buttonBackLogRegForm_Click(object sender, EventArgs e)
         {
             Hide();
             form.Show();
+        }
+        private bool textBoxComboBoxCheck_empty()
+        {
+            if (textBoxLogin.Text != "" && textBoxPass.Text != ""&& comboBoxAccessRight.SelectedIndex != -1)
+            {
+               buttonRegistration.Enabled = true;
+                return true;
+            }
+            else
+            {
+                buttonRegistration.Enabled = false;
+            }
+            return false;
+        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           textBoxComboBoxCheck_empty();
+        }
+        private void textBoxLogin_TextChanged(object sender, EventArgs e)
+        {
+           textBoxComboBoxCheck_empty();
+        }
+        private void textBoxPass_TextChanged(object sender, EventArgs e)
+        {
+            textBoxComboBoxCheck_empty();
+        }
+        private void textBoxLogin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsLetterOrDigit(number) && number != 8)
+            {
+                e.Handled = true;
+            }
+        }
+        private void textBoxPass_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsLetterOrDigit(number) && number != 8)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

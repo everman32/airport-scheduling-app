@@ -30,7 +30,7 @@ namespace Client
         private void InitializeComponent()
         {
             this.buttonBackLogForm = new System.Windows.Forms.Button();
-            this.buttonWorkClients = new System.Windows.Forms.Button();
+            this.buttonWorkPassengers = new System.Windows.Forms.Button();
             this.buttonWorkDestinations = new System.Windows.Forms.Button();
             this.buttonSearchBestAlternative = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -45,15 +45,15 @@ namespace Client
             this.buttonBackLogForm.UseVisualStyleBackColor = true;
             this.buttonBackLogForm.Click += new System.EventHandler(this.buttonBackLogReg_Click);
             // 
-            // buttonWorkClients
+            // buttonWorkPassengers
             // 
-            this.buttonWorkClients.Location = new System.Drawing.Point(163, 85);
-            this.buttonWorkClients.Name = "buttonWorkClients";
-            this.buttonWorkClients.Size = new System.Drawing.Size(197, 43);
-            this.buttonWorkClients.TabIndex = 1;
-            this.buttonWorkClients.Text = "Работа с клиентами";
-            this.buttonWorkClients.UseVisualStyleBackColor = true;
-            this.buttonWorkClients.Click += new System.EventHandler(this.buttonWorkClients_Click);
+            this.buttonWorkPassengers.Location = new System.Drawing.Point(163, 85);
+            this.buttonWorkPassengers.Name = "buttonWorkPassengers";
+            this.buttonWorkPassengers.Size = new System.Drawing.Size(197, 43);
+            this.buttonWorkPassengers.TabIndex = 1;
+            this.buttonWorkPassengers.Text = "Работа с пассажирами";
+            this.buttonWorkPassengers.UseVisualStyleBackColor = true;
+            this.buttonWorkPassengers.Click += new System.EventHandler(this.buttonWorkClients_Click);
             // 
             // buttonWorkDestinations
             // 
@@ -63,6 +63,7 @@ namespace Client
             this.buttonWorkDestinations.TabIndex = 2;
             this.buttonWorkDestinations.Text = "Работа с пунктами назначения";
             this.buttonWorkDestinations.UseVisualStyleBackColor = true;
+            this.buttonWorkDestinations.Click += new System.EventHandler(this.buttonWorkDestinations_Click);
             // 
             // buttonSearchBestAlternative
             // 
@@ -81,7 +82,7 @@ namespace Client
             this.ClientSize = new System.Drawing.Size(514, 357);
             this.Controls.Add(this.buttonSearchBestAlternative);
             this.Controls.Add(this.buttonWorkDestinations);
-            this.Controls.Add(this.buttonWorkClients);
+            this.Controls.Add(this.buttonWorkPassengers);
             this.Controls.Add(this.buttonBackLogForm);
             this.Name = "AvianavigationSpecialistForm";
             this.Text = "Окно авинавигационного специалиста";
@@ -92,7 +93,7 @@ namespace Client
         #endregion
 
         private System.Windows.Forms.Button buttonBackLogForm;
-        private System.Windows.Forms.Button buttonWorkClients;
+        private System.Windows.Forms.Button buttonWorkPassengers;
         private System.Windows.Forms.Button buttonWorkDestinations;
         private System.Windows.Forms.Button buttonSearchBestAlternative;
     }

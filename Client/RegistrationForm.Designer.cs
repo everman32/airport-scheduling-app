@@ -31,10 +31,10 @@ namespace Client
         {
             this.buttonRegistration = new System.Windows.Forms.Button();
             this.buttonBackLogRegForm = new System.Windows.Forms.Button();
-            this.comboBoxTypeAccount = new System.Windows.Forms.ComboBox();
-            this.labelTypeAccount = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.comboBoxAccessRight = new System.Windows.Forms.ComboBox();
+            this.labelAccessRight = new System.Windows.Forms.Label();
+            this.labelLogin = new System.Windows.Forms.Label();
+            this.labelPass = new System.Windows.Forms.Label();
             this.textBoxLogin = new System.Windows.Forms.TextBox();
             this.textBoxPass = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -60,61 +60,62 @@ namespace Client
             this.buttonBackLogRegForm.UseVisualStyleBackColor = true;
             this.buttonBackLogRegForm.Click += new System.EventHandler(this.buttonBackLogRegForm_Click);
             // 
-            // comboBoxTypeAccount
+            // comboBoxAccessRight
             // 
-            this.comboBoxTypeAccount.FormattingEnabled = true;
-            this.comboBoxTypeAccount.Items.AddRange(new object[] {
+            this.comboBoxAccessRight.FormattingEnabled = true;
+            this.comboBoxAccessRight.Items.AddRange(new object[] {
             "Администратор",
             "Авинавигационный специалист"});
-            this.comboBoxTypeAccount.Location = new System.Drawing.Point(135, 44);
-            this.comboBoxTypeAccount.Name = "comboBoxTypeAccount";
-            this.comboBoxTypeAccount.Size = new System.Drawing.Size(130, 23);
-            this.comboBoxTypeAccount.TabIndex = 2;
-            this.comboBoxTypeAccount.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBoxAccessRight.Location = new System.Drawing.Point(135, 44);
+            this.comboBoxAccessRight.Name = "comboBoxAccessRight";
+            this.comboBoxAccessRight.Size = new System.Drawing.Size(130, 23);
+            this.comboBoxAccessRight.TabIndex = 2;
+            this.comboBoxAccessRight.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // labelTypeAccount
+            // labelAccessRight
             // 
-            this.labelTypeAccount.AutoSize = true;
-            this.labelTypeAccount.Location = new System.Drawing.Point(38, 26);
-            this.labelTypeAccount.Name = "labelTypeAccount";
-            this.labelTypeAccount.Size = new System.Drawing.Size(175, 15);
-            this.labelTypeAccount.TabIndex = 3;
-            this.labelTypeAccount.Text = "Выберите тип учётной записи:";
-            this.labelTypeAccount.Click += new System.EventHandler(this.labelTypeAccount_Click);
+            this.labelAccessRight.AutoSize = true;
+            this.labelAccessRight.Location = new System.Drawing.Point(38, 26);
+            this.labelAccessRight.Name = "labelAccessRight";
+            this.labelAccessRight.Size = new System.Drawing.Size(234, 15);
+            this.labelAccessRight.TabIndex = 3;
+            this.labelAccessRight.Text = "Выберите права доступа учётной записи:";
             // 
-            // label2
+            // labelLogin
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 70);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(178, 15);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Введите логин учётной записи:";
+            this.labelLogin.AutoSize = true;
+            this.labelLogin.Location = new System.Drawing.Point(38, 70);
+            this.labelLogin.Name = "labelLogin";
+            this.labelLogin.Size = new System.Drawing.Size(178, 15);
+            this.labelLogin.TabIndex = 4;
+            this.labelLogin.Text = "Введите логин учётной записи:";
             // 
-            // label3
+            // labelPass
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 122);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(185, 15);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Введите пароль учётной записи:";
+            this.labelPass.AutoSize = true;
+            this.labelPass.Location = new System.Drawing.Point(38, 122);
+            this.labelPass.Name = "labelPass";
+            this.labelPass.Size = new System.Drawing.Size(185, 15);
+            this.labelPass.TabIndex = 5;
+            this.labelPass.Text = "Введите пароль учётной записи:";
             // 
             // textBoxLogin
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(135, 96);
+            this.textBoxLogin.Location = new System.Drawing.Point(135, 88);
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(130, 23);
-            this.textBoxLogin.TabIndex = 6;
-            this.textBoxLogin.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBoxLogin.TabIndex = 8;
+            this.textBoxLogin.TextChanged += new System.EventHandler(this.textBoxLogin_TextChanged);
+            this.textBoxLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxLogin_KeyPress);
             // 
             // textBoxPass
             // 
-            this.textBoxPass.Location = new System.Drawing.Point(135, 142);
+            this.textBoxPass.Location = new System.Drawing.Point(135, 140);
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.Size = new System.Drawing.Size(130, 23);
-            this.textBoxPass.TabIndex = 7;
-            this.textBoxPass.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBoxPass.TabIndex = 9;
+            this.textBoxPass.TextChanged += new System.EventHandler(this.textBoxPass_TextChanged);
+            this.textBoxPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPass_KeyPress);
             // 
             // RegistrationForm
             // 
@@ -124,10 +125,10 @@ namespace Client
             this.ClientSize = new System.Drawing.Size(380, 275);
             this.Controls.Add(this.textBoxPass);
             this.Controls.Add(this.textBoxLogin);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.labelTypeAccount);
-            this.Controls.Add(this.comboBoxTypeAccount);
+            this.Controls.Add(this.labelPass);
+            this.Controls.Add(this.labelLogin);
+            this.Controls.Add(this.labelAccessRight);
+            this.Controls.Add(this.comboBoxAccessRight);
             this.Controls.Add(this.buttonBackLogRegForm);
             this.Controls.Add(this.buttonRegistration);
             this.Name = "RegistrationForm";
@@ -141,10 +142,10 @@ namespace Client
 
         private System.Windows.Forms.Button buttonRegistration;
         private System.Windows.Forms.Button buttonBackLogRegForm;
-        private System.Windows.Forms.ComboBox comboBoxTypeAccount;
-        private System.Windows.Forms.Label labelTypeAccount;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBoxAccessRight;
+        private System.Windows.Forms.Label labelAccessRight;
+        private System.Windows.Forms.Label labelLogin;
+        private System.Windows.Forms.Label labelPass;
         private System.Windows.Forms.TextBox textBoxLogin;
         private System.Windows.Forms.TextBox textBoxPass;
     }

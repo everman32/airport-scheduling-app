@@ -27,18 +27,20 @@ namespace Client
             Hide();
             form.Show();
         }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
         private void buttonWorkClients_Click(object sender, EventArgs e)
         {
-            WorkClientsForm workClientsForm;
-            workClientsForm = new WorkClientsForm(this);
+            WorkPassengersForm workPassengersForm;
+            workPassengersForm = new WorkPassengersForm(this);
             Hide();
-            workClientsForm.Show();
+            workPassengersForm.Show();
+        }
+
+        private void buttonWorkDestinations_Click(object sender, EventArgs e)
+        {
+            WorkDestinationsForm workDestinationsForm;
+            workDestinationsForm = new WorkDestinationsForm(this);
+            Hide();
+            workDestinationsForm.Show();
         }
     }
 }

@@ -21,20 +21,12 @@ namespace Client
         private void buttonConnectClient_Click(object sender, EventArgs e)
         {
             int port;
-            try
-            {
                 port = Convert.ToInt32(textBoxPort.Text);
                 if (port < 0 || port > 65535)
                 {
                     MessageBox.Show("Порт должен быть в диапазоне от 0 до 65535");
                     return;
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Порт должен быть целым положительным числом");
-                return;
-            }
             try
             {
                 Client client = new Client("127.0.0.1", port);
@@ -51,12 +43,6 @@ namespace Client
                 MessageBox.Show("Не удалось подключиться к серверу по порту " + port);
             }
         }
-
-        private void MainPanel_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private bool textBoxPortCheck_empty()
         {
                     if (textBoxPort.Text==string.Empty )
@@ -75,6 +61,15 @@ namespace Client
         private void buttonShutdown_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void textBoxPort_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

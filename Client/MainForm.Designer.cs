@@ -51,6 +51,7 @@ namespace Client
             this.textBoxPort.Size = new System.Drawing.Size(108, 23);
             this.textBoxPort.TabIndex = 1;
             this.textBoxPort.TextChanged += new System.EventHandler(this.textBoxPort_TextChanged);
+            this.textBoxPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPort_KeyPress);
             // 
             // buttonConnectClient
             // 
@@ -85,7 +86,6 @@ namespace Client
             this.Controls.Add(this.labelPort);
             this.Name = "MainForm";
             this.Text = "Главное окно";
-            this.Load += new System.EventHandler(this.MainPanel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

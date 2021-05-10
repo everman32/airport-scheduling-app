@@ -24,15 +24,14 @@ namespace Client
             form.Show();
         }
 
-        private void LoginPanel_Load(object sender, EventArgs e)
-        {
-        }
-
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             Client.SendRequestToServer("Login");
+          
+            string selected_login = textBoxLogin.Text;
+            string selected_password = textBoxPass.Text;
 
-            DataTable dataTable = Client.SendAuthorizeServer(textBoxLogin.Text, textBoxPass.Text);
+            DataTable dataTable = Client.ReceiveAuthorizeData(selected_login, selected_password);
             if (dataTable.Rows.Count == 1)
             {
                 if (dataTable.Rows[0][2].ToString() == "1")
@@ -40,14 +39,14 @@ namespace Client
                     AdminForm adminPanel = new AdminForm(this);
                     Hide();
                     adminPanel.Show();
-                    Client.typeaccount = 1;
+                    Client.accessRight = 1;
                 }
                 else if (dataTable.Rows[0][2].ToString() == "2")
                 {
                     AvianavigationSpecialistForm dispatcherForm = new AvianavigationSpecialistForm(this);
                     Hide();
                     dispatcherForm.Show();
-                    Client.typeaccount = 2;
+                    Client.accessRight = 2;
                 }
                 Client.login = textBoxLogin.Text;
                 Client.password = textBoxPass.Text;
@@ -60,27 +59,40 @@ namespace Client
         }
         private bool textBoxCheck_empty()
         {
-            foreach (Control c in this.Controls)
+            if (textBoxLogin.Text != "" && textBoxPass.Text != "")
             {
-                if (c.GetType() == typeof(TextBox))
-                    if (c.Text == string.Empty)
-                    {
-                        buttonLogin.Enabled = false;
-                        return false;
-                    }
+                buttonLogin.Enabled = true;
+                return true;
             }
-            buttonLogin.Enabled = true;
-            return true;
+            else
+            {
+                buttonLogin.Enabled = false;
+            }
+            return false;
         }
-
         private void textBoxLogin_TextChanged(object sender, EventArgs e)
         {
-            textBoxCheck_empty();
+           textBoxCheck_empty();
         }
-
         private void textBoxPass_TextChanged(object sender, EventArgs e)
         {
             textBoxCheck_empty();
+        }
+        private void textBoxLogin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsLetterOrDigit(number) && number != 8)
+            {
+                e.Handled = true;
+            }
+        }
+        private void textBoxPass_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsLetterOrDigit(number) && number != 8)
+            {
+                e.Handled = true;
+            }
         }
     }
 }
