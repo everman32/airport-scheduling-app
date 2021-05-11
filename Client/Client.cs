@@ -30,7 +30,7 @@ namespace Client
             stream.Write(data, 0, data.Length);
             stream.Flush();
 
-            byte[] confirm = new byte[8];
+            byte[] confirm = new byte[4];
             int bytes = 0;
             do
             {
@@ -44,7 +44,7 @@ namespace Client
             stream.Write(request, 0, request.Length);
             stream.Flush();
 
-            byte[] confirm = new byte[8];
+            byte[] confirm = new byte[4];
             int bytes = 0;
             do
             {
@@ -58,7 +58,7 @@ namespace Client
                 stream.Write(login, 0, login.Length);
                 stream.Flush();
 
-                byte[] confirm = new byte[8];
+                byte[] confirm = new byte[4];
                 int bytes = 0;
                 do
                 {
@@ -70,7 +70,7 @@ namespace Client
                 stream.Write(password, 0, password.Length);
                 stream.Flush();
 
-                confirm = new byte[8];
+                confirm = new byte[4];
                 bytes = 0;
                 do
                 {
@@ -95,7 +95,7 @@ namespace Client
                 stream.Write(login, 0, login.Length);
             stream.Flush();
 
-            byte[] confirm = new byte[8];
+            byte[] confirm = new byte[4];
             int bytes = 0;
             do
             {
@@ -107,7 +107,7 @@ namespace Client
                 stream.Write(password, 0, password.Length);
             stream.Flush();
 
-            confirm = new byte[8];
+            confirm = new byte[4];
             bytes = 0;
             do
             {
@@ -119,7 +119,7 @@ namespace Client
                 stream.Write(accessRight, 0, accessRight.Length);
             stream.Flush();
 
-            confirm = new byte[8];
+            confirm = new byte[4];
             bytes = 0;
             do
             {
@@ -158,7 +158,7 @@ namespace Client
             stream.Write(id, 0, id.Length);
             stream.Flush();
 
-            byte[] confirm = new byte[8];
+            byte[] confirm = new byte[4];
             int bytes = 0;
             do
             {
@@ -170,7 +170,7 @@ namespace Client
             stream.Write(surname, 0, surname.Length);
             stream.Flush();
 
-            confirm = new byte[8];
+            confirm = new byte[4];
             bytes = 0;
             do
             {
@@ -182,7 +182,7 @@ namespace Client
             stream.Write(name, 0, name.Length);
             stream.Flush();
 
-            confirm = new byte[8];
+            confirm = new byte[4];
             bytes = 0;
             do
             {
@@ -194,7 +194,7 @@ namespace Client
             stream.Write(patronymic, 0, patronymic.Length);
             stream.Flush();
 
-            confirm = new byte[8];
+            confirm = new byte[4];
             bytes = 0;
             do
             {
@@ -206,7 +206,7 @@ namespace Client
             stream.Write(phonenumber, 0, phonenumber.Length);
             stream.Flush();
 
-            confirm = new byte[8];
+            confirm = new byte[4];
             bytes = 0;
             do
             {
@@ -232,7 +232,7 @@ namespace Client
             stream.Write(id, 0, id.Length);
             stream.Flush();
 
-            byte[] confirm = new byte[8];
+            byte[] confirm = new byte[4];
             int bytes = 0;
             do
             {
@@ -244,7 +244,7 @@ namespace Client
             stream.Write(newvalue, 0, newvalue.Length);
             stream.Flush();
 
-            confirm = new byte[8];
+            confirm = new byte[4];
             bytes = 0;
             do
             {
@@ -256,7 +256,7 @@ namespace Client
             stream.Write(command, 0, command.Length);
             stream.Flush();
 
-            confirm = new byte[8];
+            confirm = new byte[4];
             bytes = 0;
             do
             {
@@ -281,7 +281,7 @@ namespace Client
             stream.Write(id, 0, id.Length);
             stream.Flush();
 
-            byte[] confirm = new byte[8];
+            byte[] confirm = new byte[4];
             int bytes = 0;
             do
             {
@@ -289,7 +289,7 @@ namespace Client
             }
             while (stream.DataAvailable);
           
-            byte[] data = new byte[8];
+            byte[] data = new byte[64];
             bytes = 0;
             do
             {
@@ -299,6 +299,167 @@ namespace Client
             int deleted_count = BitConverter.ToInt32(data);
             Array.Clear(data, 0, data.Length);
             return deleted_count;
+        }
+
+        static public DataTable ReceiveSelectDestinations()
+        {
+            byte[] data = new byte[10000];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveAddDestinationData(string Id, string Name, string Flightduration, string Airplanemodel,string Estimatedtime1,string Estimatedtime2,string Estimatedtime3)
+        {
+            byte[] id = Encoding.Unicode.GetBytes(Id);
+            stream.Write(id, 0, id.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] name = Encoding.Unicode.GetBytes(Name);
+            stream.Write(name, 0, name.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] flightduration = Encoding.Unicode.GetBytes(Flightduration);
+            stream.Write(flightduration, 0, flightduration.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] airplanemodel = Encoding.Unicode.GetBytes(Airplanemodel);
+            stream.Write(airplanemodel, 0, airplanemodel.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] estimatedtime1 = Encoding.Unicode.GetBytes(Estimatedtime1);
+            stream.Write(estimatedtime1, 0, estimatedtime1.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] estimatedtime2 = Encoding.Unicode.GetBytes(Estimatedtime2);
+            stream.Write(estimatedtime2, 0, estimatedtime2.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] estimatedtime3 = Encoding.Unicode.GetBytes(Estimatedtime3);
+            stream.Write(estimatedtime3, 0, estimatedtime3.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveEditDestinationData(string Id, string Newvalue, string Command)
+        {
+            byte[] id = Encoding.Unicode.GetBytes(Id);
+            stream.Write(id, 0, id.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] newvalue = Encoding.Unicode.GetBytes(Newvalue);
+            stream.Write(newvalue, 0, newvalue.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] command = Encoding.Unicode.GetBytes(Command.ToString());
+            stream.Write(command, 0, command.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
         }
 
         static private DataTable GetDataTable(byte[] data)
@@ -311,7 +472,31 @@ namespace Client
             }
             return dataTable;
         }
-       
+        static public int ReceiveDeleteDestinationData(string Id)
+        {
+            byte[] id = Encoding.Unicode.GetBytes(Id);
+            stream.Write(id, 0, id.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[64];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            int deleted_count = BitConverter.ToInt32(data);
+            Array.Clear(data, 0, data.Length);
+            return deleted_count;
+        }
 
 
 

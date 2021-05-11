@@ -104,6 +104,7 @@ namespace Client
             this.toolStripWorkPassengers.Size = new System.Drawing.Size(841, 25);
             this.toolStripWorkPassengers.TabIndex = 3;
             this.toolStripWorkPassengers.Text = "toolStrip1";
+            this.toolStripWorkPassengers.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripWorkPassengers_ItemClicked);
             // 
             // toolStripButtonView
             // 
@@ -362,6 +363,7 @@ namespace Client
             this.panelDeleting.Controls.Add(this.buttonDeletePassenger);
             this.panelDeleting.Controls.Add(this.textBoxDeleteId);
             this.panelDeleting.Controls.Add(this.labelDelete);
+            this.panelDeleting.Enabled = false;
             this.panelDeleting.Location = new System.Drawing.Point(282, 28);
             this.panelDeleting.Name = "panelDeleting";
             this.panelDeleting.Size = new System.Drawing.Size(271, 231);

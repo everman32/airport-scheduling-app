@@ -340,5 +340,10 @@ namespace Client
         {
 
         }
+
+        private void toolStripWorkPassengers_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

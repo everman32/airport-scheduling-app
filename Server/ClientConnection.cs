@@ -69,12 +69,16 @@ namespace Server
                          (builder.ToString() == "Select passengers")||
                          (builder.ToString() == "Add passenger") ||
                          (builder.ToString() == "Edit passenger")||
-                         (builder.ToString()== "Delete passenger")
-                                        /*
-                                                       (builder.ToString() == "SELECT SEEKER") ||
-                                                       (builder.ToString() == "ADD SEEKER") ||
-                                                       (builder.ToString() == "DELETE SEEKER") ||
-                                                       (builder.ToString() == "UPDATE SEEKER")*/)
+                         (builder.ToString()== "Delete passenger")||
+                         (builder.ToString() == "Select destinations")||
+                         (builder.ToString() == "Add destination")||
+                         (builder.ToString() == "Edit destination")||
+                         (builder.ToString() == "Delete destination")
+                                                                                                    /*
+                                                                                                                   (builder.ToString() == "SELECT SEEKER") ||
+                                                                                                                   (builder.ToString() == "ADD SEEKER") ||
+                                                                                                                   (builder.ToString() == "DELETE SEEKER") ||
+                                                                                                                   (builder.ToString() == "UPDATE SEEKER")*/)
                     {
                         command = builder.ToString();
                     }
@@ -101,6 +105,22 @@ namespace Server
                     else if (command == "Delete passenger")
                     {
                         ClientConnection.ReceiveDeletingPassengerData(stream);
+                    }
+                    else if (command == "Select destinations")
+                    {
+                        ClientConnection.SendSelectDestinations(stream);
+                    }
+                    else if (command == "Add destination")
+                    {
+                        ClientConnection.ReceiveAdditingDestinationData(stream);
+                    }
+                    else if (command == "Edit destination")
+                    {
+                        ClientConnection.ReceiveEditingDestinationData(stream);
+                    }
+                    else if (command == "Delete destination")
+                    {
+                        ClientConnection.ReceiveDeletingDestinationData(stream);
                     }
 
                     /*
@@ -227,6 +247,14 @@ namespace Server
             string accessRight = builder.ToString();
 
             DataTable dataTable = SQLCommander.InsertAccount(login, password,accessRight);
+            byte[] data = GetBinaryFormatData(dataTable);
+            stream.Write(data, 0, data.Length);
+            stream.Flush();
+        }
+
+        static void SendSelectPassengers(NetworkStream stream)
+        {
+            DataTable dataTable = SQLCommander.SelectPassenger();
             byte[] data = GetBinaryFormatData(dataTable);
             stream.Write(data, 0, data.Length);
             stream.Flush();
@@ -373,11 +401,11 @@ namespace Server
                 
                 dataTable = SQLCommander.EditNamePassenger(id, newvalue);
             }
-            if (command == "Edit patronymic")
+            else if (command == "Edit patronymic")
             {
                 dataTable = SQLCommander.EditPatronymicPassenger(id, newvalue);
             }
-            if (command == "Edit phonenumber")
+            else if (command == "Edit phonenumber")
             {
                 dataTable = SQLCommander.EditPhonenumberPassenger(id, newvalue);
             }
@@ -410,17 +438,227 @@ namespace Server
         }
 
 
-        static void SendSelectPassengers(NetworkStream stream)
+        static void SendSelectDestinations(NetworkStream stream)
         {
-            DataTable dataTable = SQLCommander.SelectPassenger();
+            DataTable dataTable = SQLCommander.SelectDestination();
             byte[] data = GetBinaryFormatData(dataTable);
             stream.Write(data, 0, data.Length);
             stream.Flush();
         }
+        static void ReceiveAdditingDestinationData(NetworkStream stream)
+        {
+            byte[] Id = new byte[64];
+            StringBuilder builder = new StringBuilder();
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(Id, 0, Id.Length);
+                builder.Append(Encoding.Unicode.GetString(Id, 0, bytes));
+            }
+            while (stream.DataAvailable);
 
+            byte[] confirm = Encoding.Unicode.GetBytes("OK");
+            stream.Write(confirm, 0, confirm.Length);
+            stream.Flush();
 
+            string id = builder.ToString();
 
+            byte[] Name = new byte[64];
+            builder = new StringBuilder();
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(Name, 0, Name.Length);
+                builder.Append(Encoding.Unicode.GetString(Name, 0, bytes));
+            }
+            while (stream.DataAvailable);
 
+            stream.Write(confirm, 0, confirm.Length);
+            stream.Flush();
+
+            string name = builder.ToString();
+
+            byte[] Flightduration = new byte[64];
+            builder = new StringBuilder();
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(Flightduration, 0, Flightduration.Length);
+                builder.Append(Encoding.Unicode.GetString(Flightduration, 0, bytes));
+            }
+            while (stream.DataAvailable);
+
+            stream.Write(confirm, 0, confirm.Length);
+            stream.Flush();
+
+            string flightduration = builder.ToString();
+
+            byte[] Airplanemodel = new byte[64];
+            builder = new StringBuilder();
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(Airplanemodel, 0, Airplanemodel.Length);
+                builder.Append(Encoding.Unicode.GetString(Airplanemodel, 0, bytes));
+            }
+            while (stream.DataAvailable);
+
+            stream.Write(confirm, 0, confirm.Length);
+            stream.Flush();
+
+            string airplanemodel = builder.ToString();
+
+            byte[] Estimatedtime1 = new byte[64];
+            builder = new StringBuilder();
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(Estimatedtime1, 0, Estimatedtime1.Length);
+                builder.Append(Encoding.Unicode.GetString(Estimatedtime1, 0, bytes));
+            }
+            while (stream.DataAvailable);
+
+            stream.Write(confirm, 0, confirm.Length);
+            stream.Flush();
+
+            string estimatedtime1 = builder.ToString();
+
+            byte[] Estimatedtime2 = new byte[64];
+            builder = new StringBuilder();
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(Estimatedtime2, 0, Estimatedtime2.Length);
+                builder.Append(Encoding.Unicode.GetString(Estimatedtime2, 0, bytes));
+            }
+            while (stream.DataAvailable);
+
+            stream.Write(confirm, 0, confirm.Length);
+            stream.Flush();
+
+            string estimatedtime2 = builder.ToString();
+
+            byte[] Estimatedtime3 = new byte[64];
+            builder = new StringBuilder();
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(Estimatedtime3, 0, Estimatedtime3.Length);
+                builder.Append(Encoding.Unicode.GetString(Estimatedtime3, 0, bytes));
+            }
+            while (stream.DataAvailable);
+
+            stream.Write(confirm, 0, confirm.Length);
+            stream.Flush();
+
+            string estimatedtime3 = builder.ToString();
+           
+
+            DataTable dataTable = SQLCommander.InsertDestination(id, name, flightduration,airplanemodel,estimatedtime1,estimatedtime2,estimatedtime3);
+            byte[] data = GetBinaryFormatData(dataTable);
+            stream.Write(data, 0, data.Length);
+            stream.Flush();
+        }
+        static void ReceiveEditingDestinationData(NetworkStream stream)
+        {
+            byte[] Id = new byte[64];
+            StringBuilder builder = new StringBuilder();
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(Id, 0, Id.Length);
+                builder.Append(Encoding.Unicode.GetString(Id, 0, bytes));
+            }
+            while (stream.DataAvailable);
+
+            byte[] confirm = Encoding.Unicode.GetBytes("OK");
+            stream.Write(confirm, 0, confirm.Length);
+            stream.Flush();
+
+            string id = builder.ToString();
+
+            byte[] Newvalue = new byte[64];
+            builder = new StringBuilder();
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(Newvalue, 0, Newvalue.Length);
+                builder.Append(Encoding.Unicode.GetString(Newvalue, 0, bytes));
+            }
+            while (stream.DataAvailable);
+
+            stream.Write(confirm, 0, confirm.Length);
+            stream.Flush();
+
+            string newvalue = builder.ToString();
+
+            byte[] Command = new byte[64];
+            builder = new StringBuilder();
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(Command, 0, Command.Length);
+                builder.Append(Encoding.Unicode.GetString(Command, 0, bytes));
+            }
+            while (stream.DataAvailable);
+
+            stream.Write(confirm, 0, confirm.Length);
+            stream.Flush();
+
+            string command = builder.ToString();
+
+            DataTable dataTable = new DataTable();
+            if (command == "Edit name")
+            {
+                dataTable = SQLCommander.EditNameDestination(id, newvalue);
+            }
+            else if (command == "Edit flightduration")
+            {
+                dataTable = SQLCommander.EditFlightdurationDestination(id, newvalue);
+            }
+            else if (command == "Edit airplanemodel")
+            {
+                dataTable = SQLCommander.EditAirplanemodelDestination(id, newvalue);
+            }
+            else if (command == "Edit estimatedtime1")
+            {
+                dataTable = SQLCommander.EditEstimatedtime1Destination(id, newvalue);
+            }
+            else if (command == "Edit estimatedtime2")
+            {
+                dataTable = SQLCommander.EditEstimatedtime2Destination(id, newvalue);
+            }
+            else if (command == "Edit estimatedtime3")
+            {
+                dataTable = SQLCommander.EditEstimatedtime3Destination(id, newvalue);
+            }
+            byte[] data = GetBinaryFormatData(dataTable);
+            stream.Write(data, 0, data.Length);
+            stream.Flush();
+        }
+        static void ReceiveDeletingDestinationData(NetworkStream stream)
+        {
+            byte[] Id = new byte[64];
+            StringBuilder builder = new StringBuilder();
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(Id, 0, Id.Length);
+                builder.Append(Encoding.Unicode.GetString(Id, 0, bytes));
+            }
+            while (stream.DataAvailable);
+
+            byte[] confirm = Encoding.Unicode.GetBytes("OK");
+            stream.Write(confirm, 0, confirm.Length);
+            stream.Flush();
+
+            string id = builder.ToString();
+            int deleted_count = SQLCommander.DeleteDestination(id);
+
+            byte[] data = BitConverter.GetBytes(deleted_count);
+            stream.Write(data, 0, data.Length);
+            stream.Flush();
+        }
 
 
     }
