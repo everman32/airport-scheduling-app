@@ -33,11 +33,12 @@ namespace Client
             this.buttonWorkPassengers = new System.Windows.Forms.Button();
             this.buttonWorkDestinations = new System.Windows.Forms.Button();
             this.buttonSearchBestAlternative = new System.Windows.Forms.Button();
+            this.buttonWorkFlightRequests = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonBackLogForm
             // 
-            this.buttonBackLogForm.Location = new System.Drawing.Point(29, 300);
+            this.buttonBackLogForm.Location = new System.Drawing.Point(12, 308);
             this.buttonBackLogForm.Name = "buttonBackLogForm";
             this.buttonBackLogForm.Size = new System.Drawing.Size(91, 37);
             this.buttonBackLogForm.TabIndex = 0;
@@ -47,7 +48,7 @@ namespace Client
             // 
             // buttonWorkPassengers
             // 
-            this.buttonWorkPassengers.Location = new System.Drawing.Point(163, 85);
+            this.buttonWorkPassengers.Location = new System.Drawing.Point(163, 34);
             this.buttonWorkPassengers.Name = "buttonWorkPassengers";
             this.buttonWorkPassengers.Size = new System.Drawing.Size(197, 43);
             this.buttonWorkPassengers.TabIndex = 1;
@@ -57,7 +58,7 @@ namespace Client
             // 
             // buttonWorkDestinations
             // 
-            this.buttonWorkDestinations.Location = new System.Drawing.Point(163, 151);
+            this.buttonWorkDestinations.Location = new System.Drawing.Point(163, 94);
             this.buttonWorkDestinations.Name = "buttonWorkDestinations";
             this.buttonWorkDestinations.Size = new System.Drawing.Size(197, 43);
             this.buttonWorkDestinations.TabIndex = 2;
@@ -74,18 +75,32 @@ namespace Client
             this.buttonSearchBestAlternative.Text = "Поиск наилучшей альтернативы расписания для пункта назначения";
             this.buttonSearchBestAlternative.UseVisualStyleBackColor = true;
             // 
+            // buttonWorkFlightRequests
+            // 
+            this.buttonWorkFlightRequests.Location = new System.Drawing.Point(163, 152);
+            this.buttonWorkFlightRequests.Name = "buttonWorkFlightRequests";
+            this.buttonWorkFlightRequests.Size = new System.Drawing.Size(197, 44);
+            this.buttonWorkFlightRequests.TabIndex = 4;
+            this.buttonWorkFlightRequests.Text = "Работа с заявками на полёты";
+            this.buttonWorkFlightRequests.UseVisualStyleBackColor = true;
+            this.buttonWorkFlightRequests.Click += new System.EventHandler(this.buttonWorkFlightRequests_Click);
+            // 
             // AvianavigationSpecialistForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.BurlyWood;
             this.ClientSize = new System.Drawing.Size(514, 357);
+            this.Controls.Add(this.buttonWorkFlightRequests);
             this.Controls.Add(this.buttonSearchBestAlternative);
             this.Controls.Add(this.buttonWorkDestinations);
             this.Controls.Add(this.buttonWorkPassengers);
             this.Controls.Add(this.buttonBackLogForm);
+            this.MaximizeBox = false;
             this.Name = "AvianavigationSpecialistForm";
-            this.Text = "Окно авинавигационного специалиста";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Окно авианавигационного специалиста";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AvianavigationSpecialistForm_FormClosed);
             this.ResumeLayout(false);
 
         }
@@ -96,5 +111,6 @@ namespace Client
         private System.Windows.Forms.Button buttonWorkPassengers;
         private System.Windows.Forms.Button buttonWorkDestinations;
         private System.Windows.Forms.Button buttonSearchBestAlternative;
+        private System.Windows.Forms.Button buttonWorkFlightRequests;
     }
 }

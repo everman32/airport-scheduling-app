@@ -71,5 +71,10 @@ namespace Client
                 e.Handled = true;
             }
         }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -104,5 +104,10 @@ namespace Client
                 e.Handled = true;
             }
         }
+
+        private void RegistrationForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

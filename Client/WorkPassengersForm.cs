@@ -27,6 +27,9 @@ namespace Client
             panelDeleting.Enabled = false;
             panelDeleting.Visible = false;
         }
+        public WorkPassengersForm()
+        {
+        }
 
         private void buttonBackAvianavForm_Click(object sender, EventArgs e)
         {
@@ -76,7 +79,7 @@ namespace Client
         }
         private bool textBoxCheck_empty()
         {
-            if (textBoxId.Text!=""&& textBoxSurname.Text != ""&&textBoxName.Text != ""
+            if (textBoxSurname.Text != ""&&textBoxName.Text != ""
                 && textBoxPatronymic.Text != "" && textBoxPhoneNumber.Text != "")
             {
              buttonAddPassenger.Enabled = true;
@@ -131,10 +134,6 @@ namespace Client
 
             PassengersGridView.RowHeadersVisible = false;
             PassengersGridView.ReadOnly = true;
-
-            /*PassengersGridView.Width = PassengersGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Visible) +
-              PassengersGridView.ColumnHeadersHeight;*/
-
         }
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
@@ -246,8 +245,6 @@ namespace Client
         {
             Client.SendRequestToServer("Add passenger");
 
-            string selected_id = textBoxId.Text;
-
             string selected_surname = textBoxSurname.Text;
 
             string selected_name = textBoxName.Text;
@@ -256,7 +253,7 @@ namespace Client
 
             string selected_phonenumber = textBoxPhoneNumber.Text;
 
-            DataTable dataTable = Client.ReceiveAddPassengerData(selected_id, selected_surname, selected_name, selected_patronymic, selected_phonenumber);
+            DataTable dataTable = Client.ReceiveAddPassengerData(selected_surname, selected_name, selected_patronymic, selected_phonenumber);
             if (dataTable.Rows.Count == 1)
             {
 
@@ -264,7 +261,7 @@ namespace Client
             }
             else if (dataTable.Rows.Count == 0)
             {
-                MessageBox.Show("Не удалось добавить пассажира, пассажир с таким идентификационным номером, ФИО или номером телефона существует");
+                MessageBox.Show("Не удалось добавить пассажира, пассажир с таким ФИО или номером телефона существует");
             }
         }
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -344,6 +341,17 @@ namespace Client
         private void toolStripWorkPassengers_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void WorkPassengersForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Hide();
+        }
+
+        private void buttonCloseEditPassenger_Click(object sender, EventArgs e)
+        {
+            panelEditing.Enabled = false;
+            panelEditing.Visible = false;
         }
     }
 }

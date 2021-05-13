@@ -24,6 +24,9 @@ namespace Client
             panelDeleting.Enabled = false;
             panelDeleting.Visible = false;
         }
+        public WorkDestinationsForm()
+        {
+        }
         private void buttonBackAvianavForm_Click(object sender, EventArgs e)
         {
             Hide();
@@ -31,7 +34,7 @@ namespace Client
         }
         private bool textBoxCheck_empty()
         {
-            if (textBoxId.Text != "" && textBoxName.Text != "" && textBoxFlightDuration.Text != ""
+            if (textBoxName.Text != "" && textBoxFlightDuration.Text != ""
                 && textBoxAirplaneModel.Text != "" && maskedTextBoxEstimatedTime1.MaskCompleted == true
                 && maskedTextBoxEstimatedTime2.MaskCompleted == true && maskedTextBoxEstimatedTime3.MaskCompleted == true)
             {
@@ -119,7 +122,6 @@ namespace Client
         {
             Client.SendRequestToServer("Add destination");
 
-            string selected_id = textBoxId.Text;
             string selected_name = textBoxName.Text;
             string selected_flightduration = textBoxFlightDuration.Text;
             string selected_airplanemodel = textBoxAirplaneModel.Text;
@@ -127,7 +129,7 @@ namespace Client
             string selected_estimatedtime2 = maskedTextBoxEstimatedTime2.Text;
             string selected_estimatedtime3 = maskedTextBoxEstimatedTime3.Text;
 
-            DataTable dataTable = Client.ReceiveAddDestinationData(selected_id,selected_name,selected_flightduration,
+            DataTable dataTable = Client.ReceiveAddDestinationData(selected_name,selected_flightduration,
                 selected_airplanemodel, selected_estimatedtime1, selected_estimatedtime2, selected_estimatedtime3);
 
             if (dataTable.Rows.Count == 1)
@@ -137,7 +139,7 @@ namespace Client
             }
             else if (dataTable.Rows.Count == 0)
             {
-                MessageBox.Show("Не удалось добавить пункт назначения, пункт назначения с таким идентификационным номером или со всей остальной информацией существует");
+                MessageBox.Show("Не удалось добавить пункт назначения, пункт назначения с такими данными существует");
             }
         }
 
@@ -150,6 +152,7 @@ namespace Client
             Client.SendRequestToServer("Select destinations");
             DataTable dataTable = Client.ReceiveSelectDestinations();
 
+            this.Size= new System.Drawing.Size(1152, 421);
             panelViewing.Enabled = true;
             panelViewing.Visible = true;
             panelAdding.Enabled = false;
@@ -170,6 +173,7 @@ namespace Client
         }
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
+            this.Size = new System.Drawing.Size(1000, 421);
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = true;
@@ -181,6 +185,7 @@ namespace Client
         }
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
+            this.Size = new System.Drawing.Size(1000, 421);
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = false;
@@ -192,6 +197,7 @@ namespace Client
         }
         private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
+            this.Size = new System.Drawing.Size(1000, 421);
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = false;
@@ -448,5 +454,11 @@ namespace Client
                 MessageBox.Show("Не удалось удалить пункт назначения, пункта назначения с таким идент. номером не существует");
             }
         }
+
+        private void WorkDestinationsForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Hide();
+        }
+
     }
 }

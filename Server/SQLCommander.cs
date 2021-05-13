@@ -11,7 +11,6 @@ namespace Server
     static class SQLCommander
     {
         static public SqlConnection sqlConnection;
-
         static public void ConnectToDatabase()
         {
             sqlConnection = new SqlConnection();
@@ -20,6 +19,7 @@ namespace Server
             
             Console.WriteLine("База данных Airport подключена");
         }
+
 
         static public DataTable SelectAccount(string login, string password)
         {
@@ -58,23 +58,24 @@ namespace Server
             return dataTable;
         }
 
+
         static public DataTable SelectPassenger()
         {
             SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "SELECT * FROM Passenger";
+            sqlCommand.CommandText = "SELECT Id [Идентификационный номер пассажира], Surname+@space+Name+@space+Patronymic [ФИО], PhoneNumber [Телефонный номер] FROM Passenger";
             sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@space", " ");
             SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
             DataTable dataTable = new DataTable();
             adapter.Fill(dataTable);
 
             return dataTable;
         }
-        static public DataTable SelectPassenger(string id, string surname, string name, string patronymic, string phone_number)
+        static public DataTable SelectPassenger(string surname, string name, string patronymic, string phone_number)
         {
             SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "SELECT * FROM Passenger WHERE (Id=@id OR (Surname=@surname AND Name=@name AND Patronymic=@patronymic) OR PhoneNumber=@phone_number)";
+            sqlCommand.CommandText = "SELECT * FROM Passenger WHERE ((Surname=@surname AND Name=@name AND Patronymic=@patronymic) OR PhoneNumber=@phone_number)";
             sqlCommand.Connection = sqlConnection;
-            sqlCommand.Parameters.AddWithValue("@id", id);
             sqlCommand.Parameters.AddWithValue("@surname", surname);
             sqlCommand.Parameters.AddWithValue("@name", name);
             sqlCommand.Parameters.AddWithValue("@patronymic", patronymic);
@@ -104,12 +105,12 @@ namespace Server
 
             return dataTable;
         }
-        static public DataTable InsertPassenger(string id,string surname, string name, string patronymic, string phone_number)
+
+        static public DataTable InsertPassenger(string surname, string name, string patronymic, string phone_number)
         {
             SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "INSERT INTO Passenger (Id,Surname,Name,Patronymic,PhoneNumber) VALUES (@id,@surname,@name,@patronymic,@phoneNumber)";
+            sqlCommand.CommandText = "INSERT INTO Passenger (Surname,Name,Patronymic,PhoneNumber) VALUES (@surname,@name,@patronymic,@phoneNumber)";
             sqlCommand.Connection = sqlConnection;
-            sqlCommand.Parameters.AddWithValue("@id", id);
             sqlCommand.Parameters.AddWithValue("@surname", surname);
             sqlCommand.Parameters.AddWithValue("@name", name);
             sqlCommand.Parameters.AddWithValue("@patronymic", patronymic);
@@ -117,14 +118,14 @@ namespace Server
           
             DataTable dataTable = new DataTable();
             DataTable dataTable_check = new DataTable();
-            dataTable_check=SQLCommander.SelectPassenger(id, surname, name, patronymic, phone_number);
+            dataTable_check=SQLCommander.SelectPassenger(surname, name, patronymic, phone_number);
 
             if (dataTable_check.Rows.Count == 0)
             {
                 try
                 {
                     sqlCommand.ExecuteNonQuery();
-                    dataTable = SQLCommander.SelectPassenger(id, surname, name, patronymic, phone_number);
+                    dataTable = SQLCommander.SelectPassenger(surname, name, patronymic, phone_number);
                 }
             catch (Exception exception)
             {
@@ -134,6 +135,7 @@ namespace Server
             }
             return dataTable;
         }
+
         static public DataTable EditSurnamePassenger(string id,string newvalue)
         {
             SqlCommand sqlCommand = new SqlCommand();
@@ -221,6 +223,7 @@ namespace Server
             }
             return dataTable;
         }
+
         static public int DeletePassenger(string id)
         {
             SqlCommand sqlCommand = new SqlCommand();
@@ -245,7 +248,8 @@ namespace Server
         static public DataTable SelectDestination()
         {
             SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "SELECT * FROM Destination";
+            sqlCommand.CommandText = "SELECT Id [Идентификационный номер пункта назначения], Name [Наименование], FlightDuration [Продолжительность полёта], AirplaneModel [Модель самолёта]," +
+                "EstimatedTime1 [Первое предлагаемое время], EstimatedTime2 [Второе предлагаемое время], EstimatedTime3 [Третье предлагаемое время] FROM Destination";
             sqlCommand.Connection = sqlConnection;
             SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
             DataTable dataTable = new DataTable();
@@ -253,14 +257,13 @@ namespace Server
 
             return dataTable;
         }
-        static public DataTable SelectDestination(string id, string name, string flightduration, string airplanemodel,
+        static public DataTable SelectDestination(string name, string flightduration, string airplanemodel,
             string estimatedtime1, string estimatedtime2, string estimatedtime3)
         {
             SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "SELECT * FROM Destination WHERE (Id=@id OR (Name=@name AND FlightDuration=@flightduration AND AirplaneModel=@airplanemodel AND " +
-                "EstimatedTime1=@estimatedtime1 AND EstimatedTime2=@estimatedtime2 AND EstimatedTime3=@estimatedtime3))";
+            sqlCommand.CommandText = "SELECT * FROM Destination WHERE (Name=@name AND FlightDuration=@flightduration AND AirplaneModel=@airplanemodel AND " +
+                "EstimatedTime1=@estimatedtime1 AND EstimatedTime2=@estimatedtime2 AND EstimatedTime3=@estimatedtime3)";
             sqlCommand.Connection = sqlConnection;
-            sqlCommand.Parameters.AddWithValue("@id", id);
             sqlCommand.Parameters.AddWithValue("@name", name);
             sqlCommand.Parameters.AddWithValue("@flightduration", flightduration);
             sqlCommand.Parameters.AddWithValue("@airplanemodel", airplanemodel);
@@ -357,15 +360,33 @@ namespace Server
 
             return dataTable;
         }
-        static public DataTable InsertDestination(string id, string name,string flightduration,string airplanemodel,
+        static public DataTable SelectEstimatedTimes(string id)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT EstimatedTime1, EstimatedTime2, EstimatedTime3 FROM Destination dest WHERE (dest.Id=@id)";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@id", id);
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
+
+        static public DataTable InsertDestination(string name,string flightduration,string airplanemodel,
             string estimatedtime1,string estimatedtime2,string estimatedtime3)
         {
             SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "INSERT INTO Destination (Id,Name,FlightDuration,AirplaneModel," +
-                "EstimatedTime1,EstimatedTime2,EstimatedTime3) VALUES (@id,@name,@flightduration,@airplanemodel," +
+            sqlCommand.CommandText = "INSERT INTO Destination (Name,FlightDuration,AirplaneModel," +
+                "EstimatedTime1,EstimatedTime2,EstimatedTime3) VALUES (@name,@flightduration,@airplanemodel," +
                 "@estimatedtime1,@estimatedtime2,@estimatedtime3)";
             sqlCommand.Connection = sqlConnection;
-            sqlCommand.Parameters.AddWithValue("@id", id);
             sqlCommand.Parameters.AddWithValue("@name", name);
             sqlCommand.Parameters.AddWithValue("@flightduration", flightduration);
             sqlCommand.Parameters.AddWithValue("@airplanemodel", airplanemodel);
@@ -375,14 +396,14 @@ namespace Server
 
             DataTable dataTable = new DataTable();
             DataTable dataTable_check = new DataTable();
-            dataTable_check = SQLCommander.SelectDestination(id,name, flightduration,airplanemodel, estimatedtime1, estimatedtime2, estimatedtime3);
+            dataTable_check = SQLCommander.SelectDestination(name, flightduration,airplanemodel, estimatedtime1, estimatedtime2, estimatedtime3);
 
             if (dataTable_check.Rows.Count == 0)
             {
                 try
                 {
                     sqlCommand.ExecuteNonQuery();
-                    dataTable = SQLCommander.SelectDestination(id, name, flightduration, airplanemodel, estimatedtime1, estimatedtime2, estimatedtime3);
+                    dataTable = SQLCommander.SelectDestination(name, flightduration, airplanemodel, estimatedtime1, estimatedtime2, estimatedtime3);
 
                 }
                 catch (Exception exception)
@@ -393,6 +414,7 @@ namespace Server
             }
             return dataTable;
         }
+
         static public DataTable EditNameDestination(string id, string newvalue)
         {
             SqlCommand sqlCommand = new SqlCommand();
@@ -522,6 +544,7 @@ namespace Server
             }
             return dataTable;
         }
+
         static public int DeleteDestination(string id)
         {
             SqlCommand sqlCommand = new SqlCommand();
@@ -543,7 +566,204 @@ namespace Server
         }
 
 
+        static public DataTable SelectFlightRequests()
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT flightrequest.Id [Идентификационный номер заявки], pass.Surname+@space+pass.Name+@space+pass.Patronymic [ФИО пассажира], " +
+                "pass.PhoneNumber [Телефонный номер пассажира], dest.Name [Наименование пункта назначения], flightrequest.HighestPriorityTime [Самое приоритетное время], " +
+                "flightrequest.MediumPriorityTime [Время, среднее по приоритету], flightrequest.LowestPriorityTime [Время, низшее по приоритету] FROM FlightRequest flightrequest " +
+                "INNER JOIN Passenger pass ON flightrequest.IdPassenger=pass.Id INNER JOIN Destination dest ON flightrequest.IdDestination=dest.Id";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@space", " ");
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
+        static public DataTable SelectFlightRequest(string idpassenger, string iddestination)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT * FROM FlightRequest flightrequest WHERE (flightrequest.IdPassenger=@idpassenger AND flightrequest.IdDestination=@iddestination)";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@idpassenger", idpassenger);
+            sqlCommand.Parameters.AddWithValue("@iddestination", iddestination);
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
+        static public DataTable SelectFlightRequest(string id, string highestprioritytime,
+           string mediumprioritytime, string lowestprioritytime)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT * FROM FlightRequest flightrequest WHERE (flightrequest.Id=@id AND flightrequest.HighestPriorityTime=@highestprioritytime AND " +
+                "flightrequest.MediumPriorityTime=@mediumprioritytime AND flightrequest.LowestPriorityTime=@lowestprioritytime)";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@id", id);
+            sqlCommand.Parameters.AddWithValue("@highestprioritytime", DateTime.ParseExact(highestprioritytime, "dd.MM.yyyy HH:mm:ss", null));
+            sqlCommand.Parameters.AddWithValue("@mediumprioritytime", DateTime.ParseExact(mediumprioritytime, "dd.MM.yyyy HH:mm:ss", null));
+            sqlCommand.Parameters.AddWithValue("@lowestprioritytime", DateTime.ParseExact(lowestprioritytime, "dd.MM.yyyy HH:mm:ss", null));
 
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
+        static public DataTable SelectPriorityTimes(string id)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT HighestPriorityTime, MediumPriorityTime, LowestPriorityTime FROM FlightRequest flightrequest WHERE (flightrequest.Id=@id)";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@id", id);
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
+        static public DataTable SelectDestinationsNames()
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT Id, Name FROM Destination";
+            sqlCommand.Connection = sqlConnection;
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
+        static public DataTable SelectPassengersNames()
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT Id, Surname+@space+Name+@space+Patronymic [ФИО пассажира] FROM Passenger";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@space", " ");
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
+
+        static public DataTable InsertFlightRequest(string idpassenger,string iddestination,string highestprioritytime,
+           string mediumprioritytime, string lowestprioritytime)
+        {
+
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "INSERT INTO FlightRequest (IdPassenger, IdDestination, HighestPriorityTime, MediumPriorityTime, LowestPriorityTime) " +
+                "VALUES (@idpassenger, @iddestination, @highestprioritytime, " +
+                "@mediumprioritytime, @lowestprioritytime)";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@idpassenger", idpassenger);
+            sqlCommand.Parameters.AddWithValue("@iddestination", iddestination);
+            sqlCommand.Parameters.AddWithValue("@highestprioritytime",DateTime.ParseExact(highestprioritytime,"dd.MM.yyyy HH:mm:ss",null));
+            sqlCommand.Parameters.AddWithValue("@mediumprioritytime", DateTime.ParseExact(mediumprioritytime, "dd.MM.yyyy HH:mm:ss", null));
+            sqlCommand.Parameters.AddWithValue("@lowestprioritytime", DateTime.ParseExact(lowestprioritytime, "dd.MM.yyyy HH:mm:ss", null));
+
+            DataTable dataTable = new DataTable();
+            DataTable dataTable_check = new DataTable();
+            dataTable_check = SQLCommander.SelectFlightRequest(idpassenger, iddestination);
+
+            if (dataTable_check.Rows.Count == 0)
+            {
+                try
+                {
+                    sqlCommand.ExecuteNonQuery();
+                    dataTable = SQLCommander.SelectFlightRequest(idpassenger, iddestination);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                    return dataTable;
+                }
+            }
+            return dataTable;
+        }
+
+        static public DataTable EditFlightRequest(string id, string highestprioritytime,
+           string mediumprioritytime, string lowestprioritytime)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "UPDATE FlightRequest SET HighestPriorityTime=@highestprioritytime, " +
+                "MediumPriorityTime=@mediumprioritytime, LowestPriorityTime=@lowestprioritytime WHERE Id=@id";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@highestprioritytime", DateTime.ParseExact(highestprioritytime, "dd.MM.yyyy HH:mm:ss", null));
+            sqlCommand.Parameters.AddWithValue("@mediumprioritytime", DateTime.ParseExact(mediumprioritytime, "dd.MM.yyyy HH:mm:ss", null));
+            sqlCommand.Parameters.AddWithValue("@lowestprioritytime", DateTime.ParseExact(lowestprioritytime, "dd.MM.yyyy HH:mm:ss", null));
+            sqlCommand.Parameters.AddWithValue("@id", id);
+
+            DataTable dataTable = new DataTable();
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                dataTable = SQLCommander.SelectFlightRequest(id, highestprioritytime, mediumprioritytime, lowestprioritytime);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                return dataTable;
+            }
+            return dataTable;
+        }
+
+        static public int DeleteFlightRequest(string id)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "DELETE FROM FlightRequest WHERE Id=@id";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@Id", id);
+
+            int deleted_count = 0;
+            try
+            {
+                deleted_count = sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                return deleted_count;
+            }
+            return deleted_count;
+        }
 
     }
 }

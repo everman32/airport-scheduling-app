@@ -42,7 +42,7 @@ namespace Client
             this.buttonLogin.Enabled = false;
             this.buttonLogin.Location = new System.Drawing.Point(162, 179);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(110, 37);
+            this.buttonLogin.Size = new System.Drawing.Size(110, 35);
             this.buttonLogin.TabIndex = 2;
             this.buttonLogin.Text = "Войти";
             this.buttonLogin.UseVisualStyleBackColor = true;
@@ -89,6 +89,7 @@ namespace Client
             // 
             this.textBoxPass.Location = new System.Drawing.Point(162, 134);
             this.textBoxPass.Name = "textBoxPass";
+            this.textBoxPass.PasswordChar = '*';
             this.textBoxPass.Size = new System.Drawing.Size(110, 23);
             this.textBoxPass.TabIndex = 9;
             this.textBoxPass.TextChanged += new System.EventHandler(this.textBoxPass_TextChanged);
@@ -106,8 +107,11 @@ namespace Client
             this.Controls.Add(this.labelPass);
             this.Controls.Add(this.labelLogin);
             this.Controls.Add(this.buttonLogin);
+            this.MaximizeBox = false;
             this.Name = "LoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Окно авторизации";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LoginForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

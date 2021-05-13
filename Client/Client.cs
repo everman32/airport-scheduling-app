@@ -141,7 +141,7 @@ namespace Client
         
         static public DataTable ReceiveSelectPassengers()
         {
-            byte[]data = new byte[10000];
+            byte[]data = new byte[100000];
             int bytes = 0;
             do
             {
@@ -152,26 +152,14 @@ namespace Client
             Array.Clear(data, 0, data.Length);
             return dataTable;
         }
-        static public DataTable ReceiveAddPassengerData(string Id, string Surname, string Name, string Patronymic, string PhoneNumber)
+        static public DataTable ReceiveAddPassengerData(string Surname, string Name, string Patronymic, string PhoneNumber)
         {
-            byte[] id = Encoding.Unicode.GetBytes(Id);
-            stream.Write(id, 0, id.Length);
-            stream.Flush();
-
-            byte[] confirm = new byte[4];
-            int bytes = 0;
-            do
-            {
-                bytes = stream.Read(confirm, 0, confirm.Length);
-            }
-            while (stream.DataAvailable);
-
             byte[] surname = Encoding.Unicode.GetBytes(Surname);
             stream.Write(surname, 0, surname.Length);
             stream.Flush();
 
-            confirm = new byte[4];
-            bytes = 0;
+            byte[] confirm = new byte[4];
+            int bytes = 0;
             do
             {
                 bytes = stream.Read(confirm, 0, confirm.Length);
@@ -301,9 +289,10 @@ namespace Client
             return deleted_count;
         }
 
+
         static public DataTable ReceiveSelectDestinations()
         {
-            byte[] data = new byte[10000];
+            byte[] data = new byte[100000];
             int bytes = 0;
             do
             {
@@ -314,26 +303,14 @@ namespace Client
             Array.Clear(data, 0, data.Length);
             return dataTable;
         }
-        static public DataTable ReceiveAddDestinationData(string Id, string Name, string Flightduration, string Airplanemodel,string Estimatedtime1,string Estimatedtime2,string Estimatedtime3)
+        static public DataTable ReceiveAddDestinationData(string Name, string Flightduration, string Airplanemodel,string Estimatedtime1,string Estimatedtime2,string Estimatedtime3)
         {
-            byte[] id = Encoding.Unicode.GetBytes(Id);
-            stream.Write(id, 0, id.Length);
-            stream.Flush();
-
-            byte[] confirm = new byte[4];
-            int bytes = 0;
-            do
-            {
-                bytes = stream.Read(confirm, 0, confirm.Length);
-            }
-            while (stream.DataAvailable);
-
             byte[] name = Encoding.Unicode.GetBytes(Name);
             stream.Write(name, 0, name.Length);
             stream.Flush();
 
-            confirm = new byte[4];
-            bytes = 0;
+            byte[] confirm = new byte[4];
+            int bytes = 0;
             do
             {
                 bytes = stream.Read(confirm, 0, confirm.Length);
@@ -461,17 +438,6 @@ namespace Client
             Array.Clear(data, 0, data.Length);
             return dataTable;
         }
-
-        static private DataTable GetDataTable(byte[] data)
-        {
-            DataTable dataTable = null;
-            BinaryFormatter bFormat = new BinaryFormatter();
-            using (MemoryStream memoryStream = new MemoryStream(data))
-            {
-                dataTable = (DataTable)bFormat.Deserialize(memoryStream);
-            }
-            return dataTable;
-        }
         static public int ReceiveDeleteDestinationData(string Id)
         {
             byte[] id = Encoding.Unicode.GetBytes(Id);
@@ -497,6 +463,271 @@ namespace Client
             Array.Clear(data, 0, data.Length);
             return deleted_count;
         }
+
+
+        static public DataTable ReceiveSelectFlightRequests()
+        {
+            byte[] data = new byte[100000];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveSelectDestinationsNames()
+        {
+            byte[] data = new byte[10000];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveSelectPassengersNames()
+        {
+            byte[] data = new byte[10000];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveSelectEstimatedTimes(string Id)
+        {
+            byte[] id = Encoding.Unicode.GetBytes(Id);
+            stream.Write(id, 0, id.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveAddFlightRequestData(string idPassenger, string idDestination,
+                string highestPrioritytime, string mediumPrioritytime, string lowestPrioritytime)
+        {
+            byte[] idpassenger = Encoding.Unicode.GetBytes(idPassenger);
+            stream.Write(idpassenger, 0, idpassenger.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] iddestination = Encoding.Unicode.GetBytes(idDestination);
+            stream.Write(iddestination, 0, iddestination.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] highestprioritytime = Encoding.Unicode.GetBytes(highestPrioritytime);
+            stream.Write(highestprioritytime, 0, highestprioritytime.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] mediumprioritytime = Encoding.Unicode.GetBytes(mediumPrioritytime);
+            stream.Write(mediumprioritytime, 0, mediumprioritytime.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] lowestprioritytime = Encoding.Unicode.GetBytes(lowestPrioritytime);
+            stream.Write(lowestprioritytime, 0, lowestprioritytime.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveEditFlightRequestData(string Id, string highestPrioritytime,
+            string mediumPrioritytime, string lowestPrioritytime)
+        {
+            byte[] id = Encoding.Unicode.GetBytes(Id);
+            stream.Write(id, 0, id.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] highestprioritytime = Encoding.Unicode.GetBytes(highestPrioritytime);
+            stream.Write(highestprioritytime, 0, highestprioritytime.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] mediumtprioritytime = Encoding.Unicode.GetBytes(mediumPrioritytime);
+            stream.Write(mediumtprioritytime, 0, mediumtprioritytime.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] lowestprioritytime = Encoding.Unicode.GetBytes(lowestPrioritytime);
+            stream.Write(lowestprioritytime, 0, lowestprioritytime.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveSelectPriorityTimes(string Id)
+        {
+            byte[] id = Encoding.Unicode.GetBytes(Id);
+            stream.Write(id, 0, id.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public int ReceiveDeleteFlightRequestData(string Id)
+        {
+            byte[] id = Encoding.Unicode.GetBytes(Id);
+            stream.Write(id, 0, id.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[64];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            int deleted_count = BitConverter.ToInt32(data);
+            Array.Clear(data, 0, data.Length);
+            return deleted_count;
+        }
+
+        static private DataTable GetDataTable(byte[] data)
+        {
+            DataTable dataTable = null;
+            BinaryFormatter bFormat = new BinaryFormatter();
+            using (MemoryStream memoryStream = new MemoryStream(data))
+            {
+                dataTable = (DataTable)bFormat.Deserialize(memoryStream);
+            }
+            return dataTable;
+        }
+
 
 
 

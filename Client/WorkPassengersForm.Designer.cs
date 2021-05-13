@@ -36,12 +36,10 @@ namespace Client
             this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
-            this.labelId = new System.Windows.Forms.Label();
             this.labelPhone_Number = new System.Windows.Forms.Label();
             this.labelSurname = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.labelPatronymic = new System.Windows.Forms.Label();
-            this.textBoxId = new System.Windows.Forms.TextBox();
             this.textBoxPhoneNumber = new System.Windows.Forms.TextBox();
             this.textBoxSurname = new System.Windows.Forms.TextBox();
             this.textBoxName = new System.Windows.Forms.TextBox();
@@ -71,7 +69,7 @@ namespace Client
             // 
             // buttonBackAvianavForm
             // 
-            this.buttonBackAvianavForm.Location = new System.Drawing.Point(12, 283);
+            this.buttonBackAvianavForm.Location = new System.Drawing.Point(12, 299);
             this.buttonBackAvianavForm.Name = "buttonBackAvianavForm";
             this.buttonBackAvianavForm.Size = new System.Drawing.Size(91, 37);
             this.buttonBackAvianavForm.TabIndex = 0;
@@ -81,14 +79,14 @@ namespace Client
             // 
             // PassengersGridView
             // 
-            this.PassengersGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.PassengersGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.PassengersGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.PassengersGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.PassengersGridView.Location = new System.Drawing.Point(0, 20);
             this.PassengersGridView.Name = "PassengersGridView";
             this.PassengersGridView.ReadOnly = true;
             this.PassengersGridView.RowTemplate.Height = 25;
-            this.PassengersGridView.Size = new System.Drawing.Size(428, 143);
+            this.PassengersGridView.Size = new System.Drawing.Size(755, 221);
             this.PassengersGridView.TabIndex = 1;
             // 
             // toolStripWorkPassengers
@@ -101,7 +99,7 @@ namespace Client
             this.toolStripButtonDelete});
             this.toolStripWorkPassengers.Location = new System.Drawing.Point(0, 0);
             this.toolStripWorkPassengers.Name = "toolStripWorkPassengers";
-            this.toolStripWorkPassengers.Size = new System.Drawing.Size(841, 25);
+            this.toolStripWorkPassengers.Size = new System.Drawing.Size(774, 25);
             this.toolStripWorkPassengers.TabIndex = 3;
             this.toolStripWorkPassengers.Text = "toolStrip1";
             this.toolStripWorkPassengers.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripWorkPassengers_ItemClicked);
@@ -143,19 +141,10 @@ namespace Client
             this.toolStripButtonDelete.Text = "Удалить данные о пассажире";
             this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
             // 
-            // labelId
-            // 
-            this.labelId.AutoSize = true;
-            this.labelId.Location = new System.Drawing.Point(214, 12);
-            this.labelId.Name = "labelId";
-            this.labelId.Size = new System.Drawing.Size(275, 15);
-            this.labelId.TabIndex = 4;
-            this.labelId.Text = "Введите идентификационный номер пассажира:";
-            // 
             // labelPhone_Number
             // 
             this.labelPhone_Number.AutoSize = true;
-            this.labelPhone_Number.Location = new System.Drawing.Point(214, 65);
+            this.labelPhone_Number.Location = new System.Drawing.Point(246, 94);
             this.labelPhone_Number.Name = "labelPhone_Number";
             this.labelPhone_Number.Size = new System.Drawing.Size(228, 15);
             this.labelPhone_Number.TabIndex = 5;
@@ -164,7 +153,7 @@ namespace Client
             // labelSurname
             // 
             this.labelSurname.AutoSize = true;
-            this.labelSurname.Location = new System.Drawing.Point(9, 7);
+            this.labelSurname.Location = new System.Drawing.Point(41, 36);
             this.labelSurname.Name = "labelSurname";
             this.labelSurname.Size = new System.Drawing.Size(174, 15);
             this.labelSurname.TabIndex = 6;
@@ -173,7 +162,7 @@ namespace Client
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(9, 50);
+            this.labelName.Location = new System.Drawing.Point(41, 94);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(141, 15);
             this.labelName.TabIndex = 7;
@@ -182,24 +171,15 @@ namespace Client
             // labelPatronymic
             // 
             this.labelPatronymic.AutoSize = true;
-            this.labelPatronymic.Location = new System.Drawing.Point(9, 102);
+            this.labelPatronymic.Location = new System.Drawing.Point(250, 39);
             this.labelPatronymic.Name = "labelPatronymic";
             this.labelPatronymic.Size = new System.Drawing.Size(168, 15);
             this.labelPatronymic.TabIndex = 8;
             this.labelPatronymic.Text = "Введите отчество пассажира:";
             // 
-            // textBoxId
-            // 
-            this.textBoxId.Location = new System.Drawing.Point(214, 33);
-            this.textBoxId.Name = "textBoxId";
-            this.textBoxId.Size = new System.Drawing.Size(100, 23);
-            this.textBoxId.TabIndex = 9;
-            this.textBoxId.TextChanged += new System.EventHandler(this.textBoxId_TextChanged);
-            this.textBoxId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxId_KeyPress);
-            // 
             // textBoxPhoneNumber
             // 
-            this.textBoxPhoneNumber.Location = new System.Drawing.Point(218, 83);
+            this.textBoxPhoneNumber.Location = new System.Drawing.Point(250, 112);
             this.textBoxPhoneNumber.Name = "textBoxPhoneNumber";
             this.textBoxPhoneNumber.Size = new System.Drawing.Size(100, 23);
             this.textBoxPhoneNumber.TabIndex = 10;
@@ -208,7 +188,7 @@ namespace Client
             // 
             // textBoxSurname
             // 
-            this.textBoxSurname.Location = new System.Drawing.Point(9, 24);
+            this.textBoxSurname.Location = new System.Drawing.Point(41, 53);
             this.textBoxSurname.Name = "textBoxSurname";
             this.textBoxSurname.Size = new System.Drawing.Size(100, 23);
             this.textBoxSurname.TabIndex = 11;
@@ -217,7 +197,7 @@ namespace Client
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(8, 72);
+            this.textBoxName.Location = new System.Drawing.Point(41, 112);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(100, 23);
             this.textBoxName.TabIndex = 12;
@@ -226,7 +206,7 @@ namespace Client
             // 
             // textBoxPatronymic
             // 
-            this.textBoxPatronymic.Location = new System.Drawing.Point(9, 120);
+            this.textBoxPatronymic.Location = new System.Drawing.Point(250, 56);
             this.textBoxPatronymic.Name = "textBoxPatronymic";
             this.textBoxPatronymic.Size = new System.Drawing.Size(100, 23);
             this.textBoxPatronymic.TabIndex = 13;
@@ -236,7 +216,7 @@ namespace Client
             // buttonAddPassenger
             // 
             this.buttonAddPassenger.Enabled = false;
-            this.buttonAddPassenger.Location = new System.Drawing.Point(183, 184);
+            this.buttonAddPassenger.Location = new System.Drawing.Point(147, 184);
             this.buttonAddPassenger.Name = "buttonAddPassenger";
             this.buttonAddPassenger.Size = new System.Drawing.Size(100, 36);
             this.buttonAddPassenger.TabIndex = 14;
@@ -250,8 +230,6 @@ namespace Client
             this.panelAdding.Controls.Add(this.textBoxName);
             this.panelAdding.Controls.Add(this.textBoxPatronymic);
             this.panelAdding.Controls.Add(this.labelName);
-            this.panelAdding.Controls.Add(this.labelId);
-            this.panelAdding.Controls.Add(this.textBoxId);
             this.panelAdding.Controls.Add(this.textBoxPhoneNumber);
             this.panelAdding.Controls.Add(this.labelPatronymic);
             this.panelAdding.Controls.Add(this.textBoxSurname);
@@ -268,9 +246,9 @@ namespace Client
             this.panelViewing.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelViewing.Controls.Add(this.PassengersGridView);
             this.panelViewing.Enabled = false;
-            this.panelViewing.Location = new System.Drawing.Point(125, 82);
+            this.panelViewing.Location = new System.Drawing.Point(8, 28);
             this.panelViewing.Name = "panelViewing";
-            this.panelViewing.Size = new System.Drawing.Size(505, 198);
+            this.panelViewing.Size = new System.Drawing.Size(766, 252);
             this.panelViewing.TabIndex = 16;
             // 
             // panelEditing
@@ -328,6 +306,7 @@ namespace Client
             // 
             // comboBoxEdit
             // 
+            this.comboBoxEdit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEdit.FormattingEnabled = true;
             this.comboBoxEdit.Items.AddRange(new object[] {
             "Фамилия",
@@ -405,15 +384,18 @@ namespace Client
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(841, 364);
-            this.Controls.Add(this.panelDeleting);
+            this.ClientSize = new System.Drawing.Size(774, 364);
             this.Controls.Add(this.panelEditing);
-            this.Controls.Add(this.panelViewing);
             this.Controls.Add(this.panelAdding);
+            this.Controls.Add(this.panelDeleting);
+            this.Controls.Add(this.panelViewing);
             this.Controls.Add(this.toolStripWorkPassengers);
             this.Controls.Add(this.buttonBackAvianavForm);
+            this.MaximizeBox = false;
             this.Name = "WorkPassengersForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Окно работы с пассажирами";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WorkPassengersForm_FormClosed);
             this.Load += new System.EventHandler(this.WorkPassengersForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PassengersGridView)).EndInit();
             this.toolStripWorkPassengers.ResumeLayout(false);
@@ -431,20 +413,16 @@ namespace Client
         }
 
         #endregion
-
-        private System.Windows.Forms.Button buttonBackAvianavForm;
         private System.Windows.Forms.DataGridView PassengersGridView;
         private System.Windows.Forms.ToolStrip toolStripWorkPassengers;
         private System.Windows.Forms.ToolStripButton toolStripButtonView;
         private System.Windows.Forms.ToolStripButton toolStripButtonAdd;
         private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
         private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
-        private System.Windows.Forms.Label labelId;
         private System.Windows.Forms.Label labelPhone_Number;
         private System.Windows.Forms.Label labelSurname;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Label labelPatronymic;
-        private System.Windows.Forms.TextBox textBoxId;
         private System.Windows.Forms.TextBox textBoxPhoneNumber;
         private System.Windows.Forms.TextBox textBoxSurname;
         private System.Windows.Forms.TextBox textBoxName;
@@ -452,7 +430,6 @@ namespace Client
         private System.Windows.Forms.Button buttonAddPassenger;
         private System.Windows.Forms.Panel panelAdding;
         private System.Windows.Forms.Panel panelViewing;
-        private System.Windows.Forms.Panel panelEditing;
         private System.Windows.Forms.Button buttonEditPassenger;
         private System.Windows.Forms.TextBox textBoxNewvalue;
         private System.Windows.Forms.Label labelEditValue;
@@ -464,5 +441,8 @@ namespace Client
         private System.Windows.Forms.Button buttonDeletePassenger;
         private System.Windows.Forms.TextBox textBoxDeleteId;
         private System.Windows.Forms.Label labelDelete;
+        private System.Windows.Forms.Button button;
+        public System.Windows.Forms.Panel panelEditing;
+        private System.Windows.Forms.Button buttonBackAvianavForm;
     }
 }

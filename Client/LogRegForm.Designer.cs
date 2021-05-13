@@ -56,9 +56,9 @@ namespace Client
             // 
             // buttonBackMainForm
             // 
-            this.buttonBackMainForm.Location = new System.Drawing.Point(12, 133);
+            this.buttonBackMainForm.Location = new System.Drawing.Point(12, 123);
             this.buttonBackMainForm.Name = "buttonBackMainForm";
-            this.buttonBackMainForm.Size = new System.Drawing.Size(75, 23);
+            this.buttonBackMainForm.Size = new System.Drawing.Size(75, 33);
             this.buttonBackMainForm.TabIndex = 2;
             this.buttonBackMainForm.Text = "<< Назад";
             this.buttonBackMainForm.UseVisualStyleBackColor = true;
@@ -73,8 +73,11 @@ namespace Client
             this.Controls.Add(this.buttonBackMainForm);
             this.Controls.Add(this.buttonRegForm);
             this.Controls.Add(this.buttonLogForm);
+            this.MaximizeBox = false;
             this.Name = "LogRegForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Окно выбора действия";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LogRegForm_FormClosed);
             this.Load += new System.EventHandler(this.LoginRegisterPanel_Load);
             this.ResumeLayout(false);
 

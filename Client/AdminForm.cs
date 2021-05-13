@@ -27,5 +27,15 @@ namespace Client
             Hide();
             form.Show();
         }
+
+        private void AdminForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AdminForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

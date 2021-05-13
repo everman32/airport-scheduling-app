@@ -94,5 +94,10 @@ namespace Client
                 e.Handled = true;
             }
         }
+
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

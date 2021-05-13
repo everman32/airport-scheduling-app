@@ -42,9 +42,9 @@ namespace Client
             // buttonRegistration
             // 
             this.buttonRegistration.Enabled = false;
-            this.buttonRegistration.Location = new System.Drawing.Point(135, 183);
+            this.buttonRegistration.Location = new System.Drawing.Point(135, 182);
             this.buttonRegistration.Name = "buttonRegistration";
-            this.buttonRegistration.Size = new System.Drawing.Size(130, 35);
+            this.buttonRegistration.Size = new System.Drawing.Size(130, 38);
             this.buttonRegistration.TabIndex = 0;
             this.buttonRegistration.Text = "Зарегистрироваться";
             this.buttonRegistration.UseVisualStyleBackColor = true;
@@ -52,9 +52,9 @@ namespace Client
             // 
             // buttonBackLogRegForm
             // 
-            this.buttonBackLogRegForm.Location = new System.Drawing.Point(24, 230);
+            this.buttonBackLogRegForm.Location = new System.Drawing.Point(24, 218);
             this.buttonBackLogRegForm.Name = "buttonBackLogRegForm";
-            this.buttonBackLogRegForm.Size = new System.Drawing.Size(75, 23);
+            this.buttonBackLogRegForm.Size = new System.Drawing.Size(75, 35);
             this.buttonBackLogRegForm.TabIndex = 1;
             this.buttonBackLogRegForm.Text = "<< Назад";
             this.buttonBackLogRegForm.UseVisualStyleBackColor = true;
@@ -62,13 +62,14 @@ namespace Client
             // 
             // comboBoxAccessRight
             // 
+            this.comboBoxAccessRight.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAccessRight.FormattingEnabled = true;
             this.comboBoxAccessRight.Items.AddRange(new object[] {
             "Администратор",
             "Авинавигационный специалист"});
             this.comboBoxAccessRight.Location = new System.Drawing.Point(135, 44);
             this.comboBoxAccessRight.Name = "comboBoxAccessRight";
-            this.comboBoxAccessRight.Size = new System.Drawing.Size(130, 23);
+            this.comboBoxAccessRight.Size = new System.Drawing.Size(183, 23);
             this.comboBoxAccessRight.TabIndex = 2;
             this.comboBoxAccessRight.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -131,8 +132,11 @@ namespace Client
             this.Controls.Add(this.comboBoxAccessRight);
             this.Controls.Add(this.buttonBackLogRegForm);
             this.Controls.Add(this.buttonRegistration);
+            this.MaximizeBox = false;
             this.Name = "RegistrationForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Окно регистрации";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RegistrationForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

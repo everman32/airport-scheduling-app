@@ -38,11 +38,11 @@ namespace Client
             // labelPort
             // 
             this.labelPort.AutoSize = true;
-            this.labelPort.Location = new System.Drawing.Point(31, 22);
+            this.labelPort.Location = new System.Drawing.Point(71, 22);
             this.labelPort.Name = "labelPort";
-            this.labelPort.Size = new System.Drawing.Size(38, 15);
+            this.labelPort.Size = new System.Drawing.Size(161, 15);
             this.labelPort.TabIndex = 0;
-            this.labelPort.Text = "Порт:";
+            this.labelPort.Text = "Введите порт подключения:";
             // 
             // textBoxPort
             // 
@@ -56,7 +56,7 @@ namespace Client
             // buttonConnectClient
             // 
             this.buttonConnectClient.Enabled = false;
-            this.buttonConnectClient.Location = new System.Drawing.Point(238, 78);
+            this.buttonConnectClient.Location = new System.Drawing.Point(238, 61);
             this.buttonConnectClient.Name = "buttonConnectClient";
             this.buttonConnectClient.Size = new System.Drawing.Size(108, 45);
             this.buttonConnectClient.TabIndex = 2;
@@ -66,7 +66,7 @@ namespace Client
             // 
             // buttonShutdown
             // 
-            this.buttonShutdown.Location = new System.Drawing.Point(31, 82);
+            this.buttonShutdown.Location = new System.Drawing.Point(12, 87);
             this.buttonShutdown.Name = "buttonShutdown";
             this.buttonShutdown.Size = new System.Drawing.Size(75, 36);
             this.buttonShutdown.TabIndex = 3;
@@ -84,8 +84,11 @@ namespace Client
             this.Controls.Add(this.buttonConnectClient);
             this.Controls.Add(this.textBoxPort);
             this.Controls.Add(this.labelPort);
+            this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главное окно";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

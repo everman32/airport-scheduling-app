@@ -43,5 +43,10 @@ namespace Client
             Hide();
             registrationForm.Show();
         }
+
+        private void LogRegForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
