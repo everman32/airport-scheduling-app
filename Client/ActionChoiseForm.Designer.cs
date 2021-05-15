@@ -1,7 +1,7 @@
 ﻿
 namespace Client
 {
-    partial class LogRegForm
+    partial class ActionChoiseForm
     {
         /// <summary>
         /// Required designer variable.

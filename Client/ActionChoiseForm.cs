@@ -8,10 +8,10 @@ using System.Windows.Forms;
 
 namespace Client
 {
-    public partial class LogRegForm : Form
+    public partial class ActionChoiseForm : Form
     {
         public Form mainPanel;
-        public LogRegForm(MainForm main)
+        public ActionChoiseForm(MainForm main)
         {
             InitializeComponent();
             mainPanel = main;

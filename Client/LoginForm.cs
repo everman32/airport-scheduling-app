@@ -12,7 +12,7 @@ namespace Client
     public partial class LoginForm : Form
     {
         public Form form;
-        public LoginForm(LogRegForm loginregForm)
+        public LoginForm(ActionChoiseForm loginregForm)
         {
             InitializeComponent();
             form = loginregForm;
@@ -43,7 +43,7 @@ namespace Client
                 }
                 else if (dataTable.Rows[0][2].ToString() == "2")
                 {
-                    AvianavigationSpecialistForm dispatcherForm = new AvianavigationSpecialistForm(this);
+                    DispatcherForm dispatcherForm = new DispatcherForm(this);
                     Hide();
                     dispatcherForm.Show();
                     Client.accessRight = 2;

@@ -431,7 +431,7 @@ namespace Client
             this.panelViewing.Controls.Add(this.FlightRequestsGridView);
             this.panelViewing.Location = new System.Drawing.Point(0, 28);
             this.panelViewing.Name = "panelViewing";
-            this.panelViewing.Size = new System.Drawing.Size(1060, 244);
+            this.panelViewing.Size = new System.Drawing.Size(1129, 244);
             this.panelViewing.TabIndex = 20;
             // 
             // FlightRequestsGridView
@@ -442,7 +442,7 @@ namespace Client
             this.FlightRequestsGridView.Location = new System.Drawing.Point(0, 12);
             this.FlightRequestsGridView.Name = "FlightRequestsGridView";
             this.FlightRequestsGridView.RowTemplate.Height = 25;
-            this.FlightRequestsGridView.Size = new System.Drawing.Size(1051, 226);
+            this.FlightRequestsGridView.Size = new System.Drawing.Size(1161, 226);
             this.FlightRequestsGridView.TabIndex = 0;
             // 
             // toolStripWorkDestinations
@@ -455,7 +455,7 @@ namespace Client
             this.toolStripWorkDestinations.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripWorkDestinations.Location = new System.Drawing.Point(0, 0);
             this.toolStripWorkDestinations.Name = "toolStripWorkDestinations";
-            this.toolStripWorkDestinations.Size = new System.Drawing.Size(1076, 25);
+            this.toolStripWorkDestinations.Size = new System.Drawing.Size(1182, 25);
             this.toolStripWorkDestinations.TabIndex = 19;
             this.toolStripWorkDestinations.Text = "toolStrip1";
             // 
@@ -504,10 +504,10 @@ namespace Client
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(1076, 417);
+            this.ClientSize = new System.Drawing.Size(1182, 417);
+            this.Controls.Add(this.panelAdding);
             this.Controls.Add(this.panelDeleting);
             this.Controls.Add(this.panelEditing);
-            this.Controls.Add(this.panelAdding);
             this.Controls.Add(this.panelViewing);
             this.Controls.Add(this.toolStripWorkDestinations);
             this.Controls.Add(this.buttonBackAvianavForm);

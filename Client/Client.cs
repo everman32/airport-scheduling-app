@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Text;
-using System.Net;
 using System.Net.Sockets;
 using System.Data;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Threading;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Client
 {
@@ -54,45 +54,8 @@ namespace Client
         }
         static public DataTable ReceiveAuthorizeData(string Login, string Password)
         {
-                byte[] login = Encoding.Unicode.GetBytes(Login);
-                stream.Write(login, 0, login.Length);
-                stream.Flush();
-
-                byte[] confirm = new byte[4];
-                int bytes = 0;
-                do
-                {
-                    bytes = stream.Read(confirm, 0, confirm.Length);
-                }
-                while (stream.DataAvailable);
-
-                byte[]password= Encoding.Unicode.GetBytes(Password);
-                stream.Write(password, 0, password.Length);
-                stream.Flush();
-
-                confirm = new byte[4];
-                bytes = 0;
-                do
-                {
-                bytes = stream.Read(confirm, 0, confirm.Length);
-                }
-                while (stream.DataAvailable);
-
-                byte[] data = new byte[10000];
-                bytes = 0;
-                do
-                {
-                    bytes = stream.Read(data, 0, data.Length);
-                }
-                while (stream.DataAvailable);
-                DataTable dataTable = GetDataTable(data);
-                Array.Clear(data,0,data.Length);
-                return dataTable;
-        }
-        static public DataTable ReceiveRegisterData(string Login, string Password,int AccessRight)
-        {
-                byte[] login = Encoding.Unicode.GetBytes(Login);
-                stream.Write(login, 0, login.Length);
+            byte[] login = Encoding.Unicode.GetBytes(Login);
+            stream.Write(login, 0, login.Length);
             stream.Flush();
 
             byte[] confirm = new byte[4];
@@ -104,19 +67,7 @@ namespace Client
             while (stream.DataAvailable);
 
             byte[] password = Encoding.Unicode.GetBytes(Password);
-                stream.Write(password, 0, password.Length);
-            stream.Flush();
-
-            confirm = new byte[4];
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(confirm, 0, confirm.Length);
-            }
-            while (stream.DataAvailable);
-
-            byte[] accessRight = Encoding.Unicode.GetBytes(AccessRight.ToString());
-                stream.Write(accessRight, 0, accessRight.Length);
+            stream.Write(password, 0, password.Length);
             stream.Flush();
 
             confirm = new byte[4];
@@ -128,20 +79,69 @@ namespace Client
             while (stream.DataAvailable);
 
             byte[] data = new byte[10000];
-                bytes = 0;
-                do
-                {
-                    bytes = stream.Read(data, 0, data.Length);
-                }
-                while (stream.DataAvailable);
-                DataTable dataTable = GetDataTable(data);
-                Array.Clear(data, 0, data.Length);
-                return dataTable;
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
         }
-        
+        static public DataTable ReceiveRegisterData(string Login, string Password, int AccessRight)
+        {
+            byte[] login = Encoding.Unicode.GetBytes(Login);
+            stream.Write(login, 0, login.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] password = Encoding.Unicode.GetBytes(Password);
+            stream.Write(password, 0, password.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] accessRight = Encoding.Unicode.GetBytes(AccessRight.ToString());
+            stream.Write(accessRight, 0, accessRight.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+
         static public DataTable ReceiveSelectPassengers()
         {
-            byte[]data = new byte[100000];
+            byte[] data = new byte[100000];
             int bytes = 0;
             do
             {
@@ -276,7 +276,7 @@ namespace Client
                 bytes = stream.Read(confirm, 0, confirm.Length);
             }
             while (stream.DataAvailable);
-          
+
             byte[] data = new byte[64];
             bytes = 0;
             do
@@ -303,7 +303,7 @@ namespace Client
             Array.Clear(data, 0, data.Length);
             return dataTable;
         }
-        static public DataTable ReceiveAddDestinationData(string Name, string Flightduration, string Airplanemodel,string Estimatedtime1,string Estimatedtime2,string Estimatedtime3)
+        static public DataTable ReceiveAddDestinationData(string Name, string Flightduration, string Airplanemodel, string Estimatedtime1, string Estimatedtime2, string Estimatedtime3)
         {
             byte[] name = Encoding.Unicode.GetBytes(Name);
             stream.Write(name, 0, name.Length);
@@ -717,6 +717,186 @@ namespace Client
             return deleted_count;
         }
 
+
+        static public DataTable ReceiveSelectDestinationsNamesCondorcet()
+        {
+            byte[] data = new byte[10000];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveSelectEstimatedTimesCondorcet(string Id)
+        {
+            byte[] id = Encoding.Unicode.GetBytes(Id);
+            stream.Write(id, 0, id.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveSelectPriorityTimesCondorcet(string Id)
+        {
+            byte[] id = Encoding.Unicode.GetBytes(Id);
+            stream.Write(id, 0, id.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveSelectPreferencesCondorcet(string Id)
+        {
+            byte[] id = Encoding.Unicode.GetBytes(Id);
+            stream.Write(id, 0, id.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTablepreferences = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+
+            return dataTablepreferences;
+        }
+        static public DataTable ReceiveSelectPairwiseComparison(string Id)
+        {
+            byte[] id = Encoding.Unicode.GetBytes(Id);
+            stream.Write(id, 0, id.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTablePairwiseComparison = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+
+            return dataTablePairwiseComparison;
+        }
+        static public int[] ReceiveSearchBestAlternative(int[,] matrixPairwiseComparison, int matrixPairwiseComparison_count)
+        {
+            DataTable dataTablePairwiseComparison = new DataTable();
+
+            for (int i = 0; i < matrixPairwiseComparison_count; i++)
+            {
+                dataTablePairwiseComparison.Columns.Add();
+            }
+            for (int i = 0; i < matrixPairwiseComparison_count; i++)
+            {
+                DataRow row = dataTablePairwiseComparison.NewRow();
+                for (int j = 0; j < matrixPairwiseComparison_count; j++)
+                {
+                    row[j] = matrixPairwiseComparison[i, j];
+                }
+                dataTablePairwiseComparison.Rows.Add(row);
+            }
+
+            byte[] dataTable = GetBinaryFormatData(dataTablePairwiseComparison);
+            stream.Write(dataTable, 0, dataTable.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[64];
+            StringBuilder builder= new StringBuilder();
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+            }
+            while (stream.DataAvailable);
+
+            string bestAlternative_buf = builder.ToString();
+
+            int[] bestAlternative = new int[bestAlternative_buf.Length];
+            for (int i = 0; i < bestAlternative.Length; i++)
+            {
+                bestAlternative[i] = int.Parse(bestAlternative_buf[i].ToString());
+            }
+            Array.Clear(data, 0, data.Length);
+            return bestAlternative;
+        }
+
+
+
+        public static byte[] GetBinaryFormatData(DataTable dataTable)
+        {
+            BinaryFormatter bFormat = new BinaryFormatter();
+            byte[] outList = null;
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                bFormat.Serialize(memoryStream, dataTable);
+                outList = memoryStream.ToArray();
+            }
+            return outList;
+        }
         static private DataTable GetDataTable(byte[] data)
         {
             DataTable dataTable = null;

@@ -11,7 +11,7 @@ namespace Client
     public partial class RegistrationForm : Form
     {
         public Form form;
-        public RegistrationForm(LogRegForm logRegForm)
+        public RegistrationForm(ActionChoiseForm logRegForm)
         {
             InitializeComponent();
             form = logRegForm;
@@ -44,7 +44,7 @@ namespace Client
                 }
                 else if (dataTable.Rows[0][2].ToString() == "2")
                 {
-                    AvianavigationSpecialistForm dispatcherForm = new AvianavigationSpecialistForm(this);
+                    DispatcherForm dispatcherForm = new DispatcherForm(this);
                     Hide();
                     dispatcherForm.Show();
                     Client.accessRight = 2;

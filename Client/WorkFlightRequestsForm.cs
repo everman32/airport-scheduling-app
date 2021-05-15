@@ -13,10 +13,10 @@ namespace Client
         public Form form1;
         public Form form2;
         public Form form3;
-        public WorkFlightRequestsForm(AvianavigationSpecialistForm avianavigationSpecialistForm, WorkPassengersForm workPassengersForm, WorkDestinationsForm workDestinationsForm)
+        public WorkFlightRequestsForm(DispatcherForm dispatcherForm, WorkPassengersForm workPassengersForm, WorkDestinationsForm workDestinationsForm)
         {
             InitializeComponent();
-            form1 = avianavigationSpecialistForm;
+            form1 = dispatcherForm;
             form2 = workPassengersForm;
             form3 = workDestinationsForm;
             panelViewing.Enabled = false;
@@ -43,7 +43,7 @@ namespace Client
             Client.SendRequestToServer("Select flightrequests");
             DataTable dataTable = Client.ReceiveSelectFlightRequests();
 
-            this.Size = new System.Drawing.Size(1092, 456);
+            this.Size = new System.Drawing.Size(1198, 456);
             panelViewing.Enabled = true;
             panelViewing.Visible = true;
             panelAdding.Enabled = false;

@@ -34,7 +34,7 @@ namespace Client
 
                 buttonConnectClient.Enabled = false;
                 textBoxPort.Enabled = false;
-                LogRegForm loginRegisterPanel = new LogRegForm(this);
+                ActionChoiseForm loginRegisterPanel = new ActionChoiseForm(this);
                 Hide();
                 loginRegisterPanel.Show();
             }

@@ -1,7 +1,7 @@
 ﻿
 namespace Client
 {
-    partial class AvianavigationSpecialistForm
+    partial class DispatcherForm
     {
         /// <summary>
         /// Required designer variable.
@@ -74,6 +74,7 @@ namespace Client
             this.buttonSearchBestAlternative.TabIndex = 3;
             this.buttonSearchBestAlternative.Text = "Поиск наилучшей альтернативы расписания для пункта назначения";
             this.buttonSearchBestAlternative.UseVisualStyleBackColor = true;
+            this.buttonSearchBestAlternative.Click += new System.EventHandler(this.buttonSearchBestAlternative_Click);
             // 
             // buttonWorkFlightRequests
             // 
@@ -85,7 +86,7 @@ namespace Client
             this.buttonWorkFlightRequests.UseVisualStyleBackColor = true;
             this.buttonWorkFlightRequests.Click += new System.EventHandler(this.buttonWorkFlightRequests_Click);
             // 
-            // AvianavigationSpecialistForm
+            // DispatcherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -97,9 +98,9 @@ namespace Client
             this.Controls.Add(this.buttonWorkPassengers);
             this.Controls.Add(this.buttonBackLogForm);
             this.MaximizeBox = false;
-            this.Name = "AvianavigationSpecialistForm";
+            this.Name = "DispatcherForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Окно авианавигационного специалиста";
+            this.Text = "Окно диспетчера";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AvianavigationSpecialistForm_FormClosed);
             this.ResumeLayout(false);
 

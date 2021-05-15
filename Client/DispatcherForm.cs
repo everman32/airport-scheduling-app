@@ -8,14 +8,14 @@ using System.Windows.Forms;
 
 namespace Client
 {
-    public partial class AvianavigationSpecialistForm : Form
+    public partial class DispatcherForm : Form
     {
         public Form form;
         public WorkPassengersForm workPassengersForm;
         public WorkDestinationsForm workDestinationsForm;
         public WorkFlightRequestsForm workFlightRequestsForm;
 
-        public AvianavigationSpecialistForm(LoginForm loginForm)
+        public DispatcherForm(LoginForm loginForm)
         {
             InitializeComponent();
             form = loginForm;
@@ -24,7 +24,7 @@ namespace Client
             workDestinationsForm = new WorkDestinationsForm(this);
             workFlightRequestsForm = new WorkFlightRequestsForm(this, workPassengersForm, workDestinationsForm);
         }
-        public AvianavigationSpecialistForm(RegistrationForm registrationForm)
+        public DispatcherForm(RegistrationForm registrationForm)
         {
             InitializeComponent();
             form = registrationForm;
@@ -44,7 +44,7 @@ namespace Client
 
         private void buttonWorkDestinations_Click(object sender, EventArgs e)
         {
- 
+
 
             Hide();
             workDestinationsForm.Show();
@@ -60,6 +60,15 @@ namespace Client
         private void AvianavigationSpecialistForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void buttonSearchBestAlternative_Click(object sender, EventArgs e)
+        {
+            WorkCondorsetAlternative workCondorsetAlternative;
+            workCondorsetAlternative = new WorkCondorsetAlternative(this);
+
+            Hide();
+            workCondorsetAlternative.Show();
         }
     }
 }

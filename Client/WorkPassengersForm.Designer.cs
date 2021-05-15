@@ -441,7 +441,6 @@ namespace Client
         private System.Windows.Forms.Button buttonDeletePassenger;
         private System.Windows.Forms.TextBox textBoxDeleteId;
         private System.Windows.Forms.Label labelDelete;
-        private System.Windows.Forms.Button button;
         public System.Windows.Forms.Panel panelEditing;
         private System.Windows.Forms.Button buttonBackAvianavForm;
     }

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
 
 namespace Server
 {
@@ -571,8 +567,8 @@ namespace Server
             SqlCommand sqlCommand = new SqlCommand();
             sqlCommand.CommandText = "SELECT flightrequest.Id [Идентификационный номер заявки], pass.Surname+@space+pass.Name+@space+pass.Patronymic [ФИО пассажира], " +
                 "pass.PhoneNumber [Телефонный номер пассажира], dest.Name [Наименование пункта назначения], flightrequest.HighestPriorityTime [Самое приоритетное время], " +
-                "flightrequest.MediumPriorityTime [Время, среднее по приоритету], flightrequest.LowestPriorityTime [Время, низшее по приоритету] FROM FlightRequest flightrequest " +
-                "INNER JOIN Passenger pass ON flightrequest.IdPassenger=pass.Id INNER JOIN Destination dest ON flightrequest.IdDestination=dest.Id";
+                "flightrequest.MediumPriorityTime [Время, среднее по приоритету], flightrequest.LowestPriorityTime [Время, низшее по приоритету], flightrequest.Status [Статус] " +
+                "FROM FlightRequest flightrequest INNER JOIN Passenger pass ON flightrequest.IdPassenger=pass.Id INNER JOIN Destination dest ON flightrequest.IdDestination=dest.Id";
             sqlCommand.Connection = sqlConnection;
             sqlCommand.Parameters.AddWithValue("@space", " ");
             DataTable dataTable = new DataTable();
@@ -765,5 +761,62 @@ namespace Server
             return deleted_count;
         }
 
+        static public DataTable SelectDestinationsNamesCondorcet()
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT DISTINCT dest.Id [Идентификационный номер пункта назначения], dest.Name [Наименование пункта назначения] FROM FlightRequest flightrequest " +
+                "INNER JOIN Destination dest ON flightrequest.IdDestination = dest.Id";
+            sqlCommand.Connection = sqlConnection;
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
+        static public DataTable SelectEstimatedTimesCondorcet(string id)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT Name [Пункт назначения], EstimatedTime1 [Предлагаемое время 1 (a1)], EstimatedTime2 [Предлагаемое время 2 (a2)], EstimatedTime3[Предлагаемое время 3 (a3)] FROM Destination dest WHERE (dest.Id=@id)";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@id", id);
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
+        static public DataTable SelectPriorityTimesCondorcet(string id)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT pass.Surname+@space+pass.Name+@space+pass.Patronymic [ФИО пассажира], flightrequest.HighestPriorityTime [Самое приоритетное время], " +
+                "flightrequest.MediumPriorityTime[Время, среднее по приоритету], flightrequest.LowestPriorityTime[Время, низшее по приоритету] FROM FlightRequest flightrequest " +
+                "INNER JOIN Passenger pass ON flightrequest.IdPassenger = pass.Id INNER JOIN Destination dest ON flightrequest.IdDestination = dest.Id WHERE flightrequest.IdDestination = @id";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@space", " ");
+            sqlCommand.Parameters.AddWithValue("@id", id);
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
     }
 }

@@ -11,9 +11,9 @@ namespace Client
     public partial class WorkDestinationsForm : Form
     {
         public Form form;
-        public WorkDestinationsForm(AvianavigationSpecialistForm avianavigationSpecialistForm)
+        public WorkDestinationsForm(DispatcherForm dispatcherForm)
         {
-            form = avianavigationSpecialistForm;
+            form = dispatcherForm;
             InitializeComponent();
             panelViewing.Enabled = false;
             panelViewing.Visible = false;

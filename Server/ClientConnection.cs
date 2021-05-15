@@ -1,26 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Net.Sockets;
-using System.Data.SqlClient;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Data;
 using System.IO;
+using System.Collections;
+using System.Linq;
 
 namespace Server
 {
     [Serializable]
-    class ClientConnection
+    public class ClientConnection
     {
         public TcpClient client;
         static private string command = "";
-        /*
-        static private int status = 0;
-        static private string companySearch = "", companyId = "", companyName = "", companyVacancy = "", companySalary = "", companyEmployment = "", companyRequirements = "", companyDescription = "";
-        static private string seekerSearch = "", seekerId = "", seekerName = "", seekerVacancy = "", seekerSalary = "", seekerEducation = "", seekerMobileNumber = "", seekerDescription = "";
-        */
         public ClientConnection(TcpClient tcpClient)
         {
             client = tcpClient;
@@ -45,10 +38,6 @@ namespace Server
                 byte[] confirm = Encoding.Unicode.GetBytes("OK");
                 stream.Write(confirm, 0, confirm.Length);
                 stream.Flush();
-               /* string message = builder.ToString();
-                Array.Clear(data, 0, data.Length);
-                Console.WriteLine(message);*/
-
                 for (; ; )
                 {
                     builder = new StringBuilder();
@@ -76,91 +65,120 @@ namespace Server
                          (builder.ToString() == "Delete destination")||
                          (builder.ToString() == "Select flightrequests")||
                          (builder.ToString() == "Select destinationsNames") ||
-                          (builder.ToString() == "Select passengersNames") ||
+                         (builder.ToString() == "Select passengersNames") ||
                          (builder.ToString() == "Select estimatedtimes")||
                          (builder.ToString() == "Add flightrequest")||
                          (builder.ToString() == "Edit flightrequest")||
-                            (builder.ToString() == "Select prioritytimes")||
-                               (builder.ToString() == "Delete flightrequest")
-                               /*
-                               */
-                               )
+                         (builder.ToString() == "Select prioritytimes")||
+                         (builder.ToString() == "Delete flightrequest")||
+                         (builder.ToString() == "Select destinationsNamesCondorcet")||
+                         (builder.ToString() == "Select estimatedtimesCondorcet")||
+                         (builder.ToString() == "Select prioritytimesCondorcet")||
+                         (builder.ToString() == "Select preferencesCondorcet")||
+                         (builder.ToString() == "Select pairwiseComparison")||
+                         (builder.ToString() == "Select bestAlternative")
+
+
+                         )
                     {
                         command = builder.ToString();
                     }
                     if (command == "Login")
                     {
-                        ClientConnection.ReceiveAuthorize(stream);
+                        Account.ReceiveAuthorizationData(stream);
                     }
                     else if (command == "Register")
                     {
-                        ClientConnection.ReceiveRegisterData(stream);
+                        Account.ReceiveRegistrationData(stream);
                     }
                     else if (command == "Select passengers")
                     {
-                        ClientConnection.SendSelectPassengers(stream);
+                        Passenger.SendSelectingData(stream);
                     }
                     else if (command == "Add passenger")
                     {
-                        ClientConnection.ReceiveAdditingPassengerData(stream);
+                        Passenger.ReceiveDataForAdditing(stream);
                     }
                     else if (command == "Edit passenger")
                     {
-                        ClientConnection.ReceiveEditingPassengerData(stream);
+                        Passenger.ReceiveDataForEditing(stream);
                     }
                     else if (command == "Delete passenger")
                     {
-                        ClientConnection.ReceiveDeletingPassengerData(stream);
+                        Passenger.ReceiveDataForDeleting(stream);
                     }
                     else if (command == "Select destinations")
                     {
-                        ClientConnection.SendSelectDestinations(stream);
+                        Destination.SendSelectingData(stream);
                     }
                     else if (command == "Add destination")
                     {
-                        ClientConnection.ReceiveAdditingDestinationData(stream);
+                        Destination.ReceiveDataForAdditing(stream);
                     }
                     else if (command == "Edit destination")
                     {
-                        ClientConnection.ReceiveEditingDestinationData(stream);
+                        Destination.ReceiveDataForEditing(stream);
                     }
                     else if (command == "Delete destination")
                     {
-                        ClientConnection.ReceiveDeletingDestinationData(stream);
+                        Destination.ReceiveDataForDeleting(stream);
                     }
                     else if (command == "Select flightrequests")
                     {
-                        ClientConnection.SendSelectFlightRequests(stream);
+                        FlightRequest.SendSelectingData(stream);
                     }
                     else if (command == "Select destinationsNames")
                     {
-                        ClientConnection.SendSelectDestinationsNames(stream);
+                        FlightRequest.SendSelectingDestinationsNames(stream);
                     }
                     else if (command == "Select passengersNames")
                     {
-                        ClientConnection.SendSelectPassengersNames(stream);
+                        FlightRequest.SendSelectingPassengersNames(stream);
                     }
                     else if (command == "Select estimatedtimes")
                     {
-                        ClientConnection.SendSelectEstimatedtimes(stream);
+                        FlightRequest.SendSelectingEstimatedtimes(stream);
                     }
                     else if (command == "Add flightrequest")
                     {
-                        ClientConnection.ReceiveAdditingFlightRequestData(stream);
+                        FlightRequest.ReceiveDataForAdditing(stream);
                     }
                     else if (command == "Edit flightrequest")
                     {
-                        ClientConnection.ReceiveEditingFlightRequestData(stream);
+                        FlightRequest.ReceiveDataForEditing(stream);
                     }
                     else if (command == "Select prioritytimes")
                     {
-                        ClientConnection.SendSelectPriorityTimes(stream);
+                        FlightRequest.SendSelectingPriorityTimes(stream);
                     }
                     else if (command == "Delete flightrequest")
                     {
-                        ClientConnection.ReceiveDeletingFlightRequestData(stream);
+                        FlightRequest.ReceiveDataForDeleting(stream);
                     }
-
+                    else if (command == "Select destinationsNamesCondorcet")
+                    {
+                        ClientConnection.SendSelectDestinationsNamesCondorcet(stream);
+                    }
+                    else if (command == "Select estimatedtimesCondorcet")
+                    {
+                        ClientConnection.SendSelectEstimatedtimesCondorcet(stream);
+                    }
+                    else if (command == "Select prioritytimesCondorcet")
+                    {
+                        ClientConnection.SendSelectPriorityTimesCondorcet(stream);
+                    }
+                    else if (command == "Select preferencesCondorcet")
+                    {
+                        ClientConnection.SendSelectPreferencesCondorcet(stream);
+                    }
+                    else if (command == "Select pairwiseComparison")
+                    {
+                        ClientConnection.SendSelectPairwiseComparison(stream);
+                    }
+                    else if (command == "Select bestAlternative")
+                    {
+                        ClientConnection.SendSelectbestAlternative(stream);
+                    }
                     /*
                     message = "Ваше сообщение доставлено";
                     data = Encoding.Unicode.GetBytes(message);
@@ -186,7 +204,7 @@ namespace Server
             }*/
           
         }
-        static byte[] GetBinaryFormatData(DataTable dataTable)
+        public static byte[] GetBinaryFormatData(DataTable dataTable)
         {
             BinaryFormatter bFormat = new BinaryFormatter();
             byte[] outList = null;
@@ -197,175 +215,25 @@ namespace Server
             }
             return outList;
         }
-
-        static void ReceiveAuthorize(NetworkStream stream)
+        static private DataTable GetDataTable(byte[] data)
         {
-            byte[]Login = new byte[64];
-            StringBuilder builder = new StringBuilder();
-            int bytes = 0;
-            do
+            DataTable dataTable = null;
+            BinaryFormatter bFormat = new BinaryFormatter();
+            using (MemoryStream memoryStream = new MemoryStream(data))
             {
-                bytes = stream.Read(Login, 0, Login.Length);
-                builder.Append(Encoding.Unicode.GetString(Login, 0, bytes));
+                dataTable = (DataTable)bFormat.Deserialize(memoryStream);
             }
-            while (stream.DataAvailable);
+            return dataTable;
+        }
 
-            byte[] confirm = Encoding.Unicode.GetBytes("OK");
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string login = builder.ToString();
-
-            byte[] Password = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(Password, 0, Password.Length);
-                builder.Append(Encoding.Unicode.GetString(Password, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string password = builder.ToString();
-
-            DataTable dataTable = SQLCommander.SelectAccount(login, password);
+        static void SendSelectDestinationsNamesCondorcet(NetworkStream stream)
+        {
+            DataTable dataTable = SQLCommander.SelectDestinationsNamesCondorcet();
             byte[] data = GetBinaryFormatData(dataTable);
             stream.Write(data, 0, data.Length);
             stream.Flush();
         }
-        static void ReceiveRegisterData(NetworkStream stream)
-        {
-            byte[] Login = new byte[64];
-            StringBuilder builder = new StringBuilder();
-            int bytes = 0;
-            do
-            {
-                bytes = stream.Read(Login, 0, Login.Length);
-                builder.Append(Encoding.Unicode.GetString(Login, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            byte[] confirm = Encoding.Unicode.GetBytes("OK");
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string login = builder.ToString();
-
-            byte[]Password = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(Password, 0, Password.Length);
-                builder.Append(Encoding.Unicode.GetString(Password, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string password = builder.ToString();
-
-            byte[]AccessRight = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(AccessRight, 0, AccessRight.Length);
-                builder.Append(Encoding.Unicode.GetString(AccessRight, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string accessRight = builder.ToString();
-
-            DataTable dataTable = SQLCommander.InsertAccount(login, password,accessRight);
-            byte[] data = GetBinaryFormatData(dataTable);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
-        }
-
-        static void SendSelectPassengers(NetworkStream stream)
-        {
-            DataTable dataTable = SQLCommander.SelectPassenger();
-            byte[] data = GetBinaryFormatData(dataTable);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
-        }
-        static void ReceiveAdditingPassengerData(NetworkStream stream)
-        {
-            byte[] Surname = new byte[64];
-            StringBuilder builder = new StringBuilder();
-            int bytes = 0;
-            do
-            {
-                bytes = stream.Read(Surname, 0, Surname.Length);
-                builder.Append(Encoding.Unicode.GetString(Surname, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            byte[] confirm = Encoding.Unicode.GetBytes("OK");
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string surname = builder.ToString();
-
-            byte[] Name = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(Name, 0, Name.Length);
-                builder.Append(Encoding.Unicode.GetString(Name, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string name = builder.ToString();
-
-            byte[] Patronymic = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(Patronymic, 0, Patronymic.Length);
-                builder.Append(Encoding.Unicode.GetString(Patronymic, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string patronymic = builder.ToString();
-
-            byte[] PhoneNumber = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(PhoneNumber, 0, PhoneNumber.Length);
-                builder.Append(Encoding.Unicode.GetString(PhoneNumber, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string phonenumber = builder.ToString();
-
-            DataTable dataTable = SQLCommander.InsertPassenger(surname,name,patronymic,phonenumber);
-            byte[] data = GetBinaryFormatData(dataTable);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
-        }
-        static void ReceiveEditingPassengerData(NetworkStream stream)
+        static void SendSelectEstimatedtimesCondorcet(NetworkStream stream)
         {
             byte[] Id = new byte[64];
             StringBuilder builder = new StringBuilder();
@@ -383,60 +251,12 @@ namespace Server
 
             string id = builder.ToString();
 
-            byte[] Newvalue = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(Newvalue, 0, Newvalue.Length);
-                builder.Append(Encoding.Unicode.GetString(Newvalue, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string newvalue = builder.ToString();
-
-            byte[] Command = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(Command, 0, Command.Length);
-                builder.Append(Encoding.Unicode.GetString(Command, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string command = builder.ToString();
-
-            DataTable dataTable = new DataTable();
-            if (command == "Edit surname")
-            {
-                dataTable = SQLCommander.EditSurnamePassenger(id, newvalue);
-               
-            }
-            else if (command == "Edit name")
-            {
-                
-                dataTable = SQLCommander.EditNamePassenger(id, newvalue);
-            }
-            else if (command == "Edit patronymic")
-            {
-                dataTable = SQLCommander.EditPatronymicPassenger(id, newvalue);
-            }
-            else if (command == "Edit phonenumber")
-            {
-                dataTable = SQLCommander.EditPhonenumberPassenger(id, newvalue);
-            }
+            DataTable dataTable = SQLCommander.SelectEstimatedTimesCondorcet(id);
             byte[] data = GetBinaryFormatData(dataTable);
             stream.Write(data, 0, data.Length);
             stream.Flush();
         }
-        static void ReceiveDeletingPassengerData(NetworkStream stream)
+        static void SendSelectPriorityTimesCondorcet(NetworkStream stream)
         {
             byte[] Id = new byte[64];
             StringBuilder builder = new StringBuilder();
@@ -451,32 +271,23 @@ namespace Server
             byte[] confirm = Encoding.Unicode.GetBytes("OK");
             stream.Write(confirm, 0, confirm.Length);
             stream.Flush();
-            
+
             string id = builder.ToString();
-            int deleted_count = SQLCommander.DeletePassenger(id);
 
-            byte[] data = BitConverter.GetBytes(deleted_count);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
-        }
-
-
-        static void SendSelectDestinations(NetworkStream stream)
-        {
-            DataTable dataTable = SQLCommander.SelectDestination();
+            DataTable dataTable = SQLCommander.SelectPriorityTimesCondorcet(id);
             byte[] data = GetBinaryFormatData(dataTable);
             stream.Write(data, 0, data.Length);
             stream.Flush();
         }
-        static void ReceiveAdditingDestinationData(NetworkStream stream)
+        static void SendSelectPreferencesCondorcet(NetworkStream stream)
         {
-            byte[] Name = new byte[64];
+            byte[] Id = new byte[64];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
             {
-                bytes = stream.Read(Name, 0, Name.Length);
-                builder.Append(Encoding.Unicode.GetString(Name, 0, bytes));
+                bytes = stream.Read(Id, 0, Id.Length);
+                builder.Append(Encoding.Unicode.GetString(Id, 0, bytes));
             }
             while (stream.DataAvailable);
 
@@ -484,98 +295,288 @@ namespace Server
             stream.Write(confirm, 0, confirm.Length);
             stream.Flush();
 
-            string name = builder.ToString();
+            string id = builder.ToString();
+ 
+                DataTable dataTableestimated = SQLCommander.SelectEstimatedTimesCondorcet(id);
+                DataTable dataTablepriority = SQLCommander.SelectPriorityTimesCondorcet(id);
 
-            byte[] Flightduration = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
+                string[] arrayEstimatedTimes = new string[dataTableestimated.Columns.Count - 1];
+                for (int i = 0, j = 1; j < dataTableestimated.Columns.Count; j++, i++)
+                {
+                    arrayEstimatedTimes[i] = dataTableestimated.Rows[0][j].ToString();
+                }
+
+                string[,] arrayPriorityTimes = new string[dataTablepriority.Columns.Count - 1, dataTablepriority.Rows.Count];
+                for (int i = 0, x = 0; i < dataTablepriority.Rows.Count; i++, x++)
+                {
+                    for (int j = 1, y = 0; j < dataTablepriority.Columns.Count; j++, y++)
+                    {
+                        arrayPriorityTimes[y, x] = dataTablepriority.Rows[i][j].ToString();
+                    }
+                }
+
+                int arrayPreferences_rowsCount = dataTablepriority.Columns.Count - 1;
+                int arrayPreferences_columnsCount = dataTablepriority.Rows.Count;
+                string[,] arrayPreferences = new string[arrayPreferences_rowsCount, arrayPreferences_columnsCount];
+                for (int j = 0; j < arrayPreferences_columnsCount; j++)
+                {
+                    for (int i = 0; i < arrayPreferences_rowsCount; i++)
+                    {
+                        if (arrayPriorityTimes[i, j] == arrayEstimatedTimes[0])
+                        {
+                            arrayPreferences[i, j] = "a1";
+                        }
+                        else if (arrayPriorityTimes[i, j] == arrayEstimatedTimes[1])
+                        {
+                            arrayPreferences[i, j] = "a2";
+                        }
+                        if (arrayPriorityTimes[i, j] == arrayEstimatedTimes[2])
+                        {
+                            arrayPreferences[i, j] = "a3";
+                        }
+                    }
+                }
+
+                DataTable dataTablePreferences = new DataTable();
+                for (int i = 0; i < arrayPreferences_columnsCount; i++)
+                {
+                    dataTablePreferences.Columns.Add(dataTablepriority.Rows[i][0].ToString());
+                }
+                for (int i = 0; i < arrayPreferences_rowsCount; i++)
+                {
+                    DataRow row = dataTablePreferences.NewRow();
+                    for (int j = 0; j < arrayPreferences_columnsCount; j++)
+                    {
+                        row[j] = arrayPreferences[i, j];
+                    }
+                    dataTablePreferences.Rows.Add(row);
+                }
+
+                byte[] data = GetBinaryFormatData(dataTablePreferences);
+                stream.Write(data, 0, data.Length);
+                stream.Flush();
+            }
+        static void SendSelectPairwiseComparison(NetworkStream stream)
+        {
+            byte[] Id = new byte[64];
+            StringBuilder builder = new StringBuilder();
+            int bytes = 0;
             do
             {
-                bytes = stream.Read(Flightduration, 0, Flightduration.Length);
-                builder.Append(Encoding.Unicode.GetString(Flightduration, 0, bytes));
+                bytes = stream.Read(Id, 0, Id.Length);
+                builder.Append(Encoding.Unicode.GetString(Id, 0, bytes));
             }
             while (stream.DataAvailable);
 
+            byte[] confirm = Encoding.Unicode.GetBytes("OK");
             stream.Write(confirm, 0, confirm.Length);
             stream.Flush();
 
-            string flightduration = builder.ToString();
+            string id = builder.ToString();
 
-            byte[] Airplanemodel = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
+            DataTable dataTableestimated = SQLCommander.SelectEstimatedTimesCondorcet(id);
+            DataTable dataTablepriority = SQLCommander.SelectPriorityTimesCondorcet(id);
+
+            string[] arrayEstimatedTimes = new string[dataTableestimated.Columns.Count - 1];
+            for (int i = 0, j = 1; j < dataTableestimated.Columns.Count; j++, i++)
             {
-                bytes = stream.Read(Airplanemodel, 0, Airplanemodel.Length);
-                builder.Append(Encoding.Unicode.GetString(Airplanemodel, 0, bytes));
+                arrayEstimatedTimes[i] = dataTableestimated.Rows[0][j].ToString();
             }
-            while (stream.DataAvailable);
 
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string airplanemodel = builder.ToString();
-
-            byte[] Estimatedtime1 = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
+            string[,] arrayPriorityTimes = new string[dataTablepriority.Columns.Count - 1, dataTablepriority.Rows.Count];
+            for (int i = 0, x = 0; i < dataTablepriority.Rows.Count; i++, x++)
             {
-                bytes = stream.Read(Estimatedtime1, 0, Estimatedtime1.Length);
-                builder.Append(Encoding.Unicode.GetString(Estimatedtime1, 0, bytes));
+                for (int j = 1, y = 0; j < dataTablepriority.Columns.Count; j++, y++)
+                {
+                    arrayPriorityTimes[y, x] = dataTablepriority.Rows[i][j].ToString();
+                }
             }
-            while (stream.DataAvailable);
 
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string estimatedtime1 = builder.ToString();
-
-            byte[] Estimatedtime2 = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
+            int arrayPreferences_rowsCount = dataTablepriority.Columns.Count - 1;
+            int arrayPreferences_columnsCount = dataTablepriority.Rows.Count;
+            string[,] arrayPreferences = new string[arrayPreferences_rowsCount, arrayPreferences_columnsCount];
+            for (int j = 0; j < arrayPreferences_columnsCount; j++)
             {
-                bytes = stream.Read(Estimatedtime2, 0, Estimatedtime2.Length);
-                builder.Append(Encoding.Unicode.GetString(Estimatedtime2, 0, bytes));
+                for (int i = 0; i < arrayPreferences_rowsCount; i++)
+                {
+                    if (arrayPriorityTimes[i, j] == arrayEstimatedTimes[0])
+                    {
+                        arrayPreferences[i, j] = "0";
+                    }
+                    else if (arrayPriorityTimes[i, j] == arrayEstimatedTimes[1])
+                    {
+                        arrayPreferences[i, j] = "1";
+                    }
+                    if (arrayPriorityTimes[i, j] == arrayEstimatedTimes[2])
+                    {
+                        arrayPreferences[i, j] = "2";
+                    }
+                }
             }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string estimatedtime2 = builder.ToString();
-
-            byte[] Estimatedtime3 = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(Estimatedtime3, 0, Estimatedtime3.Length);
-                builder.Append(Encoding.Unicode.GetString(Estimatedtime3, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string estimatedtime3 = builder.ToString();
            
+            ArrayList indexlist_a1 = new ArrayList();
+            int alternative1=0;
+            for (int j=0;j<arrayPreferences_columnsCount;j++)
+            {
+                for (int i=0;i<arrayPreferences_rowsCount;i++)
+                {
+                    if (arrayPreferences[i,j]=="0")
+                    {
+                        alternative1 = i;
+                        indexlist_a1.Add(alternative1);
+                    }
+                }
+            }
+            ArrayList indexlist_a2 = new ArrayList();
+           int alternative2=0;
+           for (int j = 0; j < arrayPreferences_columnsCount; j++)
+           {
+               for (int i = 0; i < arrayPreferences_rowsCount; i++)
+               {
+                   if (arrayPreferences[i, j] == "1")
+                   {
+                       alternative2 = i;
+                       indexlist_a2.Add(alternative2);
+                   }
+               }
+            }
+           ArrayList indexlist_a3 = new ArrayList();
+           int alternative3=0;
+           for (int j = 0; j < arrayPreferences_columnsCount; j++)
+           {
+               for (int i = 0; i < arrayPreferences_rowsCount; i++)
+               {
+                   if (arrayPreferences[i, j] == "2")
+                   {
+                       alternative3 = i;
+                       indexlist_a3.Add(alternative3);
+                   }
+               }
+           }
+           
+                       int alternative12 = 0;
+                       for (int i=0;i<arrayPreferences_columnsCount;i++)
+                       {
+                           if (Convert.ToInt32(indexlist_a1[i]) < Convert.ToInt32(indexlist_a2[i]))
+                           {
+                               alternative12++;
+                           }
+                       }
+                       int alternative13 = 0;
+                       for (int i = 0; i < arrayPreferences_columnsCount; i++)
+                       {
+                           if (Convert.ToInt32(indexlist_a1[i]) < Convert.ToInt32(indexlist_a3[i]))
+                           {
+                               alternative13++;
+                           }
+            } 
+                       int alternative23 = 0;
+                       for (int i = 0; i < arrayPreferences_columnsCount; i++)
+                       {
+                           if (Convert.ToInt32(indexlist_a2[i]) < Convert.ToInt32(indexlist_a3[i]))
+                           {
+                               alternative23++;
+                           }
+                       }
+        
+                                   int alternative21 = arrayPreferences_columnsCount - alternative12;
+                                   int alternative31 = arrayPreferences_columnsCount - alternative13;
+                                   int alternative32 = arrayPreferences_columnsCount - alternative23;
 
-            DataTable dataTable = SQLCommander.InsertDestination(name, flightduration,airplanemodel,estimatedtime1,estimatedtime2,estimatedtime3);
-            byte[] data = GetBinaryFormatData(dataTable);
+                                   ArrayList listPairwiseComparison = new ArrayList();
+
+                                   listPairwiseComparison.Add(0);
+                                   listPairwiseComparison.Add(alternative12);
+                                   listPairwiseComparison.Add(alternative13);
+                                   listPairwiseComparison.Add(alternative21);
+                                   listPairwiseComparison.Add(0);
+                                   listPairwiseComparison.Add(alternative23);
+                                   listPairwiseComparison.Add(alternative31);
+                                   listPairwiseComparison.Add(alternative32);
+                                   listPairwiseComparison.Add(0);
+
+                                   int matrixPairwiseComparison_count = arrayPreferences_rowsCount;
+                                   int[,] matrixPairwiseComparison = new int[matrixPairwiseComparison_count, matrixPairwiseComparison_count];
+
+                                    
+                                   int list_count = 0;
+                                   for (int i = 0; i < matrixPairwiseComparison_count; i++)
+                                   {
+                                       for (int j = 0;j< matrixPairwiseComparison_count; j++)
+                                       {
+                                           matrixPairwiseComparison[i, j] = Convert.ToInt32(listPairwiseComparison[list_count]);
+                                           list_count++;
+                                       }
+                                   }   
+                                           DataTable dataTablePairwiseComparison = new DataTable();
+                                   for (int i = 0; i < matrixPairwiseComparison_count; i++)
+                                   {
+                                       dataTablePairwiseComparison.Columns.Add("a" + (i+1).ToString());
+                                   }
+                                   for (int i = 0; i < matrixPairwiseComparison_count; i++)
+                                   {
+                                       DataRow row = dataTablePairwiseComparison.NewRow();
+                                       for (int j = 0; j < matrixPairwiseComparison_count; j++)
+                                       {
+                                           row[j] = matrixPairwiseComparison[i, j];
+                                       }
+                                       dataTablePairwiseComparison.Rows.Add(row);
+                                   }
+
+            byte[] data = GetBinaryFormatData(dataTablePairwiseComparison);
             stream.Write(data, 0, data.Length);
             stream.Flush();
+            /*
+            dataGridMatrixPairwiseComparison.DataSource = dataTablePairwiseComparison;
+
+            dataGridMatrixPairwiseComparison.AllowUserToAddRows = false;
+            dataGridMatrixPairwiseComparison.AllowUserToResizeColumns = false;
+            dataGridMatrixPairwiseComparison.AllowUserToResizeRows = false;
+
+            dataGridMatrixPairwiseComparison.RowHeadersVisible = false;
+            dataGridMatrixPairwiseComparison.ReadOnly = true;
+
+            dataGridMatrixPairwiseComparison.Visible = true;
+
+            int quantity = 0;
+            int count = 0;
+            for (int i = 0; i < matrixPairwiseComparison_count; i++)
+            {
+                for (int j = 0; j < matrixPairwiseComparison_count; j++)
+                {
+                    if (matrixPairwiseComparison[i, j] >= matrixPairwiseComparison[j, i] && i != j)
+                    {
+                        quantity++;
+                    }
+                    if (j == matrixPairwiseComparison_count - 1)
+                    {
+                        if (quantity == matrixPairwiseComparison_count - 1)
+                        {
+                            MessageBox.Show("Наиболее предпочтительные варианты. Наилучшей альтернативой является: a" + (i+1).ToString());
+                            quantity = 0;
+                        }
+                        else
+                        {
+                            quantity = 0;
+                            count++;
+                        }
+                    }
+                }
+            }
+            if (count==3)
+            {
+                MessageBox.Show("Наиболее предпочтительные варианты. Парадокс Кондорсе");
+            }
+      */
+
         }
-        static void ReceiveEditingDestinationData(NetworkStream stream)
+        static void SendSelectbestAlternative(NetworkStream stream)
         {
-            byte[] Id = new byte[64];
-            StringBuilder builder = new StringBuilder();
+            byte[] data = new byte[10000];
             int bytes = 0;
             do
             {
-                bytes = stream.Read(Id, 0, Id.Length);
-                builder.Append(Encoding.Unicode.GetString(Id, 0, bytes));
+                bytes = stream.Read(data, 0, data.Length);
             }
             while (stream.DataAvailable);
 
@@ -583,333 +584,60 @@ namespace Server
             stream.Write(confirm, 0, confirm.Length);
             stream.Flush();
 
-            string id = builder.ToString();
+                DataTable dataTable = GetDataTable(data);
 
-            byte[] Newvalue = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(Newvalue, 0, Newvalue.Length);
-                builder.Append(Encoding.Unicode.GetString(Newvalue, 0, bytes));
-            }
-            while (stream.DataAvailable);
+                int matrixPairwiseComparison_count = dataTable.Rows.Count;
+                int[,] matrixPairwiseComparison = new int[matrixPairwiseComparison_count, matrixPairwiseComparison_count];
+                for (int i = 0; i < matrixPairwiseComparison_count; i++)
+                {
+                    for (int j = 0; j < matrixPairwiseComparison_count; j++)
+                    {
+                        matrixPairwiseComparison[i, j] = Convert.ToInt32(dataTable.Rows[i][j]);
+                    }
+                }
 
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
+                ArrayList bestAlternative_list = new ArrayList();
 
-            string newvalue = builder.ToString();
+                int quantity = 0;
+                int count = 0;
 
-            byte[] Command = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(Command, 0, Command.Length);
-                builder.Append(Encoding.Unicode.GetString(Command, 0, bytes));
-            }
-            while (stream.DataAvailable);
+                for (int i = 0; i < matrixPairwiseComparison_count; i++)
+                {
+                    for (int j = 0; j < matrixPairwiseComparison_count; j++)
+                    {
+                        if (matrixPairwiseComparison[i, j] >= matrixPairwiseComparison[j, i] && i != j)
+                        {
+                            quantity++;
+                        }
+                        if (j == matrixPairwiseComparison_count - 1)
+                        {
+                            if (quantity == matrixPairwiseComparison_count - 1)
+                            {
+                                bestAlternative_list.Add(i + 1);
+                                quantity = 0;
+                            }
+                            else
+                            {
+                                quantity = 0;
+                                count++;
+                            }
+                        }
+                    }
+                }
+                if (count == 3)
+                {
+                    Console.WriteLine("Наиболее предпочтительные варианты. Парадокс Кондорсе");
+                }
+                string bestAlternative_buf = "";
+                for (int i=0;i< bestAlternative_list.Count;i++)
+                {
+                    bestAlternative_buf += bestAlternative_list[i].ToString();
+                }
 
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
+                byte[] bestAlternative = Encoding.Unicode.GetBytes(bestAlternative_buf.ToString());
 
-            string command = builder.ToString();
-
-            DataTable dataTable = new DataTable();
-            if (command == "Edit name")
-            {
-                dataTable = SQLCommander.EditNameDestination(id, newvalue);
-            }
-            else if (command == "Edit flightduration")
-            {
-                dataTable = SQLCommander.EditFlightdurationDestination(id, newvalue);
-            }
-            else if (command == "Edit airplanemodel")
-            {
-                dataTable = SQLCommander.EditAirplanemodelDestination(id, newvalue);
-            }
-            else if (command == "Edit estimatedtime1")
-            {
-                dataTable = SQLCommander.EditEstimatedtime1Destination(id, newvalue);
-            }
-            else if (command == "Edit estimatedtime2")
-            {
-                dataTable = SQLCommander.EditEstimatedtime2Destination(id, newvalue);
-            }
-            else if (command == "Edit estimatedtime3")
-            {
-                dataTable = SQLCommander.EditEstimatedtime3Destination(id, newvalue);
-            }
-            byte[] data = GetBinaryFormatData(dataTable);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
-        }
-        static void ReceiveDeletingDestinationData(NetworkStream stream)
-        {
-            byte[] Id = new byte[64];
-            StringBuilder builder = new StringBuilder();
-            int bytes = 0;
-            do
-            {
-                bytes = stream.Read(Id, 0, Id.Length);
-                builder.Append(Encoding.Unicode.GetString(Id, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            byte[] confirm = Encoding.Unicode.GetBytes("OK");
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string id = builder.ToString();
-            int deleted_count = SQLCommander.DeleteDestination(id);
-
-            byte[] data = BitConverter.GetBytes(deleted_count);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
-        }
-
-        static void SendSelectFlightRequests(NetworkStream stream)
-        {
-            DataTable dataTable = SQLCommander.SelectFlightRequests();
-            byte[] data = GetBinaryFormatData(dataTable);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
-        }
-        static void SendSelectDestinationsNames(NetworkStream stream)
-        {
-            DataTable dataTable = SQLCommander.SelectDestinationsNames();
-            byte[] data = GetBinaryFormatData(dataTable);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
-        }
-        static void SendSelectPassengersNames(NetworkStream stream)
-        {
-            DataTable dataTable = SQLCommander.SelectPassengersNames();
-            byte[] data = GetBinaryFormatData(dataTable);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
-        }
-        static void SendSelectEstimatedtimes(NetworkStream stream)
-        {
-            byte[] Id = new byte[64];
-            StringBuilder builder = new StringBuilder();
-            int bytes = 0;
-            do
-            {
-                bytes = stream.Read(Id, 0, Id.Length);
-                builder.Append(Encoding.Unicode.GetString(Id, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            byte[] confirm = Encoding.Unicode.GetBytes("OK");
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string id = builder.ToString();
-
-            DataTable dataTable = SQLCommander.SelectEstimatedTimes(id);
-            byte[] data = GetBinaryFormatData(dataTable);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
-        }
-        static void ReceiveAdditingFlightRequestData(NetworkStream stream)
-        {
-            byte[] idPassenger = new byte[64];
-            StringBuilder builder = new StringBuilder();
-            int bytes = 0;
-            do
-            {
-                bytes = stream.Read(idPassenger, 0, idPassenger.Length);
-                builder.Append(Encoding.Unicode.GetString(idPassenger, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            byte[] confirm = Encoding.Unicode.GetBytes("OK");
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string idpassenger = builder.ToString();
-
-            byte[] idDestination = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(idDestination, 0, idDestination.Length);
-                builder.Append(Encoding.Unicode.GetString(idDestination, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string iddestination = builder.ToString();
-
-            byte[] highestPrioritytime = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(highestPrioritytime, 0, highestPrioritytime.Length);
-                builder.Append(Encoding.Unicode.GetString(highestPrioritytime, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string highestprioritytime = builder.ToString();
-
-            byte[] mediumPrioritytime = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(mediumPrioritytime, 0, mediumPrioritytime.Length);
-                builder.Append(Encoding.Unicode.GetString(mediumPrioritytime, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string mediumprioritytime = builder.ToString();
-
-            byte[] lowestPrioritytime = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(lowestPrioritytime, 0, lowestPrioritytime.Length);
-                builder.Append(Encoding.Unicode.GetString(lowestPrioritytime, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string lowestprioritytime = builder.ToString();
-
-            DataTable dataTable = SQLCommander.InsertFlightRequest(idpassenger,iddestination,highestprioritytime, mediumprioritytime, lowestprioritytime);
-            byte[] data = GetBinaryFormatData(dataTable);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
-        }
-        static void ReceiveEditingFlightRequestData(NetworkStream stream)
-        {
-            byte[] Id = new byte[64];
-            StringBuilder builder = new StringBuilder();
-            int bytes = 0;
-            do
-            {
-                bytes = stream.Read(Id, 0, Id.Length);
-                builder.Append(Encoding.Unicode.GetString(Id, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            byte[] confirm = Encoding.Unicode.GetBytes("OK");
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string id = builder.ToString();
-
-            byte[] highestPriorityTime = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(highestPriorityTime, 0, highestPriorityTime.Length);
-                builder.Append(Encoding.Unicode.GetString(highestPriorityTime, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string highestprioritytime = builder.ToString();
-
-            byte[] mediumPriorityTime = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(mediumPriorityTime, 0, mediumPriorityTime.Length);
-                builder.Append(Encoding.Unicode.GetString(mediumPriorityTime, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string mediumprioritytime = builder.ToString();
-
-            byte[] lowestPriorityTime = new byte[64];
-            builder = new StringBuilder();
-            bytes = 0;
-            do
-            {
-                bytes = stream.Read(lowestPriorityTime, 0, lowestPriorityTime.Length);
-                builder.Append(Encoding.Unicode.GetString(lowestPriorityTime, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string lowestprioritytime = builder.ToString();
-
-            DataTable dataTable = new DataTable();
-                dataTable = SQLCommander.EditFlightRequest(id, highestprioritytime, mediumprioritytime, lowestprioritytime);
-
-            byte[] data = GetBinaryFormatData(dataTable);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
-        }
-        static void SendSelectPriorityTimes(NetworkStream stream)
-        {
-            byte[] Id = new byte[64];
-            StringBuilder builder = new StringBuilder();
-            int bytes = 0;
-            do
-            {
-                bytes = stream.Read(Id, 0, Id.Length);
-                builder.Append(Encoding.Unicode.GetString(Id, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            byte[] confirm = Encoding.Unicode.GetBytes("OK");
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string id = builder.ToString();
-
-            DataTable dataTable = SQLCommander.SelectPriorityTimes(id);
-            byte[] data = GetBinaryFormatData(dataTable);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
-        }
-        static void ReceiveDeletingFlightRequestData(NetworkStream stream)
-        {
-            byte[] Id = new byte[64];
-            StringBuilder builder = new StringBuilder();
-            int bytes = 0;
-            do
-            {
-                bytes = stream.Read(Id, 0, Id.Length);
-                builder.Append(Encoding.Unicode.GetString(Id, 0, bytes));
-            }
-            while (stream.DataAvailable);
-
-            byte[] confirm = Encoding.Unicode.GetBytes("OK");
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            string id = builder.ToString();
-            int deleted_count = SQLCommander.DeleteFlightRequest(id);
-
-            byte[] data = BitConverter.GetBytes(deleted_count);
-            stream.Write(data, 0, data.Length);
-            stream.Flush();
+                stream.Write(bestAlternative, 0, bestAlternative.Length);
+                stream.Flush();
         }
     }
   
