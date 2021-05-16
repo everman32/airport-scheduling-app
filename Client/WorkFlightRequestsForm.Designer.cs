@@ -431,7 +431,7 @@ namespace Client
             this.panelViewing.Controls.Add(this.FlightRequestsGridView);
             this.panelViewing.Location = new System.Drawing.Point(0, 28);
             this.panelViewing.Name = "panelViewing";
-            this.panelViewing.Size = new System.Drawing.Size(1129, 244);
+            this.panelViewing.Size = new System.Drawing.Size(1170, 311);
             this.panelViewing.TabIndex = 20;
             // 
             // FlightRequestsGridView
@@ -439,10 +439,10 @@ namespace Client
             this.FlightRequestsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.FlightRequestsGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.FlightRequestsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.FlightRequestsGridView.Location = new System.Drawing.Point(0, 12);
+            this.FlightRequestsGridView.Location = new System.Drawing.Point(12, 12);
             this.FlightRequestsGridView.Name = "FlightRequestsGridView";
             this.FlightRequestsGridView.RowTemplate.Height = 25;
-            this.FlightRequestsGridView.Size = new System.Drawing.Size(1161, 226);
+            this.FlightRequestsGridView.Size = new System.Drawing.Size(1149, 284);
             this.FlightRequestsGridView.TabIndex = 0;
             // 
             // toolStripWorkDestinations
@@ -505,9 +505,9 @@ namespace Client
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(1182, 417);
+            this.Controls.Add(this.panelEditing);
             this.Controls.Add(this.panelAdding);
             this.Controls.Add(this.panelDeleting);
-            this.Controls.Add(this.panelEditing);
             this.Controls.Add(this.panelViewing);
             this.Controls.Add(this.toolStripWorkDestinations);
             this.Controls.Add(this.buttonBackAvianavForm);

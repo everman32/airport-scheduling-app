@@ -27,6 +27,19 @@ namespace Client
             panelDeleting.Enabled = false;
             panelDeleting.Visible = false;
         }
+        public WorkPassengersForm(AdminForm adminForm)
+        {
+            InitializeComponent();
+            form = adminForm;
+            panelViewing.Enabled = false;
+            panelViewing.Visible = false;
+            panelAdding.Enabled = false;
+            panelAdding.Visible = false;
+            panelEditing.Enabled = false;
+            panelEditing.Visible = false;
+            panelDeleting.Enabled = false;
+            panelDeleting.Visible = false;
+        }
         public WorkPassengersForm()
         {
         }

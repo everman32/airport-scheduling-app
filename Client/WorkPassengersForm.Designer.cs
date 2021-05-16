@@ -82,11 +82,11 @@ namespace Client
             this.PassengersGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.PassengersGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.PassengersGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.PassengersGridView.Location = new System.Drawing.Point(0, 20);
+            this.PassengersGridView.Location = new System.Drawing.Point(5, 10);
             this.PassengersGridView.Name = "PassengersGridView";
             this.PassengersGridView.ReadOnly = true;
             this.PassengersGridView.RowTemplate.Height = 25;
-            this.PassengersGridView.Size = new System.Drawing.Size(755, 221);
+            this.PassengersGridView.Size = new System.Drawing.Size(755, 242);
             this.PassengersGridView.TabIndex = 1;
             // 
             // toolStripWorkPassengers
@@ -236,7 +236,7 @@ namespace Client
             this.panelAdding.Controls.Add(this.labelSurname);
             this.panelAdding.Controls.Add(this.labelPhone_Number);
             this.panelAdding.Enabled = false;
-            this.panelAdding.Location = new System.Drawing.Point(138, 49);
+            this.panelAdding.Location = new System.Drawing.Point(177, 49);
             this.panelAdding.Name = "panelAdding";
             this.panelAdding.Size = new System.Drawing.Size(487, 231);
             this.panelAdding.TabIndex = 15;
@@ -248,7 +248,7 @@ namespace Client
             this.panelViewing.Enabled = false;
             this.panelViewing.Location = new System.Drawing.Point(8, 28);
             this.panelViewing.Name = "panelViewing";
-            this.panelViewing.Size = new System.Drawing.Size(766, 252);
+            this.panelViewing.Size = new System.Drawing.Size(766, 265);
             this.panelViewing.TabIndex = 16;
             // 
             // panelEditing
@@ -261,9 +261,9 @@ namespace Client
             this.panelEditing.Controls.Add(this.labelEditId);
             this.panelEditing.Controls.Add(this.textBoxEditId);
             this.panelEditing.Enabled = false;
-            this.panelEditing.Location = new System.Drawing.Point(243, 38);
+            this.panelEditing.Location = new System.Drawing.Point(224, 49);
             this.panelEditing.Name = "panelEditing";
-            this.panelEditing.Size = new System.Drawing.Size(396, 231);
+            this.panelEditing.Size = new System.Drawing.Size(392, 231);
             this.panelEditing.TabIndex = 15;
             // 
             // buttonEditPassenger
@@ -315,7 +315,7 @@ namespace Client
             "Телефонный номер"});
             this.comboBoxEdit.Location = new System.Drawing.Point(98, 102);
             this.comboBoxEdit.Name = "comboBoxEdit";
-            this.comboBoxEdit.Size = new System.Drawing.Size(121, 23);
+            this.comboBoxEdit.Size = new System.Drawing.Size(147, 23);
             this.comboBoxEdit.TabIndex = 2;
             this.comboBoxEdit.SelectedIndexChanged += new System.EventHandler(this.comboBoxEdit_SelectedIndexChanged);
             // 
@@ -343,9 +343,9 @@ namespace Client
             this.panelDeleting.Controls.Add(this.textBoxDeleteId);
             this.panelDeleting.Controls.Add(this.labelDelete);
             this.panelDeleting.Enabled = false;
-            this.panelDeleting.Location = new System.Drawing.Point(282, 28);
+            this.panelDeleting.Location = new System.Drawing.Point(257, 61);
             this.panelDeleting.Name = "panelDeleting";
-            this.panelDeleting.Size = new System.Drawing.Size(271, 231);
+            this.panelDeleting.Size = new System.Drawing.Size(275, 231);
             this.panelDeleting.TabIndex = 17;
             this.panelDeleting.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDeleting_Paint);
             // 
@@ -385,9 +385,9 @@ namespace Client
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(774, 364);
+            this.Controls.Add(this.panelDeleting);
             this.Controls.Add(this.panelEditing);
             this.Controls.Add(this.panelAdding);
-            this.Controls.Add(this.panelDeleting);
             this.Controls.Add(this.panelViewing);
             this.Controls.Add(this.toolStripWorkPassengers);
             this.Controls.Add(this.buttonBackAvianavForm);

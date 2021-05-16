@@ -101,7 +101,6 @@ namespace Server
 
             return dataTable;
         }
-
         static public DataTable InsertPassenger(string surname, string name, string patronymic, string phone_number)
         {
             SqlCommand sqlCommand = new SqlCommand();
@@ -131,7 +130,6 @@ namespace Server
             }
             return dataTable;
         }
-
         static public DataTable EditSurnamePassenger(string id,string newvalue)
         {
             SqlCommand sqlCommand = new SqlCommand();
@@ -219,7 +217,6 @@ namespace Server
             }
             return dataTable;
         }
-
         static public int DeletePassenger(string id)
         {
             SqlCommand sqlCommand = new SqlCommand();
@@ -245,7 +242,7 @@ namespace Server
         {
             SqlCommand sqlCommand = new SqlCommand();
             sqlCommand.CommandText = "SELECT Id [Идентификационный номер пункта назначения], Name [Наименование], FlightDuration [Продолжительность полёта], AirplaneModel [Модель самолёта]," +
-                "EstimatedTime1 [Первое предлагаемое время], EstimatedTime2 [Второе предлагаемое время], EstimatedTime3 [Третье предлагаемое время] FROM Destination";
+                "EstimatedTime1 [Первое предлагаемое время], EstimatedTime2 [Второе предлагаемое время], EstimatedTime3 [Третье предлагаемое время], Status [Статус] FROM Destination";
             sqlCommand.Connection = sqlConnection;
             SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
             DataTable dataTable = new DataTable();
@@ -374,7 +371,6 @@ namespace Server
             }
             return dataTable;
         }
-
         static public DataTable InsertDestination(string name,string flightduration,string airplanemodel,
             string estimatedtime1,string estimatedtime2,string estimatedtime3)
         {
@@ -410,7 +406,6 @@ namespace Server
             }
             return dataTable;
         }
-
         static public DataTable EditNameDestination(string id, string newvalue)
         {
             SqlCommand sqlCommand = new SqlCommand();
@@ -540,7 +535,6 @@ namespace Server
             }
             return dataTable;
         }
-
         static public int DeleteDestination(string id)
         {
             SqlCommand sqlCommand = new SqlCommand();
@@ -679,7 +673,6 @@ namespace Server
             }
             return dataTable;
         }
-
         static public DataTable InsertFlightRequest(string idpassenger,string iddestination,string highestprioritytime,
            string mediumprioritytime, string lowestprioritytime)
         {
@@ -714,7 +707,6 @@ namespace Server
             }
             return dataTable;
         }
-
         static public DataTable EditFlightRequest(string id, string highestprioritytime,
            string mediumprioritytime, string lowestprioritytime)
         {
@@ -740,7 +732,6 @@ namespace Server
             }
             return dataTable;
         }
-
         static public int DeleteFlightRequest(string id)
         {
             SqlCommand sqlCommand = new SqlCommand();
@@ -760,6 +751,7 @@ namespace Server
             }
             return deleted_count;
         }
+
 
         static public DataTable SelectDestinationsNamesCondorcet()
         {
@@ -817,6 +809,161 @@ namespace Server
                 Console.WriteLine(exception.Message);
             }
             return dataTable;
+        }
+
+        static public DataTable SelectSchedule()
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT Id [Идентификационный номер полёта], IdDestination [Идентификационный номер пункта назначения], PassengersCount [Количество пассажиров], " +
+                "FinalDate [Дата полёта], ReserveDate [Резервная дата полёта] FROM Schedule";
+            sqlCommand.Connection = sqlConnection;
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
+        static public DataTable SelectSchedule(string iddestination, string finaldate)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT * FROM Schedule schedule WHERE (schedule.IdDestination=@iddestination AND schedule.FinalDate=@finaldate)";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@iddestination", iddestination);
+            sqlCommand.Parameters.AddWithValue("@finaldate", DateTime.ParseExact(finaldate, "dd.MM.yyyy HH:mm:ss", null));
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
+        static public DataTable SelectScheduleWithReserve(string iddestination, string finaldate, string reservedate)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT * FROM Schedule schedule WHERE (schedule.IdDestination=@iddestination AND ((schedule.FinalDate=@finaldate " +
+                "AND schedule.ReserveDate=@reservedate) OR schedule.FinalDate=@finaldate))";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@iddestination", iddestination);
+            sqlCommand.Parameters.AddWithValue("@finaldate", DateTime.ParseExact(finaldate, "dd.MM.yyyy HH:mm:ss", null));
+            sqlCommand.Parameters.AddWithValue("@reservedate", DateTime.ParseExact(reservedate, "dd.MM.yyyy HH:mm:ss", null));
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
+        static public DataTable InsertSchedule(string iddestination,string finaldate)
+        {
+            SqlCommand sqlCommand1 = new SqlCommand();
+            sqlCommand1.CommandText = "SELECT * FROM FlightRequest flightrequest WHERE (flightrequest.IdDestination=@iddestination)";
+            sqlCommand1.Connection = sqlConnection;
+            sqlCommand1.Parameters.AddWithValue("@iddestination", iddestination);
+            DataTable dataTablepassengers = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand1);
+            adapter.Fill(dataTablepassengers);
+
+            int passengersCount = dataTablepassengers.Rows.Count;
+            SqlCommand sqlCommand2 = new SqlCommand();
+            sqlCommand2.CommandText = "INSERT INTO Schedule (IdDestination, PassengersCount , FinalDate) " +
+                "VALUES (@iddestination, @passengerscount, @finaldate)";
+            sqlCommand2.Connection = sqlConnection;
+            sqlCommand2.Parameters.AddWithValue("@iddestination", iddestination);
+            sqlCommand2.Parameters.AddWithValue("@passengerscount", passengersCount);
+            sqlCommand2.Parameters.AddWithValue("@finaldate", DateTime.ParseExact(finaldate, "dd.MM.yyyy HH:mm:ss", null));
+           
+            DataTable dataTable = new DataTable();
+            DataTable dataTable_check = new DataTable();
+            dataTable_check = SQLCommander.SelectSchedule(iddestination, finaldate);
+
+            if (dataTable_check.Rows.Count == 0)
+            {
+                try
+                {
+                    sqlCommand2.ExecuteNonQuery();
+                    dataTable = SQLCommander.SelectSchedule(iddestination, finaldate);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                    return dataTable;
+                }
+            }
+            return dataTable;
+        }
+        static public DataTable InsertScheduleWithReserve(string iddestination, string finaldate, string reservedate)
+        {
+            SqlCommand sqlCommand1 = new SqlCommand();
+            sqlCommand1.CommandText = "SELECT * FROM FlightRequest flightrequest WHERE (flightrequest.IdDestination=@iddestination)";
+            sqlCommand1.Connection = sqlConnection;
+            sqlCommand1.Parameters.AddWithValue("@iddestination", iddestination);
+            DataTable dataTablepassengers = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand1);
+            adapter.Fill(dataTablepassengers);
+
+            int passengersCount = dataTablepassengers.Rows.Count;
+            SqlCommand sqlCommand2 = new SqlCommand();
+            sqlCommand2.CommandText = "INSERT INTO Schedule (IdDestination, PassengersCount , FinalDate, ReserveDate) " +
+                "VALUES (@iddestination, @passengerscount, @finaldate, @reservedate)";
+            sqlCommand2.Connection = sqlConnection;
+            sqlCommand2.Parameters.AddWithValue("@iddestination", iddestination);
+            sqlCommand2.Parameters.AddWithValue("@passengerscount", passengersCount);
+            sqlCommand2.Parameters.AddWithValue("@finaldate", DateTime.ParseExact(finaldate, "dd.MM.yyyy HH:mm:ss", null));
+            sqlCommand2.Parameters.AddWithValue("@reservedate", DateTime.ParseExact(reservedate, "dd.MM.yyyy HH:mm:ss", null));
+
+            DataTable dataTable = new DataTable();
+            DataTable dataTable_check = new DataTable();
+            dataTable_check = SQLCommander.SelectScheduleWithReserve(iddestination, finaldate, reservedate);
+
+            if (dataTable_check.Rows.Count == 0)
+            {
+                try
+                {
+                    sqlCommand2.ExecuteNonQuery();
+                    dataTable = SQLCommander.SelectScheduleWithReserve(iddestination, finaldate, reservedate);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                    return dataTable;
+                }
+            }
+            return dataTable;
+        }
+        static public int DeleteSchedule(string id)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "DELETE FROM Schedule WHERE Id=@id";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@Id", id);
+
+            int deleted_count = 0;
+            try
+            {
+                deleted_count = sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                return deleted_count;
+            }
+            return deleted_count;
         }
     }
 }

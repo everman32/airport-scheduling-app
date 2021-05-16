@@ -18,19 +18,30 @@ namespace Client
             form = dispatcherForm;
             panelSearchingAlternative.Enabled = false;
             panelSearchingAlternative.Visible = false;
-            panelViewingSchedule.Enabled = false;
-            panelViewingSchedule.Visible = false;
-            panelDeletingSchedule.Enabled = false;
-            panelDeletingSchedule.Visible = false;
+            panelViewing.Enabled = false;
+            panelViewing.Visible = false;
+            panelDeleting.Enabled = false;
+            panelDeleting.Visible = false;
+        }
+        public WorkCondorsetAlternative(AdminForm adminForm)
+        {
+            InitializeComponent();
+            form = adminForm;
+            panelSearchingAlternative.Enabled = false;
+            panelSearchingAlternative.Visible = false;
+            panelViewing.Enabled = false;
+            panelViewing.Visible = false;
+            panelDeleting.Enabled = false;
+            panelDeleting.Visible = false;
         }
         private void toolStripButtonSearchAlternative_Click(object sender, EventArgs e)
         {
             panelSearchingAlternative.Enabled = true;
             panelSearchingAlternative.Visible = true;
-            panelViewingSchedule.Enabled = false;
-            panelViewingSchedule.Visible = false;
-            panelDeletingSchedule.Enabled = false;
-            panelDeletingSchedule.Visible = false;
+            panelViewing.Enabled = false;
+            panelViewing.Visible = false;
+            panelDeleting.Enabled = false;
+            panelDeleting.Visible = false;
 
             Client.SendRequestToServer("Select destinationsNamesCondorcet");
             DataTable dataTable_destination = Client.ReceiveSelectDestinationsNamesCondorcet();
@@ -42,19 +53,33 @@ namespace Client
         {
             panelSearchingAlternative.Enabled = false;
             panelSearchingAlternative.Visible = false;
-            panelViewingSchedule.Enabled = true;
-            panelViewingSchedule.Visible = true;
-            panelDeletingSchedule.Enabled = false;
-            panelDeletingSchedule.Visible = false;
+            panelViewing.Enabled = true;
+            panelViewing.Visible = true;
+            panelDeleting.Enabled = false;
+            panelDeleting.Visible = false;
+
+            Client.SendRequestToServer("Select schedule");
+            DataTable dataTable = Client.ReceiveSelectSchedule();
+
+            //this.Size = new System.Drawing.Size(1198, 456);
+
+            ScheduleGridView.DataSource = dataTable;
+
+            ScheduleGridView.AllowUserToAddRows = false;
+            ScheduleGridView.AllowUserToResizeColumns = false;
+            ScheduleGridView.AllowUserToResizeRows = false;
+
+            ScheduleGridView.RowHeadersVisible = false;
+            ScheduleGridView.ReadOnly = true;
         }
         private void toolStripButtonDeleteSchedule_Click(object sender, EventArgs e)
         {
             panelSearchingAlternative.Enabled = false;
             panelSearchingAlternative.Visible = false;
-            panelViewingSchedule.Enabled = false;
-            panelViewingSchedule.Visible = false;
-            panelDeletingSchedule.Enabled = true;
-            panelDeletingSchedule.Visible = true;
+            panelViewing.Enabled = false;
+            panelViewing.Visible = false;
+            panelDeleting.Enabled = true;
+            panelDeleting.Visible = true;
         }
 
         private void buttonBackAvianavForm_Click(object sender, EventArgs e)
@@ -72,7 +97,8 @@ namespace Client
         {
             buttonGetEstimatedPriorityTimes.Visible = true;
             labelPairwiseComparison.Visible = false;
-            dataGridPairwiseComparison.Visible = false;
+            buttonPairwiseComparison.Visible = false;
+            PairwiseComparisonGridView.Visible = false;
             buttonSearchAlternative.Visible = false;
         }
         private void buttonGetEstimatedPriorityTimes_Click(object sender, EventArgs e)
@@ -85,16 +111,16 @@ namespace Client
             Client.SendRequestToServer("Select estimatedtimesCondorcet");
             DataTable dataTableEstimatedTimes = Client.ReceiveSelectEstimatedTimesCondorcet(id);
 
-            dataGridEstimatedTimes.DataSource = dataTableEstimatedTimes;
+            EstimatedTimesGridView.DataSource = dataTableEstimatedTimes;
 
-            dataGridEstimatedTimes.AllowUserToAddRows = false;
-            dataGridEstimatedTimes.AllowUserToResizeColumns = false;
-            dataGridEstimatedTimes.AllowUserToResizeRows = false;
+            EstimatedTimesGridView.AllowUserToAddRows = false;
+            EstimatedTimesGridView.AllowUserToResizeColumns = false;
+            EstimatedTimesGridView.AllowUserToResizeRows = false;
 
-            dataGridEstimatedTimes.RowHeadersVisible = false;
-            dataGridEstimatedTimes.ReadOnly = true;
+            EstimatedTimesGridView.RowHeadersVisible = false;
+            EstimatedTimesGridView.ReadOnly = true;
 
-            dataGridEstimatedTimes.Visible = true;
+            EstimatedTimesGridView.Visible = true;
 
             labelPriorityTimes.Visible = true;
 
@@ -102,16 +128,16 @@ namespace Client
             Client.SendRequestToServer("Select prioritytimesCondorcet");
             DataTable dataTablePriorityTimes = Client.ReceiveSelectPriorityTimesCondorcet(id);
 
-            dataGridPriorityTimes.DataSource = dataTablePriorityTimes;
+            PriorityTimesGridView.DataSource = dataTablePriorityTimes;
 
-            dataGridPriorityTimes.AllowUserToAddRows = false;
-            dataGridPriorityTimes.AllowUserToResizeColumns = false;
-            dataGridPriorityTimes.AllowUserToResizeRows = false;
+            PriorityTimesGridView.AllowUserToAddRows = false;
+            PriorityTimesGridView.AllowUserToResizeColumns = false;
+            PriorityTimesGridView.AllowUserToResizeRows = false;
 
-            dataGridPriorityTimes.RowHeadersVisible = false;
-            dataGridPriorityTimes.ReadOnly = true;
+            PriorityTimesGridView.RowHeadersVisible = false;
+            PriorityTimesGridView.ReadOnly = true;
 
-            dataGridPriorityTimes.Visible = true;
+            PriorityTimesGridView.Visible = true;
 
 
             labelPreferences.Visible = true;
@@ -119,16 +145,16 @@ namespace Client
             Client.SendRequestToServer("Select preferencesCondorcet");
             DataTable dataTablePreferences = Client.ReceiveSelectPreferencesCondorcet(id);
 
-            dataGridPreferences.DataSource = dataTablePreferences;
+            PreferencesGridView.DataSource = dataTablePreferences;
 
-            dataGridPreferences.AllowUserToAddRows = false;
-            dataGridPreferences.AllowUserToResizeColumns = false;
-            dataGridPreferences.AllowUserToResizeRows = false;
+            PreferencesGridView.AllowUserToAddRows = false;
+            PreferencesGridView.AllowUserToResizeColumns = false;
+            PreferencesGridView.AllowUserToResizeRows = false;
 
-            dataGridPreferences.RowHeadersVisible = false;
-            dataGridPreferences.ReadOnly = true;
+            PreferencesGridView.RowHeadersVisible = false;
+            PreferencesGridView.ReadOnly = true;
 
-            dataGridPreferences.Visible = true;
+            PreferencesGridView.Visible = true;
 
             buttonPairwiseComparison.Visible = true;
             
@@ -141,53 +167,138 @@ namespace Client
             DataTable dataTablePairwise = Client.ReceiveSelectPairwiseComparison(id);
 
             labelPairwiseComparison.Visible = true;
-            dataGridPairwiseComparison.DataSource = dataTablePairwise;
+            PairwiseComparisonGridView.DataSource = dataTablePairwise;
 
-            dataGridPairwiseComparison.AllowUserToAddRows = false;
-            dataGridPairwiseComparison.AllowUserToResizeColumns = false;
-            dataGridPairwiseComparison.AllowUserToResizeRows = false;
+            PairwiseComparisonGridView.AllowUserToAddRows = false;
+            PairwiseComparisonGridView.AllowUserToResizeColumns = false;
+            PairwiseComparisonGridView.AllowUserToResizeRows = false;
 
-            dataGridPairwiseComparison.RowHeadersVisible = false;
-            dataGridPairwiseComparison.ReadOnly = true;
+            PairwiseComparisonGridView.RowHeadersVisible = false;
+            PairwiseComparisonGridView.ReadOnly = true;
 
-            dataGridPairwiseComparison.Visible = true;
+            PairwiseComparisonGridView.Visible = true;
 
             buttonSearchAlternative.Visible = true;
         }
 
         private void buttonSearchAlternative_Click(object sender, EventArgs e)
         {
-            int matrixPairwiseComparison_count = dataGridPairwiseComparison.Rows.Count;
+            int matrixPairwiseComparison_count = PairwiseComparisonGridView.Rows.Count;
             int[,] matrixPairwiseComparison = new int[matrixPairwiseComparison_count, matrixPairwiseComparison_count];
-
             for (int j = 0; j < matrixPairwiseComparison_count; j++)
             {
                 for (int i = 0; i < matrixPairwiseComparison_count; i++)
                 {
-                    matrixPairwiseComparison[i, j] = Convert.ToInt32(dataGridPairwiseComparison.Rows[i].Cells[j].Value);
+                    matrixPairwiseComparison[i, j] = Convert.ToInt32(PairwiseComparisonGridView.Rows[i].Cells[j].Value);
                 }
             }
             Client.SendRequestToServer("Select bestAlternative");
-
             int[] bestAlternative_buf = Client.ReceiveSearchBestAlternative(matrixPairwiseComparison, matrixPairwiseComparison_count);
-
             ArrayList bestAlternative = new ArrayList(bestAlternative_buf);
   
-
             if (bestAlternative.Count==3)
             {
                 MessageBox.Show("Наиболее предпочтительные варианты. Парадокс Кондорсе");
             }
-            else
+            else if (bestAlternative.Count == 1)
             {
-                string str="";
+                MessageBox.Show("Наиболее предпочтительные варианты. Наилучшей альтернативой является: а" + bestAlternative[0] + " (" +
+                EstimatedTimesGridView.Rows[0].Cells[Convert.ToInt32(bestAlternative[0])].Value + ") ");
 
+                string IdDestination = comboBoxDestination.SelectedValue.ToString();
+                string finalDate = EstimatedTimesGridView.Rows[0].Cells[Convert.ToInt32(bestAlternative[0])].Value.ToString();
+
+                Client.SendRequestToServer("Add schedule");
+                DataTable dataTable = Client.ReceiveAddScheduleData(IdDestination, finalDate);
+
+                if (dataTable.Rows.Count == 1)
+                {
+                    string DestinationName = comboBoxDestination.SelectedText;
+                    MessageBox.Show("Расписание для пункта назначения " + DestinationName + " составлено. Время отправления: " +
+                      finalDate);
+                }
+                else if (dataTable.Rows.Count == 0)
+                {
+                    MessageBox.Show("Не удалось добавить расписание для пункта назначения, расписание для этого пункта назначения существует");
+                }
+            }
+            else if (bestAlternative.Count == 2)
+            {
+                /*
+                string str="";
                 for(int i=0;i< bestAlternative.Count;i++)
                 {
                     str += " а"+ bestAlternative[i].ToString()+";";
+                }*/
+                MessageBox.Show("Наиболее предпочтительные варианты. Наилучшими альтернативами являются: а" + bestAlternative[0] + " (" +
+                    EstimatedTimesGridView.Rows[0].Cells[Convert.ToInt32(bestAlternative[0])].Value + ") " + "а" + bestAlternative[1] + " (" +
+                    EstimatedTimesGridView.Rows[0].Cells[Convert.ToInt32(bestAlternative[1])].Value + ") ");
+
+                string IdDestination = comboBoxDestination.SelectedValue.ToString();
+                string finalDate = EstimatedTimesGridView.Rows[0].Cells[Convert.ToInt32(bestAlternative[0])].Value.ToString();
+                string reserveDate= EstimatedTimesGridView.Rows[0].Cells[Convert.ToInt32(bestAlternative[1])].Value.ToString();
+
+                Client.SendRequestToServer("Add scheduleWithReserve");
+                DataTable dataTable = Client.ReceiveAddScheduleWithReserveData(IdDestination, finalDate, reserveDate);
+
+                if (dataTable.Rows.Count == 1)
+                {
+                    string DestinationName = comboBoxDestination.SelectedText;
+                    MessageBox.Show("Расписание для пункта назначения " + DestinationName + " составлено. Время отправления: " +
+                      finalDate+" Резервное время (время для дополнительного маршрута): "+ reserveDate);
                 }
-                MessageBox.Show("Наиболее предпочтительные варианты. Наилучшими альтернативами являются: " + str);
-           }
+                else if (dataTable.Rows.Count == 0)
+                {
+                    MessageBox.Show("Не удалось добавить расписание для пункта назначения, расписание для этого пункта назначения существует");
+                }
+            }
+            
+        }
+
+
+        private bool textBoxCheck_empty()
+        {
+            if (textBoxDeleteId.Text != "")
+            {
+                buttonDeleteSchedule.Enabled = true;
+                return true;
+            }
+            else
+            {
+                buttonDeleteSchedule.Enabled = false;
+            }
+            return false;
+        }
+
+        private void textBoxDeleteId_TextChanged(object sender, EventArgs e)
+        {
+            textBoxCheck_empty();
+        }
+
+        private void textBoxDeleteId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void buttonDeleteSchedule_Click(object sender, EventArgs e)
+        {
+            Client.SendRequestToServer("Delete schedule");
+
+            string selected_id = textBoxDeleteId.Text;
+
+            int deleted_count = Client.ReceiveDeleteScheduleData(selected_id);
+            if (deleted_count == 1)
+            {
+                MessageBox.Show("Удаление расписания на полёт с Идент. номером " + selected_id + " выполнено");
+            }
+            else if (deleted_count == 0)
+            {
+                MessageBox.Show("Не удалось удалить расписание на полёт, расписания с таким идент. номером не существует");
+            }
         }
     }
 }

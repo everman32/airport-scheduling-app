@@ -37,22 +37,17 @@ namespace Client
         }
         private void buttonWorkClients_Click(object sender, EventArgs e)
         {
-
             Hide();
             workPassengersForm.Show();
         }
 
         private void buttonWorkDestinations_Click(object sender, EventArgs e)
         {
-
-
             Hide();
             workDestinationsForm.Show();
         }
         private void buttonWorkFlightRequests_Click(object sender, EventArgs e)
         {
-
-
             Hide();
             workFlightRequestsForm.Show();
         }

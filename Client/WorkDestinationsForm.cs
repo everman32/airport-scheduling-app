@@ -24,6 +24,19 @@ namespace Client
             panelDeleting.Enabled = false;
             panelDeleting.Visible = false;
         }
+        public WorkDestinationsForm(AdminForm adminForm)
+        {
+            form = adminForm;
+            InitializeComponent();
+            panelViewing.Enabled = false;
+            panelViewing.Visible = false;
+            panelAdding.Enabled = false;
+            panelAdding.Visible = false;
+            panelEditing.Enabled = false;
+            panelEditing.Visible = false;
+            panelDeleting.Enabled = false;
+            panelDeleting.Visible = false;
+        }
         public WorkDestinationsForm()
         {
         }
@@ -153,6 +166,7 @@ namespace Client
             DataTable dataTable = Client.ReceiveSelectDestinations();
 
             this.Size= new System.Drawing.Size(1152, 421);
+            this.CenterToScreen();
             panelViewing.Enabled = true;
             panelViewing.Visible = true;
             panelAdding.Enabled = false;
@@ -174,6 +188,7 @@ namespace Client
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
             this.Size = new System.Drawing.Size(1000, 421);
+            this.CenterToScreen();
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = true;
@@ -186,6 +201,7 @@ namespace Client
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
             this.Size = new System.Drawing.Size(1000, 421);
+            this.CenterToScreen();
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = false;
@@ -198,6 +214,7 @@ namespace Client
         private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
             this.Size = new System.Drawing.Size(1000, 421);
+            this.CenterToScreen();
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = false;

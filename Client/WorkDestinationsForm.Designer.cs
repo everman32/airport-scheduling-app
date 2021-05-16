@@ -84,7 +84,7 @@ namespace Client
             this.toolStripButtonDelete});
             this.toolStripWorkDestinations.Location = new System.Drawing.Point(0, 0);
             this.toolStripWorkDestinations.Name = "toolStripWorkDestinations";
-            this.toolStripWorkDestinations.Size = new System.Drawing.Size(1136, 25);
+            this.toolStripWorkDestinations.Size = new System.Drawing.Size(1142, 25);
             this.toolStripWorkDestinations.TabIndex = 0;
             this.toolStripWorkDestinations.Text = "toolStrip1";
             this.toolStripWorkDestinations.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripWorkDestinations_ItemClicked);
@@ -142,9 +142,9 @@ namespace Client
             // panelViewing
             // 
             this.panelViewing.Controls.Add(this.DestinationsGridView);
-            this.panelViewing.Location = new System.Drawing.Point(0, 43);
+            this.panelViewing.Location = new System.Drawing.Point(12, 28);
             this.panelViewing.Name = "panelViewing";
-            this.panelViewing.Size = new System.Drawing.Size(1136, 259);
+            this.panelViewing.Size = new System.Drawing.Size(1124, 302);
             this.panelViewing.TabIndex = 2;
             // 
             // DestinationsGridView
@@ -155,7 +155,7 @@ namespace Client
             this.DestinationsGridView.Location = new System.Drawing.Point(14, 12);
             this.DestinationsGridView.Name = "DestinationsGridView";
             this.DestinationsGridView.RowTemplate.Height = 25;
-            this.DestinationsGridView.Size = new System.Drawing.Size(1110, 227);
+            this.DestinationsGridView.Size = new System.Drawing.Size(1098, 281);
             this.DestinationsGridView.TabIndex = 0;
             // 
             // panelAdding
@@ -467,11 +467,11 @@ namespace Client
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.ClientSize = new System.Drawing.Size(1136, 382);
-            this.Controls.Add(this.panelEditing);
+            this.ClientSize = new System.Drawing.Size(1142, 382);
             this.Controls.Add(this.panelAdding);
-            this.Controls.Add(this.panelDeleting);
             this.Controls.Add(this.panelViewing);
+            this.Controls.Add(this.panelEditing);
+            this.Controls.Add(this.panelDeleting);
             this.Controls.Add(this.buttonBackAvianavForm);
             this.Controls.Add(this.toolStripWorkDestinations);
             this.MaximizeBox = false;

@@ -885,6 +885,132 @@ namespace Client
         }
 
 
+        static public DataTable ReceiveAddScheduleData(string idDestination, string finalDate)
+        {
+            byte[] iddestination = Encoding.Unicode.GetBytes(idDestination);
+            stream.Write(iddestination, 0, iddestination.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] finaldate = Encoding.Unicode.GetBytes(finalDate);
+            stream.Write(finaldate, 0, finaldate.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveAddScheduleWithReserveData(string idDestination, string finalDate,string reserveDate)
+        {
+            byte[] iddestination = Encoding.Unicode.GetBytes(idDestination);
+            stream.Write(iddestination, 0, iddestination.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] finaldate = Encoding.Unicode.GetBytes(finalDate);
+            stream.Write(finaldate, 0, finaldate.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] reservedate = Encoding.Unicode.GetBytes(reserveDate);
+            stream.Write(reservedate, 0, reservedate.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveSelectSchedule()
+        {
+            byte[] data = new byte[100000];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public int ReceiveDeleteScheduleData(string Id)
+        {
+            byte[] id = Encoding.Unicode.GetBytes(Id);
+            stream.Write(id, 0, id.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[64];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            int deleted_count = BitConverter.ToInt32(data);
+            Array.Clear(data, 0, data.Length);
+            return deleted_count;
+        }
 
         public static byte[] GetBinaryFormatData(DataTable dataTable)
         {

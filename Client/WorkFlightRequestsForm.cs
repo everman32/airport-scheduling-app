@@ -28,6 +28,21 @@ namespace Client
             panelDeleting.Enabled = false;
             panelDeleting.Visible = false;
         }
+        public WorkFlightRequestsForm(AdminForm adminForm, WorkPassengersForm workPassengersForm, WorkDestinationsForm workDestinationsForm)
+        {
+            InitializeComponent();
+            form1 = adminForm;
+            form2 = workPassengersForm;
+            form3 = workDestinationsForm;
+            panelViewing.Enabled = false;
+            panelViewing.Visible = false;
+            panelAdding.Enabled = false;
+            panelAdding.Visible = false;
+            panelEditing.Enabled = false;
+            panelEditing.Visible = false;
+            panelDeleting.Enabled = false;
+            panelDeleting.Visible = false;
+        }
         private void WorkFlightRequestsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
@@ -44,6 +59,7 @@ namespace Client
             DataTable dataTable = Client.ReceiveSelectFlightRequests();
 
             this.Size = new System.Drawing.Size(1198, 456);
+            this.CenterToScreen();
             panelViewing.Enabled = true;
             panelViewing.Visible = true;
             panelAdding.Enabled = false;
@@ -66,6 +82,7 @@ namespace Client
         {
 
             this.Size = new System.Drawing.Size(600, 456);
+            this.CenterToScreen();
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = true;
@@ -91,6 +108,7 @@ namespace Client
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
             this.Size = new System.Drawing.Size(600, 456);
+            this.CenterToScreen();
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = false;
@@ -105,6 +123,7 @@ namespace Client
         private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
             this.Size = new System.Drawing.Size(600, 456);
+            this.CenterToScreen();
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = false;
