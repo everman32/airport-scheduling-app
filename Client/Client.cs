@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Text;
 using System.Net.Sockets;
 using System.Data;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace Client
 {
@@ -1012,6 +1009,84 @@ namespace Client
             return deleted_count;
         }
 
+
+
+        static public DataTable ReceiveSelectAccounts()
+        {
+            byte[] data = new byte[10000];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveEditAccountData(string Login, string Newvalue)
+        {
+            byte[] login = Encoding.Unicode.GetBytes(Login);
+            stream.Write(login, 0, login.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] newvalue = Encoding.Unicode.GetBytes(Newvalue);
+            stream.Write(newvalue, 0, newvalue.Length);
+            stream.Flush();
+
+            confirm = new byte[4];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[10000];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public int ReceiveDeleteAccountData(string Login)
+        {
+            byte[] login = Encoding.Unicode.GetBytes(Login);
+            stream.Write(login, 0, login.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[64];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            int deleted_count = BitConverter.ToInt32(data);
+            Array.Clear(data, 0, data.Length);
+            return deleted_count;
+        }
+
         public static byte[] GetBinaryFormatData(DataTable dataTable)
         {
             BinaryFormatter bFormat = new BinaryFormatter();
@@ -1022,6 +1097,33 @@ namespace Client
                 outList = memoryStream.ToArray();
             }
             return outList;
+        }
+
+
+        static public DataTable ReceiveBuildReportData(string Id)
+        {
+            byte[] id = Encoding.Unicode.GetBytes(Id);
+            stream.Write(id, 0, id.Length);
+            stream.Flush();
+
+            byte[] confirm = new byte[4];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(confirm, 0, confirm.Length);
+            }
+            while (stream.DataAvailable);
+
+            byte[] data = new byte[100000];
+            bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
         }
         static private DataTable GetDataTable(byte[] data)
         {

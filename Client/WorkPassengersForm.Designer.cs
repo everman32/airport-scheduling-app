@@ -385,8 +385,8 @@ namespace Client
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(774, 364);
-            this.Controls.Add(this.panelDeleting);
             this.Controls.Add(this.panelEditing);
+            this.Controls.Add(this.panelDeleting);
             this.Controls.Add(this.panelAdding);
             this.Controls.Add(this.panelViewing);
             this.Controls.Add(this.toolStripWorkPassengers);

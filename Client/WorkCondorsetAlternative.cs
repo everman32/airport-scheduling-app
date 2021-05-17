@@ -100,6 +100,7 @@ namespace Client
             buttonPairwiseComparison.Visible = false;
             PairwiseComparisonGridView.Visible = false;
             buttonSearchAlternative.Visible = false;
+            buttonReportPassengersFlight.Visible = false;
         }
         private void buttonGetEstimatedPriorityTimes_Click(object sender, EventArgs e)
         {
@@ -216,6 +217,7 @@ namespace Client
                     string DestinationName = comboBoxDestination.SelectedText;
                     MessageBox.Show("Расписание для пункта назначения " + DestinationName + " составлено. Время отправления: " +
                       finalDate);
+                    buttonReportPassengersFlight.Visible = true;
                 }
                 else if (dataTable.Rows.Count == 0)
                 {
@@ -246,6 +248,7 @@ namespace Client
                     string DestinationName = comboBoxDestination.SelectedText;
                     MessageBox.Show("Расписание для пункта назначения " + DestinationName + " составлено. Время отправления: " +
                       finalDate+" Резервное время (время для дополнительного маршрута): "+ reserveDate);
+                    buttonReportPassengersFlight.Visible = true;
                 }
                 else if (dataTable.Rows.Count == 0)
                 {
@@ -299,6 +302,34 @@ namespace Client
             {
                 MessageBox.Show("Не удалось удалить расписание на полёт, расписания с таким идент. номером не существует");
             }
+        }
+
+        private void WorkCondorsetAlternative_Load(object sender, EventArgs e)
+        {
+
+        }
+
+         void buttonReportPassengersFlight_Click(object sender, EventArgs e)
+        {
+            Client.SendRequestToServer("Build report");
+            string selected_id = comboBoxDestination.SelectedValue.ToString();
+            DataTable dataTable = Client.ReceiveBuildReportData(selected_id);
+
+            Report report;
+            report = new Report(this);
+            report.PassengersFlightGridView.DataSource = dataTable;
+
+            report.PassengersFlightGridView.DataSource = dataTable;
+
+            report.PassengersFlightGridView.AllowUserToAddRows = false;
+            report.PassengersFlightGridView.AllowUserToResizeColumns = false;
+            report.PassengersFlightGridView.AllowUserToResizeRows = false;
+
+            report.PassengersFlightGridView.RowHeadersVisible = false;
+            report.PassengersFlightGridView.ReadOnly = true;
+
+            report.PassengersFlightGridView.Visible = true;
+            report.Show();
         }
     }
 }

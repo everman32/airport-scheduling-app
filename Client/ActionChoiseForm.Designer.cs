@@ -64,17 +64,17 @@ namespace Client
             this.buttonBackMainForm.UseVisualStyleBackColor = true;
             this.buttonBackMainForm.Click += new System.EventHandler(this.buttonBackMainForm_Click);
             // 
-            // LogRegForm
+            // ActionChoiseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.RosyBrown;
+            this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(334, 168);
             this.Controls.Add(this.buttonBackMainForm);
             this.Controls.Add(this.buttonRegForm);
             this.Controls.Add(this.buttonLogForm);
             this.MaximizeBox = false;
-            this.Name = "LogRegForm";
+            this.Name = "ActionChoiseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Окно выбора действия";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LogRegForm_FormClosed);

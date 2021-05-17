@@ -39,6 +39,7 @@ namespace Client
             this.buttonBackAvianavForm = new System.Windows.Forms.Button();
             this.panelSearchingAlternative = new System.Windows.Forms.Panel();
             this.buttonSearchAlternative = new System.Windows.Forms.Button();
+            this.buttonReportPassengersFlight = new System.Windows.Forms.Button();
             this.labelPairwiseComparison = new System.Windows.Forms.Label();
             this.PairwiseComparisonGridView = new System.Windows.Forms.DataGridView();
             this.PreferencesGridView = new System.Windows.Forms.DataGridView();
@@ -53,7 +54,6 @@ namespace Client
             this.comboBoxDestination = new System.Windows.Forms.ComboBox();
             this.panelViewing = new System.Windows.Forms.Panel();
             this.buttonChartPopularityDestinations = new System.Windows.Forms.Button();
-            this.buttonReportPassengersFlight = new System.Windows.Forms.Button();
             this.buttonReportFlightDetails = new System.Windows.Forms.Button();
             this.ScheduleGridView = new System.Windows.Forms.DataGridView();
             this.panelDeleting = new System.Windows.Forms.Panel();
@@ -126,6 +126,7 @@ namespace Client
             // panelSearchingAlternative
             // 
             this.panelSearchingAlternative.Controls.Add(this.buttonSearchAlternative);
+            this.panelSearchingAlternative.Controls.Add(this.buttonReportPassengersFlight);
             this.panelSearchingAlternative.Controls.Add(this.labelPairwiseComparison);
             this.panelSearchingAlternative.Controls.Add(this.PairwiseComparisonGridView);
             this.panelSearchingAlternative.Controls.Add(this.PreferencesGridView);
@@ -153,6 +154,17 @@ namespace Client
             this.buttonSearchAlternative.UseVisualStyleBackColor = true;
             this.buttonSearchAlternative.Visible = false;
             this.buttonSearchAlternative.Click += new System.EventHandler(this.buttonSearchAlternative_Click);
+            // 
+            // buttonReportPassengersFlight
+            // 
+            this.buttonReportPassengersFlight.Location = new System.Drawing.Point(480, 425);
+            this.buttonReportPassengersFlight.Name = "buttonReportPassengersFlight";
+            this.buttonReportPassengersFlight.Size = new System.Drawing.Size(150, 54);
+            this.buttonReportPassengersFlight.TabIndex = 2;
+            this.buttonReportPassengersFlight.Text = "Отчёт с подробной информацией о пассажирах рейса";
+            this.buttonReportPassengersFlight.UseVisualStyleBackColor = true;
+            this.buttonReportPassengersFlight.Visible = false;
+            this.buttonReportPassengersFlight.Click += new System.EventHandler(this.buttonReportPassengersFlight_Click);
             // 
             // labelPairwiseComparison
             // 
@@ -299,12 +311,11 @@ namespace Client
             // panelViewing
             // 
             this.panelViewing.Controls.Add(this.buttonChartPopularityDestinations);
-            this.panelViewing.Controls.Add(this.buttonReportPassengersFlight);
             this.panelViewing.Controls.Add(this.buttonReportFlightDetails);
             this.panelViewing.Controls.Add(this.ScheduleGridView);
             this.panelViewing.Location = new System.Drawing.Point(7, 96);
             this.panelViewing.Name = "panelViewing";
-            this.panelViewing.Size = new System.Drawing.Size(713, 404);
+            this.panelViewing.Size = new System.Drawing.Size(713, 351);
             this.panelViewing.TabIndex = 3;
             // 
             // buttonChartPopularityDestinations
@@ -315,15 +326,7 @@ namespace Client
             this.buttonChartPopularityDestinations.TabIndex = 3;
             this.buttonChartPopularityDestinations.Text = "Диаграмма с популярностью пунктов назначения";
             this.buttonChartPopularityDestinations.UseVisualStyleBackColor = true;
-            // 
-            // buttonReportPassengersFlight
-            // 
-            this.buttonReportPassengersFlight.Location = new System.Drawing.Point(288, 287);
-            this.buttonReportPassengersFlight.Name = "buttonReportPassengersFlight";
-            this.buttonReportPassengersFlight.Size = new System.Drawing.Size(150, 54);
-            this.buttonReportPassengersFlight.TabIndex = 2;
-            this.buttonReportPassengersFlight.Text = "Отчёт с подробной информацией о пассажирах рейса";
-            this.buttonReportPassengersFlight.UseVisualStyleBackColor = true;
+            this.buttonChartPopularityDestinations.Visible = false;
             // 
             // buttonReportFlightDetails
             // 
@@ -333,6 +336,7 @@ namespace Client
             this.buttonReportFlightDetails.TabIndex = 1;
             this.buttonReportFlightDetails.Text = "Отчёт с подробной информацацией о рейсе";
             this.buttonReportFlightDetails.UseVisualStyleBackColor = true;
+            this.buttonReportFlightDetails.Visible = false;
             // 
             // ScheduleGridView
             // 
@@ -388,7 +392,7 @@ namespace Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(731, 573);
             this.Controls.Add(this.panelViewing);
             this.Controls.Add(this.panelSearchingAlternative);
@@ -443,8 +447,8 @@ namespace Client
         private System.Windows.Forms.DataGridView PairwiseComparisonGridView;
         private System.Windows.Forms.Label labelPairwiseComparison;
         private System.Windows.Forms.Button buttonSearchAlternative;
-        private System.Windows.Forms.Button buttonChartPopularityDestinations;
         private System.Windows.Forms.Button buttonReportPassengersFlight;
+        private System.Windows.Forms.Button buttonChartPopularityDestinations;
         private System.Windows.Forms.Button buttonReportFlightDetails;
     }
 }

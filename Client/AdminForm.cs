@@ -71,5 +71,12 @@ namespace Client
             Hide();
             workCondorsetAlternative.Show();
         }
+
+        private void buttonWorkAccounts_Click(object sender, EventArgs e)
+        {
+            WorkAccountsForm workAccountsForm;
+            workAccountsForm = new WorkAccountsForm(this);
+            workAccountsForm.Show();
+        }
     }
 }

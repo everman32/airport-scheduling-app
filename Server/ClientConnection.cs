@@ -78,7 +78,13 @@ namespace Server
                           (builder.ToString() == "Add schedule")||
                            (builder.ToString() == "Add scheduleWithReserve")||
                             (builder.ToString() == "Select schedule")||
-                            (builder.ToString() == "Delete schedule")
+                            (builder.ToString() == "Delete schedule")||
+                            (builder.ToString() == "Select accounts")||
+                             (builder.ToString() == "Edit account")||
+                             (builder.ToString() == "Delete account")||
+                             (builder.ToString() == "Build report")
+
+
 
 
                          )
@@ -196,6 +202,22 @@ namespace Server
                     else if (command == "Delete schedule")
                     {
                         Schedule.ReceiveDataForDeleting(stream);
+                    }
+                    else if (command == "Select accounts")
+                    {
+                        Account.SendSelectingData(stream);
+                    }
+                    else if (command == "Edit account")
+                    {
+                        Account.ReceiveDataForEditing(stream);
+                    }
+                    else if (command == "Delete account")
+                    {
+                        Account.ReceiveDataForDeleting(stream);
+                    }
+                    else if (command == "Build report")
+                    {
+                        Account.ReceiveDataForBuildReport(stream);
                     }
                     /*
                     message = "Ваше сообщение доставлено";

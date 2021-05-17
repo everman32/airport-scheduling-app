@@ -17,6 +17,18 @@ namespace Server
         }
 
 
+        static public DataTable SelectAccount()
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT Login [Логин учётной записи], Password [Пароль учётной записи], accessRight [Права доступа (1-админ.2-диспетчер)] FROM Account";
+            sqlCommand.Connection = sqlConnection;
+
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+
+            return dataTable;
+        }
         static public DataTable SelectAccount(string login, string password)
         {
             SqlCommand sqlCommand = new SqlCommand();
@@ -31,7 +43,30 @@ namespace Server
             
             return dataTable;
         }
-       static public DataTable InsertAccount(string login, string password,string accessRight)
+        static public DataTable SelectAccount(string login)
+        {
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.CommandText = "SELECT * FROM Account WHERE (Login=@login)";
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.Parameters.AddWithValue("@login", login);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+
+                adapter.Fill(dataTable);
+
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                return dataTable;
+            }
+
+            return dataTable;
+        }
+            static public DataTable InsertAccount(string login, string password,string accessRight)
         {
             SqlCommand sqlCommand = new SqlCommand();
             sqlCommand.CommandText = "INSERT INTO Account (Login,Password,AccessRight) VALUES (@login,@password,@accessRight)";
@@ -41,10 +76,40 @@ namespace Server
             sqlCommand.Parameters.AddWithValue("@accessRight", accessRight);
   
             DataTable dataTable = new DataTable();
+            DataTable dataTable_check = new DataTable();
+            dataTable_check = SQLCommander.SelectAccount(login);
+
+            if (dataTable_check.Rows.Count == 0)
+            {
+                try
+                {
+                    sqlCommand.ExecuteNonQuery();
+                    dataTable = SQLCommander.SelectAccount(login,password);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                    return dataTable;
+                }
+            }
+            return dataTable;
+    }
+        static public DataTable EditPassword(string login, string newvalue)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+
+            sqlCommand.CommandText = "UPDATE Account SET Password=@password WHERE Login=@login";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@password", newvalue);
+            sqlCommand.Parameters.AddWithValue("@login", login);
+
+            DataTable dataTable = new DataTable();
+
             try
             {
                 sqlCommand.ExecuteNonQuery();
-                dataTable = SQLCommander.SelectAccount(login, password);
+                dataTable = SQLCommander.SelectAccount(login, newvalue);
+
             }
             catch (Exception exception)
             {
@@ -52,6 +117,25 @@ namespace Server
                 return dataTable;
             }
             return dataTable;
+        }
+                static public int DeleteAccount(string login)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "DELETE FROM Account WHERE Login=@login";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@login", login);
+
+            int deleted_count=0;
+            try
+            {
+                deleted_count=sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                return deleted_count;
+            }
+            return deleted_count;
         }
 
 
@@ -965,5 +1049,29 @@ namespace Server
             }
             return deleted_count;
         }
+
+        static public DataTable SelectPassengersForReport(string id)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT DISTINCT flightrequest.Id [Идентификационный номер заявки], pass.Surname [Фамилия пассажира], pass.Name [Имя пассажира],pass.Patronymic [Отчество пассажира], " +
+                " pass.PhoneNumber[Телефонный номер пассажира] FROM FlightRequest flightrequest " +
+                "INNER JOIN Passenger pass ON flightrequest.IdPassenger = pass.Id " +
+                "INNER JOIN Destination dest ON flightrequest.IdDestination = @id";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@id", id);
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
+
+
     }
 }

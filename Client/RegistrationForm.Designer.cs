@@ -66,7 +66,7 @@ namespace Client
             this.comboBoxAccessRight.FormattingEnabled = true;
             this.comboBoxAccessRight.Items.AddRange(new object[] {
             "Администратор",
-            "Авинавигационный специалист"});
+            "Диспетчер"});
             this.comboBoxAccessRight.Location = new System.Drawing.Point(135, 44);
             this.comboBoxAccessRight.Name = "comboBoxAccessRight";
             this.comboBoxAccessRight.Size = new System.Drawing.Size(183, 23);
@@ -122,7 +122,7 @@ namespace Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightGreen;
+            this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(380, 275);
             this.Controls.Add(this.textBoxPass);
             this.Controls.Add(this.textBoxLogin);

@@ -90,7 +90,7 @@ namespace Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.BurlyWood;
+            this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(514, 357);
             this.Controls.Add(this.buttonWorkFlightRequests);
             this.Controls.Add(this.buttonSearchBestAlternative);

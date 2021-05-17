@@ -95,12 +95,13 @@ namespace Client
             this.buttonWorkAccounts.TabIndex = 9;
             this.buttonWorkAccounts.Text = "Работа с учётными записями";
             this.buttonWorkAccounts.UseVisualStyleBackColor = true;
+            this.buttonWorkAccounts.Click += new System.EventHandler(this.buttonWorkAccounts_Click);
             // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightGreen;
+            this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(516, 418);
             this.Controls.Add(this.buttonWorkAccounts);
             this.Controls.Add(this.buttonWorkFlightRequests);
