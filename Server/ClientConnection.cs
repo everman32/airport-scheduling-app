@@ -64,6 +64,8 @@ namespace Server
                          (builder.ToString() == "Select flightrequests")||
                          (builder.ToString() == "Select destinationsNames") ||
                          (builder.ToString() == "Select passengersNames") ||
+                         (builder.ToString() == "Select flightrequestsNames") ||
+                         (builder.ToString() == "Select schedulesNames") ||
                          (builder.ToString() == "Select estimatedtimes")||
                          (builder.ToString() == "Add flightrequest")||
                          (builder.ToString() == "Edit flightrequest")||
@@ -143,6 +145,10 @@ namespace Server
                     {
                         FlightRequest.SendSelectingPassengersNames(stream);
                     }
+                    else if (command == "Select flightrequestsNames")
+                    {
+                        FlightRequest.SendSelectingFlightRequestsNames(stream);
+                    }
                     else if (command == "Select estimatedtimes")
                     {
                         FlightRequest.SendSelectingEstimatedtimes(stream);
@@ -202,6 +208,10 @@ namespace Server
                     else if (command == "Delete schedule")
                     {
                         Schedule.ReceiveDataForDeleting(stream);
+                    }
+                    else if (command == "Select schedulesNames")
+                    {
+                        Schedule.SendSelectingSchedulesNames(stream);
                     }
                     else if (command == "Select accounts")
                     {

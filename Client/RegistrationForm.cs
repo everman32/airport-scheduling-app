@@ -20,15 +20,8 @@ namespace Client
         {
             Client.SendRequestToServer("Register");
 
-            int accessRight=0;
-            if (comboBoxAccessRight.SelectedIndex==0)
-            {
-                accessRight = 1;
-            }
-            else if (comboBoxAccessRight.SelectedIndex == 1)
-            {
-                accessRight = 2;
-            }
+                int accessRight = 2;
+
             string selected_login = textBoxLogin.Text;
             string selected_password = textBoxPass.Text;
            
@@ -55,7 +48,7 @@ namespace Client
             }
             else if (dataTable.Rows.Count == 0)
             {
-                MessageBox.Show("Не удалось зарегистрироваться, пользователь с таким логином уже существует"); ;
+                MessageBox.Show("Учётная запись с такими данными существует"); ;
             }
         }
         private void buttonBackLogRegForm_Click(object sender, EventArgs e)
@@ -63,9 +56,9 @@ namespace Client
             Hide();
             form.Show();
         }
-        private bool textBoxComboBoxCheck_empty()
+        private bool textBoxCheck_empty()
         {
-            if (textBoxLogin.Text != "" && textBoxPass.Text != ""&& comboBoxAccessRight.SelectedIndex != -1)
+            if (textBoxLogin.Text != "" && textBoxPass.Text != "")
             {
                buttonRegistration.Enabled = true;
                 return true;
@@ -78,15 +71,15 @@ namespace Client
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           textBoxComboBoxCheck_empty();
+           textBoxCheck_empty();
         }
         private void textBoxLogin_TextChanged(object sender, EventArgs e)
         {
-           textBoxComboBoxCheck_empty();
+           textBoxCheck_empty();
         }
         private void textBoxPass_TextChanged(object sender, EventArgs e)
         {
-            textBoxComboBoxCheck_empty();
+            textBoxCheck_empty();
         }
         private void textBoxLogin_KeyPress(object sender, KeyPressEventArgs e)
         {

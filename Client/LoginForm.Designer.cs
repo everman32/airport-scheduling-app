@@ -40,9 +40,9 @@ namespace Client
             // buttonLogin
             // 
             this.buttonLogin.Enabled = false;
-            this.buttonLogin.Location = new System.Drawing.Point(162, 179);
+            this.buttonLogin.Location = new System.Drawing.Point(118, 147);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(110, 35);
+            this.buttonLogin.Size = new System.Drawing.Size(115, 30);
             this.buttonLogin.TabIndex = 2;
             this.buttonLogin.Text = "Войти";
             this.buttonLogin.UseVisualStyleBackColor = true;
@@ -51,26 +51,26 @@ namespace Client
             // labelLogin
             // 
             this.labelLogin.AutoSize = true;
-            this.labelLogin.Location = new System.Drawing.Point(162, 54);
+            this.labelLogin.Location = new System.Drawing.Point(115, 29);
             this.labelLogin.Name = "labelLogin";
-            this.labelLogin.Size = new System.Drawing.Size(89, 15);
+            this.labelLogin.Size = new System.Drawing.Size(84, 13);
             this.labelLogin.TabIndex = 5;
             this.labelLogin.Text = "Введите логин:";
             // 
             // labelPass
             // 
             this.labelPass.AutoSize = true;
-            this.labelPass.Location = new System.Drawing.Point(162, 116);
+            this.labelPass.Location = new System.Drawing.Point(115, 83);
             this.labelPass.Name = "labelPass";
-            this.labelPass.Size = new System.Drawing.Size(96, 15);
+            this.labelPass.Size = new System.Drawing.Size(91, 13);
             this.labelPass.TabIndex = 6;
             this.labelPass.Text = "Введите пароль:";
             // 
             // buttonBackLogRegForm
             // 
-            this.buttonBackLogRegForm.Location = new System.Drawing.Point(12, 260);
+            this.buttonBackLogRegForm.Location = new System.Drawing.Point(12, 198);
             this.buttonBackLogRegForm.Name = "buttonBackLogRegForm";
-            this.buttonBackLogRegForm.Size = new System.Drawing.Size(75, 32);
+            this.buttonBackLogRegForm.Size = new System.Drawing.Size(64, 28);
             this.buttonBackLogRegForm.TabIndex = 7;
             this.buttonBackLogRegForm.Text = "<< Назад";
             this.buttonBackLogRegForm.UseVisualStyleBackColor = true;
@@ -78,29 +78,31 @@ namespace Client
             // 
             // textBoxLogin
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(162, 72);
+            this.textBoxLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxLogin.Location = new System.Drawing.Point(118, 45);
             this.textBoxLogin.Name = "textBoxLogin";
-            this.textBoxLogin.Size = new System.Drawing.Size(110, 23);
+            this.textBoxLogin.Size = new System.Drawing.Size(115, 26);
             this.textBoxLogin.TabIndex = 8;
             this.textBoxLogin.TextChanged += new System.EventHandler(this.textBoxLogin_TextChanged);
             this.textBoxLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxLogin_KeyPress);
             // 
             // textBoxPass
             // 
-            this.textBoxPass.Location = new System.Drawing.Point(162, 134);
+            this.textBoxPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPass.Location = new System.Drawing.Point(118, 99);
             this.textBoxPass.Name = "textBoxPass";
-            this.textBoxPass.PasswordChar = '*';
-            this.textBoxPass.Size = new System.Drawing.Size(110, 23);
+            this.textBoxPass.PasswordChar = '•';
+            this.textBoxPass.Size = new System.Drawing.Size(115, 26);
             this.textBoxPass.TabIndex = 9;
             this.textBoxPass.TextChanged += new System.EventHandler(this.textBoxPass_TextChanged);
             this.textBoxPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPass_KeyPress);
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(413, 304);
+            this.ClientSize = new System.Drawing.Size(326, 238);
             this.Controls.Add(this.textBoxPass);
             this.Controls.Add(this.textBoxLogin);
             this.Controls.Add(this.buttonBackLogRegForm);

@@ -38,17 +38,18 @@ namespace Client
             // labelPort
             // 
             this.labelPort.AutoSize = true;
-            this.labelPort.Location = new System.Drawing.Point(71, 22);
+            this.labelPort.Location = new System.Drawing.Point(35, 21);
             this.labelPort.Name = "labelPort";
-            this.labelPort.Size = new System.Drawing.Size(161, 15);
+            this.labelPort.Size = new System.Drawing.Size(148, 13);
             this.labelPort.TabIndex = 0;
             this.labelPort.Text = "Введите порт подключения:";
             // 
             // textBoxPort
             // 
-            this.textBoxPort.Location = new System.Drawing.Point(238, 19);
+            this.textBoxPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPort.Location = new System.Drawing.Point(204, 16);
             this.textBoxPort.Name = "textBoxPort";
-            this.textBoxPort.Size = new System.Drawing.Size(108, 23);
+            this.textBoxPort.Size = new System.Drawing.Size(93, 26);
             this.textBoxPort.TabIndex = 1;
             this.textBoxPort.TextChanged += new System.EventHandler(this.textBoxPort_TextChanged);
             this.textBoxPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPort_KeyPress);
@@ -56,9 +57,9 @@ namespace Client
             // buttonConnectClient
             // 
             this.buttonConnectClient.Enabled = false;
-            this.buttonConnectClient.Location = new System.Drawing.Point(238, 61);
+            this.buttonConnectClient.Location = new System.Drawing.Point(204, 53);
             this.buttonConnectClient.Name = "buttonConnectClient";
-            this.buttonConnectClient.Size = new System.Drawing.Size(108, 45);
+            this.buttonConnectClient.Size = new System.Drawing.Size(93, 39);
             this.buttonConnectClient.TabIndex = 2;
             this.buttonConnectClient.Text = "Подключиться к серверу";
             this.buttonConnectClient.UseVisualStyleBackColor = true;
@@ -66,9 +67,9 @@ namespace Client
             // 
             // buttonShutdown
             // 
-            this.buttonShutdown.Location = new System.Drawing.Point(12, 87);
+            this.buttonShutdown.Location = new System.Drawing.Point(10, 75);
             this.buttonShutdown.Name = "buttonShutdown";
-            this.buttonShutdown.Size = new System.Drawing.Size(75, 36);
+            this.buttonShutdown.Size = new System.Drawing.Size(64, 31);
             this.buttonShutdown.TabIndex = 3;
             this.buttonShutdown.Text = "Выход";
             this.buttonShutdown.UseVisualStyleBackColor = true;
@@ -76,10 +77,10 @@ namespace Client
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(377, 135);
+            this.ClientSize = new System.Drawing.Size(323, 117);
             this.Controls.Add(this.buttonShutdown);
             this.Controls.Add(this.buttonConnectClient);
             this.Controls.Add(this.textBoxPort);
@@ -87,7 +88,7 @@ namespace Client
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Главное окно";
+            this.Text = "Окно подключения";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();

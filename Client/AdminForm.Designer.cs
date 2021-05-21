@@ -39,9 +39,9 @@ namespace Client
             // 
             // buttonBackLogForm
             // 
-            this.buttonBackLogForm.Location = new System.Drawing.Point(22, 367);
+            this.buttonBackLogForm.Location = new System.Drawing.Point(19, 318);
             this.buttonBackLogForm.Name = "buttonBackLogForm";
-            this.buttonBackLogForm.Size = new System.Drawing.Size(80, 39);
+            this.buttonBackLogForm.Size = new System.Drawing.Size(69, 34);
             this.buttonBackLogForm.TabIndex = 0;
             this.buttonBackLogForm.Text = "<< Назад";
             this.buttonBackLogForm.UseVisualStyleBackColor = true;
@@ -49,9 +49,9 @@ namespace Client
             // 
             // buttonWorkFlightRequests
             // 
-            this.buttonWorkFlightRequests.Location = new System.Drawing.Point(141, 158);
+            this.buttonWorkFlightRequests.Location = new System.Drawing.Point(127, 137);
             this.buttonWorkFlightRequests.Name = "buttonWorkFlightRequests";
-            this.buttonWorkFlightRequests.Size = new System.Drawing.Size(197, 44);
+            this.buttonWorkFlightRequests.Size = new System.Drawing.Size(197, 38);
             this.buttonWorkFlightRequests.TabIndex = 8;
             this.buttonWorkFlightRequests.Text = "Работа с заявками на полёты";
             this.buttonWorkFlightRequests.UseVisualStyleBackColor = true;
@@ -59,9 +59,9 @@ namespace Client
             // 
             // buttonSearchBestAlternative
             // 
-            this.buttonSearchBestAlternative.Location = new System.Drawing.Point(139, 222);
+            this.buttonSearchBestAlternative.Location = new System.Drawing.Point(125, 192);
             this.buttonSearchBestAlternative.Name = "buttonSearchBestAlternative";
-            this.buttonSearchBestAlternative.Size = new System.Drawing.Size(199, 40);
+            this.buttonSearchBestAlternative.Size = new System.Drawing.Size(199, 48);
             this.buttonSearchBestAlternative.TabIndex = 7;
             this.buttonSearchBestAlternative.Text = "Поиск наилучшей альтернативы расписания для пункта назначения";
             this.buttonSearchBestAlternative.UseVisualStyleBackColor = true;
@@ -69,9 +69,9 @@ namespace Client
             // 
             // buttonWorkDestinations
             // 
-            this.buttonWorkDestinations.Location = new System.Drawing.Point(141, 100);
+            this.buttonWorkDestinations.Location = new System.Drawing.Point(127, 85);
             this.buttonWorkDestinations.Name = "buttonWorkDestinations";
-            this.buttonWorkDestinations.Size = new System.Drawing.Size(197, 43);
+            this.buttonWorkDestinations.Size = new System.Drawing.Size(197, 37);
             this.buttonWorkDestinations.TabIndex = 6;
             this.buttonWorkDestinations.Text = "Работа с пунктами назначения";
             this.buttonWorkDestinations.UseVisualStyleBackColor = true;
@@ -79,9 +79,9 @@ namespace Client
             // 
             // buttonWorkPassengers
             // 
-            this.buttonWorkPassengers.Location = new System.Drawing.Point(141, 40);
+            this.buttonWorkPassengers.Location = new System.Drawing.Point(127, 31);
             this.buttonWorkPassengers.Name = "buttonWorkPassengers";
-            this.buttonWorkPassengers.Size = new System.Drawing.Size(197, 43);
+            this.buttonWorkPassengers.Size = new System.Drawing.Size(197, 37);
             this.buttonWorkPassengers.TabIndex = 5;
             this.buttonWorkPassengers.Text = "Работа с пассажирами";
             this.buttonWorkPassengers.UseVisualStyleBackColor = true;
@@ -89,9 +89,9 @@ namespace Client
             // 
             // buttonWorkAccounts
             // 
-            this.buttonWorkAccounts.Location = new System.Drawing.Point(141, 282);
+            this.buttonWorkAccounts.Location = new System.Drawing.Point(127, 260);
             this.buttonWorkAccounts.Name = "buttonWorkAccounts";
-            this.buttonWorkAccounts.Size = new System.Drawing.Size(197, 42);
+            this.buttonWorkAccounts.Size = new System.Drawing.Size(197, 36);
             this.buttonWorkAccounts.TabIndex = 9;
             this.buttonWorkAccounts.Text = "Работа с учётными записями";
             this.buttonWorkAccounts.UseVisualStyleBackColor = true;
@@ -99,10 +99,10 @@ namespace Client
             // 
             // AdminForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(516, 418);
+            this.ClientSize = new System.Drawing.Size(442, 362);
             this.Controls.Add(this.buttonWorkAccounts);
             this.Controls.Add(this.buttonWorkFlightRequests);
             this.Controls.Add(this.buttonSearchBestAlternative);

@@ -45,128 +45,13 @@ namespace Client
             Hide();
             form.Show();
         }
-        private bool textBoxCheck_empty()
-        {
-            if (textBoxName.Text != "" && textBoxFlightDuration.Text != ""
-                && textBoxAirplaneModel.Text != "" && maskedTextBoxEstimatedTime1.MaskCompleted == true
-                && maskedTextBoxEstimatedTime2.MaskCompleted == true && maskedTextBoxEstimatedTime3.MaskCompleted == true)
-            {
-                buttonAddDestination.Enabled = true;
-                return true;
-            }
-            else
-            {
-                buttonAddDestination.Enabled = false;
-            }
-            return false;
-        }
-        private void textBoxId_TextChanged(object sender, EventArgs e)
-        {
-            textBoxCheck_empty();
-        }
 
-        private void textBoxName_TextChanged(object sender, EventArgs e)
-        {
-            textBoxCheck_empty();
-        }
 
-        private void textBoxFlightDuration_TextChanged(object sender, EventArgs e)
-        {
-            textBoxCheck_empty();
-        }
-
-        private void textBoxAirplaneModel_TextChanged(object sender, EventArgs e)
-        {
-            textBoxCheck_empty();
-        }
-
-        private void maskedTextBoxEstimatedTime1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-            textBoxCheck_empty();
-        }
-
-        private void maskedTextBoxEstimatedTime2_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-            textBoxCheck_empty();
-        }
-
-        private void maskedTextBoxEstimatedTime3_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-            textBoxCheck_empty();
-        }
-
-        private void textBoxId_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void textBoxName_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-            if (!Char.IsLetter(number) && number != 8)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void textBoxFlightDuration_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void textBoxAirplaneModel_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-            if (!Char.IsLetterOrDigit(number) && number != 8)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void buttonAddDestination_Click(object sender, EventArgs e)
-        {
-            Client.SendRequestToServer("Add destination");
-
-            string selected_name = textBoxName.Text;
-            string selected_flightduration = textBoxFlightDuration.Text;
-            string selected_airplanemodel = textBoxAirplaneModel.Text;
-            string selected_estimatedtime1 = maskedTextBoxEstimatedTime1.Text;
-            string selected_estimatedtime2 = maskedTextBoxEstimatedTime2.Text;
-            string selected_estimatedtime3 = maskedTextBoxEstimatedTime3.Text;
-
-            DataTable dataTable = Client.ReceiveAddDestinationData(selected_name,selected_flightduration,
-                selected_airplanemodel, selected_estimatedtime1, selected_estimatedtime2, selected_estimatedtime3);
-
-            if (dataTable.Rows.Count == 1)
-            {
-
-                MessageBox.Show("Пункт назначения " + selected_name + " добавлен");
-            }
-            else if (dataTable.Rows.Count == 0)
-            {
-                MessageBox.Show("Не удалось добавить пункт назначения, пункт назначения с такими данными существует");
-            }
-        }
-
-        private void toolStripWorkDestinations_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
         private void toolStripButtonView_Click(object sender, EventArgs e)
         {
             Client.SendRequestToServer("Select destinations");
             DataTable dataTable = Client.ReceiveSelectDestinations();
 
-            this.Size= new System.Drawing.Size(1152, 421);
-            this.CenterToScreen();
             panelViewing.Enabled = true;
             panelViewing.Visible = true;
             panelAdding.Enabled = false;
@@ -185,23 +70,95 @@ namespace Client
             DestinationsGridView.RowHeadersVisible = false;
             DestinationsGridView.ReadOnly = true;
         }
+
+
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            this.Size = new System.Drawing.Size(1000, 421);
-            this.CenterToScreen();
+            textBoxName.Clear();
+            textBoxFlightDuration.Clear();
+            textBoxAirplaneModel.Clear();
+            maskedTextBoxEstimatedTime1.Clear();
+            maskedTextBoxEstimatedTime2.Clear();
+            maskedTextBoxEstimatedTime3.Clear();
+
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = true;
             panelAdding.Visible = true;
-           panelEditing.Enabled = false;
+            panelEditing.Enabled = false;
             panelEditing.Visible = false;
             panelDeleting.Enabled = false;
             panelDeleting.Visible = false;
         }
+        private bool textBoxCheck_empty()
+        {
+            if (textBoxName.Text != "" && textBoxFlightDuration.Text != ""
+                && textBoxAirplaneModel.Text != "" && maskedTextBoxEstimatedTime1.MaskCompleted == true
+                && maskedTextBoxEstimatedTime2.MaskCompleted == true && maskedTextBoxEstimatedTime3.MaskCompleted == true)
+            {
+                buttonAddDestination.Enabled = true;
+                return true;
+            }
+            else
+            {
+                buttonAddDestination.Enabled = false;
+            }
+            return false;
+        }
+        private void textBoxName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsLetter(number) && number != 8)
+            {
+                e.Handled = true;
+            }
+        }
+        private void textBoxFlightDuration_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8)
+            {
+                e.Handled = true;
+            }
+        }
+        private void textBoxAirplaneModel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsLetterOrDigit(number) && number != 8)
+            {
+                e.Handled = true;
+            }
+        }
+        private void textBoxName_TextChanged(object sender, EventArgs e)
+        {
+            textBoxCheck_empty();
+        }
+        private void textBoxFlightDuration_TextChanged(object sender, EventArgs e)
+        {
+            textBoxCheck_empty();
+        }
+        private void textBoxAirplaneModel_TextChanged(object sender, EventArgs e)
+        {
+            textBoxCheck_empty();
+        }
+        private void maskedTextBoxEstimatedTime1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            textBoxCheck_empty();
+        }
+        private void maskedTextBoxEstimatedTime2_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            textBoxCheck_empty();
+        }
+        private void maskedTextBoxEstimatedTime3_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            textBoxCheck_empty();
+        }
+
+
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
-            this.Size = new System.Drawing.Size(1000, 421);
-            this.CenterToScreen();
+            maskedTextBoxNewvalueDate.Clear();
+            textBoxNewvalue.Clear();
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = false;
@@ -210,25 +167,20 @@ namespace Client
             panelEditing.Visible = true;
             panelDeleting.Enabled = false;
             panelDeleting.Visible = false;
-        }
-        private void toolStripButtonDelete_Click(object sender, EventArgs e)
-        {
-            this.Size = new System.Drawing.Size(1000, 421);
-            this.CenterToScreen();
-            panelViewing.Enabled = false;
-            panelViewing.Visible = false;
-            panelAdding.Enabled = false;
-            panelAdding.Visible = false;
-            panelEditing.Enabled = false;
-            panelEditing.Visible = false;
-            panelDeleting.Enabled = true;
-            panelDeleting.Visible = true;
-        }
 
+            Client.SendRequestToServer("Select destinationsNames");
+            DataTable dataTable_destination = Client.ReceiveSelectDestinationsNames();
+            comboBoxEdit.DataSource = dataTable_destination;
+            comboBoxEdit.DisplayMember = "Name";
+            comboBoxEdit.ValueMember = "Id";
+
+            comboBoxEdit.SelectedIndex = -1;
+            comboBoxEditCriteria.SelectedIndex = -1;
+        }
         private bool textBoxComboboxCheck_empty()
         {
-            if (textBoxEditId.Text != "" && comboBoxEdit.SelectedIndex != -1 && (maskedTextBoxNewvalueDate.Text != ""
-                ||textBoxNewvalueDigit.Text!=""||textBoxNewvalueLetter.Text!=""|| textBoxNewvalueLetterOrDigit.Text != ""))
+            if (comboBoxEdit.SelectedIndex != -1 && comboBoxEditCriteria.SelectedIndex != -1 && (maskedTextBoxNewvalueDate.MaskCompleted == true
+                || textBoxNewvalue.Text != ""))
             {
                 buttonEditDestination.Enabled = true;
                 return true;
@@ -239,157 +191,6 @@ namespace Client
             }
             return false;
         }
-       
-
-        private void WorkDestinationsForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonEditDestination_Click(object sender, EventArgs e)
-        {
-            Client.SendRequestToServer("Edit destination");
-
-            string command = "";
-            string selected_newvalue="";
-
-            if (comboBoxEdit.SelectedIndex == 0)
-            {
-                command = "Edit name";
-                selected_newvalue = textBoxNewvalueLetter.Text;
-            }
-            else if (comboBoxEdit.SelectedIndex == 1)
-            {
-                command = "Edit flightduration";
-                selected_newvalue = textBoxNewvalueDigit.Text;
-            }
-            else if (comboBoxEdit.SelectedIndex == 2)
-            {
-                command = "Edit airplanemodel";
-                selected_newvalue = textBoxNewvalueLetterOrDigit.Text;
-            }
-            else if (comboBoxEdit.SelectedIndex == 3)
-            {
-                command = "Edit estimatedtime1";
-                selected_newvalue = maskedTextBoxNewvalueDate.Text;
-            }
-            else if (comboBoxEdit.SelectedIndex == 4)
-            {
-                command = "Edit estimatedtime2";
-                selected_newvalue = maskedTextBoxNewvalueDate.Text;
-            }
-            else if (comboBoxEdit.SelectedIndex == 5)
-            {
-                command = "Edit estimatedtime3";
-                selected_newvalue = maskedTextBoxNewvalueDate.Text;
-            }
-
-            string selected_id = textBoxEditId.Text;
-
-            DataTable dataTable = Client.ReceiveEditDestinationData(selected_id, selected_newvalue, command);
-            if (dataTable.Rows.Count == 1)
-            {
-                if (command == "Edit name")
-                {
-                    MessageBox.Show("Редактирование пункта назначения с Идент. номером " + selected_id + " выполнено с использованием нового значения " + selected_newvalue);
-                }
-                else if (command == "Edit flightduration")
-                {
-                    MessageBox.Show("Редактирование продолжительности полёта с Идент. номером " + selected_id + " выполнено с использованием нового значения " + selected_newvalue);
-                }
-                else if (command == "Edit airplanemodel")
-                {
-                    MessageBox.Show("Редактирование модели самолёта с Идент. номером " + selected_id + " выполнено с использованием нового значения " + selected_newvalue);
-                }
-                else if (command == "Edit estimatedtime1")
-                {
-                    MessageBox.Show("Редактирование первого предлагаемоего времени с Идент. номером " + selected_id + " выполнено с использованием нового значения " + selected_newvalue);
-                }
-                else if (command == "Edit estimatedtime2")
-                {
-                    MessageBox.Show("Редактирование второго предлагаемоего времени с Идент. номером " + selected_id + " выполнено с использованием нового значения " + selected_newvalue);
-                }
-                else if (command == "Edit estimatedtime3")
-                {
-                    MessageBox.Show("Редактирование третьего предлагаемоего времени с Идент. номером " + selected_id + " выполнено с использованием нового значения " + selected_newvalue);
-                }
-            }
-            else if (dataTable.Rows.Count == 0)
-            {
-                MessageBox.Show("Не удалось выполнить редактирование, пункта назначения с таким идент. номером не существует");
-            }
-        }
-
-        private void textBoxEditId_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8)
-            {
-                e.Handled = true;
-            }
-        }
-        private void textBoxEditId_TextChanged(object sender, EventArgs e)
-        {
-            textBoxComboboxCheck_empty();
-        }
-        private void comboBoxEdit_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            textBoxComboboxCheck_empty();
-            if (comboBoxEdit.SelectedIndex == 0)
-            {
-                labelEditValue.Visible = true;
-                textBoxNewvalueLetter.Visible = true;
-                textBoxNewvalueDigit.Visible = false;
-                textBoxNewvalueLetterOrDigit.Visible = false;
-                maskedTextBoxNewvalueDate.Visible=false;
-            }
-            else if (comboBoxEdit.SelectedIndex == 1)
-            {
-                labelEditValue.Visible = true;
-                textBoxNewvalueLetter.Visible = false;
-                textBoxNewvalueDigit.Visible = true;
-                textBoxNewvalueLetterOrDigit.Visible = false;
-                maskedTextBoxNewvalueDate.Visible = false;
-            }
-            else if (comboBoxEdit.SelectedIndex == 2)
-            {
-                labelEditValue.Visible = true;
-                textBoxNewvalueLetter.Visible = false;
-                textBoxNewvalueDigit.Visible = false;
-                textBoxNewvalueLetterOrDigit.Visible = true;
-                maskedTextBoxNewvalueDate.Visible = false;
-            }
-            else if (comboBoxEdit.SelectedIndex == 3)
-            {
-                labelEditValue.Visible = true;
-                textBoxNewvalueLetter.Visible = false;
-                textBoxNewvalueDigit.Visible = false;
-                textBoxNewvalueLetterOrDigit.Visible = false;
-                maskedTextBoxNewvalueDate.Visible = true;
-            }
-            else if (comboBoxEdit.SelectedIndex == 4)
-            {
-                labelEditValue.Visible = true;
-                textBoxNewvalueLetter.Visible = false;
-                textBoxNewvalueDigit.Visible = false;
-                textBoxNewvalueLetterOrDigit.Visible = false;
-                maskedTextBoxNewvalueDate.Visible = true;
-            }
-            else if (comboBoxEdit.SelectedIndex == 5)
-            {
-                labelEditValue.Visible = true;
-                textBoxNewvalueLetter.Visible = false;
-                textBoxNewvalueDigit.Visible = false;
-                textBoxNewvalueLetterOrDigit.Visible = false;
-                maskedTextBoxNewvalueDate.Visible = true;
-            }
-        }
-
-        private void maskedTextBoxNewvalue_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-            textBoxComboboxCheck_empty();
-        }
-
         private void textBoxNewvalueDigit_KeyPress(object sender, KeyPressEventArgs e)
         {
             char number = e.KeyChar;
@@ -398,16 +199,14 @@ namespace Client
                 e.Handled = true;
             }
         }
-        private void textBoxNewvalueDigit_TextChanged(object sender, EventArgs e)
+        private void textBoxNewvalueLetterOrDigit_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBoxComboboxCheck_empty();
+            char number = e.KeyChar;
+            if (!Char.IsLetterOrDigit(number) && number != 8)
+            {
+                e.Handled = true;
+            }
         }
-
-        private void textBoxNewvalueLetter_TextChanged(object sender, EventArgs e)
-        {
-            textBoxComboboxCheck_empty();
-        }
-
         private void textBoxNewvalueLetter_KeyPress(object sender, KeyPressEventArgs e)
         {
             char number = e.KeyChar;
@@ -416,23 +215,87 @@ namespace Client
                 e.Handled = true;
             }
         }
-
-        private void textBoxNewValueLetterOrDigit_TextChanged(object sender, EventArgs e)
+        private void comboBoxEdit_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            maskedTextBoxNewvalueDate.Clear();
+            textBoxNewvalue.Clear();
+            textBoxComboboxCheck_empty();
+            textBoxNewvalueCheckMask();
+        }
+        private void comboBoxEdit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            maskedTextBoxNewvalueDate.Clear();
+            textBoxNewvalue.Clear();
+            if (comboBoxEditCriteria.SelectedIndex == 0 || comboBoxEditCriteria.SelectedIndex == 1 || comboBoxEditCriteria.SelectedIndex == 2)
+            {
+                labelEditValue.Visible = true;
+                textBoxNewvalue.Visible = true;
+                maskedTextBoxNewvalueDate.Visible = false;
+            }
+            else if (comboBoxEditCriteria.SelectedIndex == 3 || comboBoxEditCriteria.SelectedIndex == 4 || comboBoxEditCriteria.SelectedIndex == 5)
+            {
+                labelEditValue.Visible = true;
+                maskedTextBoxNewvalueDate.Visible = true;
+                textBoxNewvalue.Visible = false;
+            }
+            textBoxComboboxCheck_empty();
+            textBoxNewvalueCheckMask();
+        }
+        private void maskedTextBoxNewvalue_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            textBoxComboboxCheck_empty();
+        }
+        private void textBoxNewvalue_TextChanged(object sender, EventArgs e)
         {
             textBoxComboboxCheck_empty();
         }
 
-        private void textBoxNewValueLetterOrDigit_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBoxNewvalueCheckMask()
         {
-            char number = e.KeyChar;
-            if (!Char.IsLetterOrDigit(number) && number != 8)
+            this.textBoxNewvalue.KeyPress -= new System.Windows.Forms.KeyPressEventHandler(this.textBoxNewvalueDigit_KeyPress);
+            this.textBoxNewvalue.KeyPress -= new System.Windows.Forms.KeyPressEventHandler(this.textBoxNewvalueLetter_KeyPress);
+            this.textBoxNewvalue.KeyPress -= new System.Windows.Forms.KeyPressEventHandler(this.textBoxNewvalueLetterOrDigit_KeyPress);
+            if (comboBoxEditCriteria.SelectedIndex == 0)
             {
-                e.Handled = true;
+                this.textBoxNewvalue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNewvalueLetter_KeyPress);
+            }
+            else if (comboBoxEditCriteria.SelectedIndex == 1)
+            {
+                this.textBoxNewvalue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNewvalueDigit_KeyPress);
+            }
+            else if (comboBoxEditCriteria.SelectedIndex == 2)
+            {
+                this.textBoxNewvalue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNewvalueLetterOrDigit_KeyPress);
             }
         }
-        private bool textBoxDeleteCheck_empty()
+
+
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
-            if (textBoxDeleteId.Text != "")
+            panelViewing.Enabled = false;
+            panelViewing.Visible = false;
+            panelAdding.Enabled = false;
+            panelAdding.Visible = false;
+            panelEditing.Enabled = false;
+            panelEditing.Visible = false;
+            panelDeleting.Enabled = true;
+            panelDeleting.Visible = true;
+
+            Client.SendRequestToServer("Select destinationsNames");
+            DataTable dataTable_destination = Client.ReceiveSelectDestinationsNames();
+            comboBoxDelete.DataSource = dataTable_destination;
+            comboBoxDelete.DisplayMember = "Name";
+            comboBoxDelete.ValueMember = "Id";
+
+            comboBoxDelete.SelectedIndex = -1;
+        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxDeleteCheck_empty();
+        }
+        private bool comboBoxDeleteCheck_empty()
+        {
+            if (comboBoxDelete.SelectedIndex != -1)
             {
                 buttonDeleteDestination.Enabled = true;
                 return true;
@@ -443,39 +306,133 @@ namespace Client
             }
             return false;
         }
-        private void textBoxDeleteId_TextChanged(object sender, EventArgs e)
+
+
+        private void buttonAddDestination_Click(object sender, EventArgs e)
         {
-            textBoxDeleteCheck_empty();
-        }
-        private void textBoxDeleteId_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8)
+            Client.SendRequestToServer("Add destination");
+
+            string name = textBoxName.Text;
+            string flightduration = textBoxFlightDuration.Text;
+            string airplanemodel = textBoxAirplaneModel.Text;
+            string estimatedtime1 = maskedTextBoxEstimatedTime1.Text;
+            string estimatedtime2 = maskedTextBoxEstimatedTime2.Text;
+            string estimatedtime3 = maskedTextBoxEstimatedTime3.Text;
+
+            DataTable dataTable = Client.ReceiveAddDestinationData(name, flightduration,
+                airplanemodel, estimatedtime1, estimatedtime2, estimatedtime3);
+
+            if (dataTable.Rows.Count == 1)
             {
-                e.Handled = true;
+
+                MessageBox.Show("Пункт назначения " + name + " добавлен");
+            }
+            else if (dataTable.Rows.Count == 0)
+            {
+                MessageBox.Show("Пункт назначения с такими данными существует");
+            }
+        }
+        private void buttonEditDestination_Click(object sender, EventArgs e)
+        {
+            Client.SendRequestToServer("Edit destination");
+
+            string command = "";
+            string newvalue = "";
+
+            if (comboBoxEditCriteria.SelectedIndex == 0)
+            {
+                command = "Edit name";
+                newvalue = textBoxNewvalue.Text;
+            }
+            else if (comboBoxEditCriteria.SelectedIndex == 1)
+            {
+                command = "Edit flightduration";
+                newvalue = textBoxNewvalue.Text;
+            }
+            else if (comboBoxEditCriteria.SelectedIndex == 2)
+            {
+                command = "Edit airplanemodel";
+                newvalue = textBoxNewvalue.Text;
+            }
+            else if (comboBoxEditCriteria.SelectedIndex == 3)
+            {
+                command = "Edit estimatedtime1";
+                newvalue = maskedTextBoxNewvalueDate.Text;
+            }
+            else if (comboBoxEditCriteria.SelectedIndex == 4)
+            {
+                command = "Edit estimatedtime2";
+                newvalue = maskedTextBoxNewvalueDate.Text;
+            }
+            else if (comboBoxEditCriteria.SelectedIndex == 5)
+            {
+                command = "Edit estimatedtime3";
+                newvalue = maskedTextBoxNewvalueDate.Text;
+            }
+            string id = comboBoxEdit.SelectedValue.ToString();
+
+            DataTable dataTable = Client.ReceiveEditDestinationData(id, newvalue, command);
+            if (dataTable.Rows.Count == 1)
+            {
+                if (command == "Edit name")
+                {
+                    MessageBox.Show("Редактирование названия выполнено с использованием нового значения " + newvalue);
+                }
+                else if (command == "Edit flightduration")
+                {
+                    MessageBox.Show("Редактирование продолжительности полёта выполнено с использованием нового значения " + newvalue);
+                }
+                else if (command == "Edit airplanemodel")
+                {
+                    MessageBox.Show("Редактирование модели самолёта выполнено с использованием нового значения " + newvalue);
+                }
+                else if (command == "Edit estimatedtime1")
+                {
+                    MessageBox.Show("Редактирование первого предлагаемоего времени выполнено с использованием нового значения " + newvalue);
+                }
+                else if (command == "Edit estimatedtime2")
+                {
+                    MessageBox.Show("Редактирование второго предлагаемоего времени выполнено с использованием нового значения " + newvalue);
+                }
+                else if (command == "Edit estimatedtime3")
+                {
+                    MessageBox.Show("Редактирование третьего предлагаемоего времени выполнено с использованием нового значения " + newvalue);
+                }
+            }
+            else if (dataTable.Rows.Count == 0)
+            {
+                MessageBox.Show("Пункта назначения с такими данными не существует");
             }
         }
         private void buttonDeletePassenger_Click(object sender, EventArgs e)
         {
             Client.SendRequestToServer("Delete destination");
 
-            string selected_id = textBoxDeleteId.Text;
+            string id = comboBoxDelete.SelectedValue.ToString();
 
-            int deleted_count = Client.ReceiveDeleteDestinationData(selected_id);
+            int deleted_count = Client.ReceiveDeleteDestinationData(id);
             if (deleted_count == 1)
             {
-                MessageBox.Show("Удаление пункта назначения с Идент. номером " + selected_id + " выполнено");
+                MessageBox.Show("Удаление пункта назначения выполнено");
             }
             else if (deleted_count == 0)
             {
-                MessageBox.Show("Не удалось удалить пункт назначения, пункта назначения с таким идент. номером не существует");
+                MessageBox.Show("Пункта назначения с такими данными не существует");
             }
         }
-
         private void WorkDestinationsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Hide();
+            Application.Exit();
         }
+
+
+        private void buttonFlightDurations_Click(object sender, EventArgs e)
+        {
+            GraphFlightDuration diagramFlightDuration;
+            diagramFlightDuration = new GraphFlightDuration(this, DestinationsGridView);
+            diagramFlightDuration.Show();
+        }
+
 
     }
 }

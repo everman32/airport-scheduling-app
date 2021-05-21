@@ -34,12 +34,16 @@ namespace Client
             DataTable dataTable = Client.ReceiveAuthorizeData(selected_login, selected_password);
             if (dataTable.Rows.Count == 1)
             {
+                Client.login = textBoxLogin.Text;
+                Client.password = textBoxPass.Text;
+
                 if (dataTable.Rows[0][2].ToString() == "1")
                 {
                     AdminForm adminPanel = new AdminForm(this);
                     Hide();
                     adminPanel.Show();
                     Client.accessRight = 1;
+                    MessageBox.Show("Авторизация выполнена. Вы вошли как администратор " + Client.login);
                 }
                 else if (dataTable.Rows[0][2].ToString() == "2")
                 {
@@ -47,10 +51,9 @@ namespace Client
                     Hide();
                     dispatcherForm.Show();
                     Client.accessRight = 2;
+                    MessageBox.Show("Авторизация выполнена. Вы вошли как диспетчер " + Client.login);
                 }
-                Client.login = textBoxLogin.Text;
-                Client.password = textBoxPass.Text;
-                MessageBox.Show("Авторизация выполнена. Вы вошли как " + Client.login);
+
             }
         else if (dataTable.Rows.Count == 0)
             {

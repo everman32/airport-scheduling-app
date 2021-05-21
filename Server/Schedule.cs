@@ -128,7 +128,14 @@ namespace Server
             stream.Write(data, 0, data.Length);
             stream.Flush();
         }
-       
+        public static void SendSelectingSchedulesNames(NetworkStream stream)
+        {
+            DataTable dataTable = SQLCommander.SelectSchedulesNames();
+            byte[] data = ClientConnection.GetBinaryFormatData(dataTable);
+            stream.Write(data, 0, data.Length);
+            stream.Flush();
+        }
+
 
 
     }

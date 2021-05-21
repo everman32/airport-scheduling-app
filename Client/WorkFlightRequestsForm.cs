@@ -53,13 +53,12 @@ namespace Client
             form1.Show();
         }
 
+
         private void toolStripButtonView_Click (object sender, EventArgs e)
         {
             Client.SendRequestToServer("Select flightrequests");
             DataTable dataTable = Client.ReceiveSelectFlightRequests();
 
-            this.Size = new System.Drawing.Size(1198, 456);
-            this.CenterToScreen();
             panelViewing.Enabled = true;
             panelViewing.Visible = true;
             panelAdding.Enabled = false;
@@ -78,11 +77,10 @@ namespace Client
             FlightRequestsGridView.RowHeadersVisible = false;
             FlightRequestsGridView.ReadOnly = true;
         }
+
+
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-
-            this.Size = new System.Drawing.Size(600, 456);
-            this.CenterToScreen();
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = true;
@@ -104,66 +102,20 @@ namespace Client
             comboBoxDestination.DataSource = dataTable_destination;
             comboBoxDestination.DisplayMember = "Name";
             comboBoxDestination.ValueMember = "Id";
-        }
-        private void toolStripButtonEdit_Click(object sender, EventArgs e)
-        {
-            this.Size = new System.Drawing.Size(600, 456);
-            this.CenterToScreen();
-            panelViewing.Enabled = false;
-            panelViewing.Visible = false;
-            panelAdding.Enabled = false;
-            panelAdding.Visible = false;
-            panelEditing.Enabled = true;
-            panelEditing.Visible = true;
-            panelDeleting.Enabled = false;
-            panelDeleting.Visible = false;
 
-
-        }
-        private void toolStripButtonDelete_Click(object sender, EventArgs e)
-        {
-            this.Size = new System.Drawing.Size(600, 456);
-            this.CenterToScreen();
-            panelViewing.Enabled = false;
-            panelViewing.Visible = false;
-            panelAdding.Enabled = false;
-            panelAdding.Visible = false;
-            panelEditing.Enabled = false;
-            panelEditing.Visible = false;
-            panelDeleting.Enabled = true;
-            panelDeleting.Visible = true;
-        }
-
-        private void buttonAddDestination_Click(object sender, EventArgs e)
-        {
-            Client.SendRequestToServer("Add flightrequest");
-
-            string selected_idpassenger = comboBoxPassenger.SelectedValue.ToString();
-            string selected_iddestination = comboBoxDestination.SelectedValue.ToString();
-            string selected_highestPrioritytime = comboBoxHighestPriorityTime.Text;
-            string selected_mediumPrioritytime = comboBoxMediumPriorityTime.Text;
-            string selected_lowestPrioritytime = comboBoxLowestPriorityTime.Text;
-
-            DataTable dataTable = Client.ReceiveAddFlightRequestData(selected_idpassenger, selected_iddestination,
-                selected_highestPrioritytime, selected_mediumPrioritytime, selected_lowestPrioritytime);
-
-            if (dataTable.Rows.Count == 1)
-            {
-
-                MessageBox.Show("Заявка на полёт пассажира" + comboBoxPassenger.SelectedText + " в пункт назначения "+
-                    comboBoxDestination.SelectedText+" добавлена");
-            }
-            else if (dataTable.Rows.Count == 0)
-            {
-                MessageBox.Show("Не удалось добавить заявку на полёт, заявка на полёт с такими данными существует");
-            }
+            comboBoxDestination.SelectedIndex = -1;
+            comboBoxPassenger.SelectedIndex = -1;
+            comboBoxHighestPriorityTime.SelectedIndex = -1;
+            comboBoxMediumPriorityTime.SelectedIndex = -1;
+            comboBoxLowestPriorityTime.SelectedIndex = -1;
         }
         private void comboBoxDestination_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboboxCheck_empty();
-            comboBoxHighestPriorityTime.Items.Clear();
-            comboBoxMediumPriorityTime.Items.Clear();
-            comboBoxLowestPriorityTime.Items.Clear();
+            comboboxCheckDestination_empty();
+            comboBoxHighestPriorityTime.SelectedIndex = -1 ;
+            comboBoxMediumPriorityTime.SelectedIndex = -1;
+            comboBoxLowestPriorityTime.SelectedIndex = -1;
 
             labelHighestPriorityTime.Visible = false;
             labelMediumPriorityTime.Visible = false;
@@ -173,19 +125,20 @@ namespace Client
             comboBoxMediumPriorityTime.Visible = false;
             comboBoxLowestPriorityTime.Visible = false;
         }
-        private void comboBoxCheckEqual()
+        private void comboBoxPassenger_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxHighestPriorityTime.SelectedIndex != -1 && comboBoxMediumPriorityTime.SelectedIndex != -1 &&
-                comboBoxLowestPriorityTime.SelectedIndex != -1)
-            {
-                if (comboBoxHighestPriorityTime.SelectedIndex == comboBoxMediumPriorityTime.SelectedIndex ||
-                     comboBoxMediumPriorityTime.SelectedIndex == comboBoxLowestPriorityTime.SelectedIndex ||
-                     comboBoxHighestPriorityTime.SelectedIndex == comboBoxLowestPriorityTime.SelectedIndex)
-                {
-                    MessageBox.Show("Времена не должны совпадать");
-                    buttonAddFlightRequest.Enabled = false;
-                }
-            }
+            comboboxCheck_empty();
+            comboBoxHighestPriorityTime.SelectedIndex = -1;
+            comboBoxMediumPriorityTime.SelectedIndex = -1;
+            comboBoxLowestPriorityTime.SelectedIndex = -1;
+
+            labelHighestPriorityTime.Visible = false;
+            labelMediumPriorityTime.Visible = false;
+            labelLowestPriorityTime.Visible = false;
+
+            comboBoxHighestPriorityTime.Visible = false;
+            comboBoxMediumPriorityTime.Visible = false;
+            comboBoxLowestPriorityTime.Visible = false;
         }
         private void comboBoxHighestPriorityTime_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -216,27 +169,35 @@ namespace Client
             }
             return false;
         }
-        private void comboBoxPassenger_SelectedIndexChanged(object sender, EventArgs e)
+        private bool comboboxCheckDestination_empty()
         {
-            comboboxCheck_empty();
-            comboBoxHighestPriorityTime.Items.Clear();
-            comboBoxMediumPriorityTime.Items.Clear();
-            comboBoxLowestPriorityTime.Items.Clear();
-
-            labelHighestPriorityTime.Visible = false;
-            labelMediumPriorityTime.Visible = false;
-            labelLowestPriorityTime.Visible = false;
-
-            comboBoxHighestPriorityTime.Visible = false;
-            comboBoxMediumPriorityTime.Visible = false;
-            comboBoxLowestPriorityTime.Visible = false;
+            if (comboBoxDestination.SelectedIndex != -1)
+            {
+                buttonGetTime.Enabled = true;
+                return true;
+            }
+            else
+            {
+                buttonGetTime.Enabled = false;
+            }
+            return false;
+        }
+        private void comboBoxCheckEqual()
+        {
+            if (comboBoxHighestPriorityTime.SelectedIndex != -1 && comboBoxMediumPriorityTime.SelectedIndex != -1 &&
+                comboBoxLowestPriorityTime.SelectedIndex != -1)
+            {
+                if (comboBoxHighestPriorityTime.SelectedIndex == comboBoxMediumPriorityTime.SelectedIndex ||
+                     comboBoxMediumPriorityTime.SelectedIndex == comboBoxLowestPriorityTime.SelectedIndex ||
+                     comboBoxHighestPriorityTime.SelectedIndex == comboBoxLowestPriorityTime.SelectedIndex)
+                {
+                    MessageBox.Show("Даты не должны совпадать");
+                    buttonAddFlightRequest.Enabled = false;
+                }
+            }
         }
         private void buttonGetTime_Click(object sender, EventArgs e)
         {
-            comboBoxHighestPriorityTime.Items.Clear();
-            comboBoxMediumPriorityTime.Items.Clear();
-            comboBoxLowestPriorityTime.Items.Clear();
-
             labelHighestPriorityTime.Visible = true;
             labelMediumPriorityTime.Visible = true;
             labelLowestPriorityTime.Visible = true;
@@ -247,43 +208,67 @@ namespace Client
 
             string id = comboBoxDestination.SelectedValue.ToString();
 
-                    Client.SendRequestToServer("Select estimatedtimes");
-                    DataTable dataTable = Client.ReceiveSelectEstimatedTimes(id);
+            Client.SendRequestToServer("Select estimatedtimes");
+            DataTable dataTable = Client.ReceiveSelectEstimatedTimes(id);
 
-                    string[] estimatedtime = { dataTable.Rows[0][0].ToString(), dataTable.Rows[0][1].ToString(),
+            string[] estimatedtime = { dataTable.Rows[0][0].ToString(), dataTable.Rows[0][1].ToString(),
                 dataTable.Rows[0][2].ToString() };
 
-                    comboBoxHighestPriorityTime.Items.AddRange(estimatedtime);
-                    comboBoxMediumPriorityTime.Items.AddRange(estimatedtime);
-                    comboBoxLowestPriorityTime.Items.AddRange(estimatedtime);
+            comboBoxHighestPriorityTime.Items.Clear();
+            comboBoxMediumPriorityTime.Items.Clear();
+            comboBoxLowestPriorityTime.Items.Clear();
+
+            comboBoxHighestPriorityTime.Items.AddRange(estimatedtime);
+            comboBoxMediumPriorityTime.Items.AddRange(estimatedtime);
+            comboBoxLowestPriorityTime.Items.AddRange(estimatedtime);
+
+            comboBoxHighestPriorityTime.SelectedIndex = -1;
+            comboBoxMediumPriorityTime.SelectedIndex = -1;
+            comboBoxLowestPriorityTime.SelectedIndex = -1;
         }
 
-        private void buttonEditFlightRequest_Click(object sender, EventArgs e)
+
+        private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
-            Client.SendRequestToServer("Edit flightrequest");
+            panelViewing.Enabled = false;
+            panelViewing.Visible = false;
+            panelAdding.Enabled = false;
+            panelAdding.Visible = false;
+            panelEditing.Enabled = true;
+            panelEditing.Visible = true;
+            panelDeleting.Enabled = false;
+            panelDeleting.Visible = false;
 
-            string selected_idflightrequest = textBoxEditId.Text;
-            string selected_highestPrioritytime = comboBoxEditHighestPriorityTime.Text;
-            string selected_mediumPrioritytime = comboBoxEditMediumPriorityTime.Text;
-            string selected_lowestPrioritytime = comboBoxEditLowestPriorityTime.Text;
+            Client.SendRequestToServer("Select flightrequestsNames");
+            DataTable dataTable_flightrequest = Client.ReceiveSelectFlightrequestsNames();
+            comboBoxEdit.DataSource = dataTable_flightrequest;
+            comboBoxEdit.DisplayMember = "Заявка";
+            comboBoxEdit.ValueMember = "Id";
 
-            DataTable dataTable = Client.ReceiveEditFlightRequestData(selected_idflightrequest,
-                selected_highestPrioritytime, selected_mediumPrioritytime, selected_lowestPrioritytime);
-
-            if (dataTable.Rows.Count == 1)
-            {
-
-                MessageBox.Show("Заявка на полёт пассажира с идент. номером" + textBoxEditId.Text +" отредактирована");
-            }
-            else if (dataTable.Rows.Count == 0)
-            {
-                MessageBox.Show("Не удалось отредактировать заявку на полёт, заявки на полёт с идент. номером"+ textBoxEditId.Text+" не существует");
-            }
+            comboBoxEdit.SelectedIndex = -1;
+            comboBoxEditHighestPriorityTime.SelectedIndex = -1;
+            comboBoxEditMediumPriorityTime.SelectedIndex = -1;
+            comboBoxEditLowestPriorityTime.SelectedIndex = -1;
         }
-
-        private bool comboboxtextBoxEditCheck_empty()
+        private void comboBoxEdit_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxEditHighestPriorityTime.SelectedIndex != -1 && comboBoxEditMediumPriorityTime.SelectedIndex != -1 && comboBoxEditLowestPriorityTime.SelectedIndex != -1&& textBoxEditId.Text!="")
+            comboboxCheck_empty();
+            comboboxCheckFlightRequest_empty();
+            comboBoxEditHighestPriorityTime.SelectedIndex = -1;
+            comboBoxEditMediumPriorityTime.SelectedIndex = -1;
+            comboBoxEditLowestPriorityTime.SelectedIndex = -1;
+
+            labelEditHighestPriorityTime.Visible = false;
+            labelEditMediumPriorityTime.Visible = false;
+            labelEditLowestPriorityTime.Visible = false;
+
+            comboBoxEditHighestPriorityTime.Visible = false;
+            comboBoxEditMediumPriorityTime.Visible = false;
+            comboBoxEditLowestPriorityTime.Visible = false;
+        }
+        private bool comboboxEditCheck_empty()
+        {
+            if (comboBoxEdit.SelectedIndex!=-1 && comboBoxEditHighestPriorityTime.SelectedIndex != -1 && comboBoxEditMediumPriorityTime.SelectedIndex != -1 && comboBoxEditLowestPriorityTime.SelectedIndex != -1)
             {
                 buttonEditFlightRequest.Enabled = true;
                 return true;
@@ -291,6 +276,19 @@ namespace Client
             else
             {
                 buttonEditFlightRequest.Enabled = false;
+            }
+            return false;
+        }
+        private bool comboboxCheckFlightRequest_empty()
+        {
+            if (comboBoxEdit.SelectedIndex != -1)
+            {
+                buttonEditGetTime.Enabled = true;
+                return true;
+            }
+            else
+            {
+                buttonEditGetTime.Enabled = false;
             }
             return false;
         }
@@ -303,53 +301,29 @@ namespace Client
                      comboBoxEditMediumPriorityTime.SelectedIndex == comboBoxEditLowestPriorityTime.SelectedIndex ||
                      comboBoxEditHighestPriorityTime.SelectedIndex == comboBoxEditLowestPriorityTime.SelectedIndex)
                 {
-                    MessageBox.Show("Времена не должны совпадать");
+                    MessageBox.Show("Даты не должны совпадать");
                     buttonEditFlightRequest.Enabled = false;
                 }
             }
         }
         private void comboBoxEditHighestPriorityTime_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboboxtextBoxEditCheck_empty();
+            comboboxEditCheck_empty();
             comboBoxEditCheckEqual();
         }
         private void comboBoxEditMediumPriorityTime_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboboxtextBoxEditCheck_empty();
+            comboboxEditCheck_empty();
             comboBoxEditCheckEqual();
         }
         private void comboBoxEditLowestPriorityTime_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboboxtextBoxEditCheck_empty();
+            comboboxEditCheck_empty();
             comboBoxEditCheckEqual();
-        }
-        private void textBoxEditId_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8)
-            {
-                e.Handled = true;
-            }
-        }
-        private void textBoxEditId_TextChanged(object sender, EventArgs e)
-        {
-            comboboxtextBoxEditCheck_empty();
-
-            comboBoxEditHighestPriorityTime.Items.Clear();
-            comboBoxEditMediumPriorityTime.Items.Clear();
-            comboBoxEditLowestPriorityTime.Items.Clear();
-
-            labelEditHighestPriorityTime.Visible = false;
-            labelEditMediumPriorityTime.Visible = false;
-            labelEditLowestPriorityTime.Visible = false;
-
-            comboBoxEditHighestPriorityTime.Visible = false;
-            comboBoxEditMediumPriorityTime.Visible = false;
-            comboBoxEditLowestPriorityTime.Visible = false;
         }
         private void buttonEditGetTime_Click(object sender, EventArgs e)
         {
-            string id = textBoxEditId.Text;
+            string id = comboBoxEdit.SelectedValue.ToString();
 
             Client.SendRequestToServer("Select prioritytimes");
             DataTable dataTable = Client.ReceiveSelectPriorityTimes(id);
@@ -358,6 +332,10 @@ namespace Client
                 comboBoxEditHighestPriorityTime.Items.Clear();
                 comboBoxEditMediumPriorityTime.Items.Clear();
                 comboBoxEditLowestPriorityTime.Items.Clear();
+
+                comboBoxEditHighestPriorityTime.SelectedIndex = -1;
+                comboBoxEditMediumPriorityTime.SelectedIndex = -1;
+                comboBoxEditLowestPriorityTime.SelectedIndex = -1;
 
                 labelEditHighestPriorityTime.Visible = true;
                 labelEditMediumPriorityTime.Visible = true;
@@ -379,45 +357,33 @@ namespace Client
             }
             else if (dataTable.Rows.Count == 0)
             {
-                MessageBox.Show("Не удалось получить даты полётов, заявки на полёт с идент. номером " + textBoxEditId.Text + " не существует");
+                MessageBox.Show("Такой заявки не существует");
             }
         }
 
-        private void buttonDeleteDestination_Click(object sender, EventArgs e)
-        {
-            Client.SendRequestToServer("Delete flightrequest");
 
-            string selected_id = textBoxDeleteId.Text;
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            panelViewing.Enabled = false;
+            panelViewing.Visible = false;
+            panelAdding.Enabled = false;
+            panelAdding.Visible = false;
+            panelEditing.Enabled = false;
+            panelEditing.Visible = false;
+            panelDeleting.Enabled = true;
+            panelDeleting.Visible = true;
 
-            int deleted_count = Client.ReceiveDeleteFlightRequestData(selected_id);
-            if (deleted_count == 1)
-            {
-                MessageBox.Show("Удаление заявки на полёт с Идент. номером " + selected_id + " выполнено");
-            }
-            else if (deleted_count == 0)
-            {
-                MessageBox.Show("Не удалось удалить заявку на полёт, заявки с таким идент. номером не существует");
-            }
-        }
+            Client.SendRequestToServer("Select flightrequestsNames");
+            DataTable dataTable_flightrequest = Client.ReceiveSelectFlightrequestsNames();
+            comboBoxDelete.DataSource = dataTable_flightrequest;
+            comboBoxDelete.DisplayMember = "Заявка";
+            comboBoxDelete.ValueMember = "Id";
 
-        private void buttonEditPassenger_Click(object sender, EventArgs e)
-        {
-            form2.Show();
+            comboBoxDelete.SelectedIndex = -1;
         }
-        private void buttonEditDestination_Click(object sender, EventArgs e)
+        private bool comboBoxDeleteCheck_empty()
         {
-            form3.Show();
-        }
-        private void buttonViewEdit_Click(object sender, EventArgs e)
-        {
-            labelEditId.Visible = true;
-            textBoxEditId.Visible = true;
-            buttonEditGetTime.Visible = true;
-        }
-
-        private bool textBoxDeleteFlightRequestCheck_empty()
-        {
-            if (textBoxDeleteId.Text != "")
+            if (comboBoxDelete.SelectedIndex != -1)
             {
                 buttonDeleteFlightRequest.Enabled = true;
                 return true;
@@ -428,18 +394,82 @@ namespace Client
             }
             return false;
         }
-        private void textBoxDeleteId_TextChanged(object sender, EventArgs e)
+        private void comboBoxDelete_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxDeleteFlightRequestCheck_empty();
+            comboBoxDeleteCheck_empty();
         }
 
-        private void textBoxDeleteId_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void buttonAddDestination_Click(object sender, EventArgs e)
         {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8)
+            Client.SendRequestToServer("Add flightrequest");
+
+            string idpassenger = comboBoxPassenger.SelectedValue.ToString();
+            string iddestination = comboBoxDestination.SelectedValue.ToString();
+            string highestPrioritytime = comboBoxHighestPriorityTime.Text;
+            string mediumPrioritytime = comboBoxMediumPriorityTime.Text;
+            string lowestPrioritytime = comboBoxLowestPriorityTime.Text;
+
+            DataTable dataTable = Client.ReceiveAddFlightRequestData(idpassenger, iddestination,
+                highestPrioritytime, mediumPrioritytime, lowestPrioritytime);
+
+            if (dataTable.Rows.Count == 1)
             {
-                e.Handled = true;
+
+                MessageBox.Show("Заявка на полёт добавлена");
             }
+            else if (dataTable.Rows.Count == 0)
+            {
+                MessageBox.Show("Заявка на полёт с такими данными существует");
+            }
+        }
+        private void buttonEditFlightRequest_Click(object sender, EventArgs e)
+        {
+            Client.SendRequestToServer("Edit flightrequest");
+
+            string id = comboBoxEdit.SelectedValue.ToString();
+            string highestPrioritytime = comboBoxEditHighestPriorityTime.Text;
+            string mediumPrioritytime = comboBoxEditMediumPriorityTime.Text;
+            string lowestPrioritytime = comboBoxEditLowestPriorityTime.Text;
+
+            DataTable dataTable = Client.ReceiveEditFlightRequestData(id,
+                highestPrioritytime, mediumPrioritytime, lowestPrioritytime);
+
+            if (dataTable.Rows.Count == 1)
+            {
+
+                MessageBox.Show("Заявка на полёт отредактирована");
+            }
+            else if (dataTable.Rows.Count == 0)
+            {
+                MessageBox.Show("Такой заявки не существует");
+            }
+        }
+        private void buttonDeleteDestination_Click(object sender, EventArgs e)
+        {
+            Client.SendRequestToServer("Delete flightrequest");
+
+            string id = comboBoxDelete.SelectedValue.ToString();
+
+            int deleted_count = Client.ReceiveDeleteFlightRequestData(id);
+            if (deleted_count == 1)
+            {
+                MessageBox.Show("Удаление заявки на полёт выполнено");
+            }
+            else if (deleted_count == 0)
+            {
+                MessageBox.Show("Такой заявки не существует");
+            }
+        }
+
+
+        private void buttonEditPassenger_Click(object sender, EventArgs e)
+        {
+            form2.Show();
+        }
+        private void buttonEditDestination_Click(object sender, EventArgs e)
+        {
+            form3.Show();
         }
     }
 }

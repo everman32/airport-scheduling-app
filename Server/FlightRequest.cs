@@ -28,6 +28,13 @@ namespace Server
             stream.Write(data, 0, data.Length);
             stream.Flush();
         }
+        public static void SendSelectingFlightRequestsNames(NetworkStream stream)
+        {
+            DataTable dataTable = SQLCommander.SelectFlightRequestsNames();
+            byte[] data = ClientConnection.GetBinaryFormatData(dataTable);
+            stream.Write(data, 0, data.Length);
+            stream.Flush();
+        }
         public static void SendSelectingEstimatedtimes(NetworkStream stream)
         {
             byte[] Id = new byte[64];

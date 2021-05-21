@@ -74,7 +74,7 @@ namespace Client
             this.toolStripButtonDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(799, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(798, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -124,17 +124,17 @@ namespace Client
             this.panelDeleting.Controls.Add(this.textBoxDeleteLogin);
             this.panelDeleting.Controls.Add(this.labelDelete);
             this.panelDeleting.Enabled = false;
-            this.panelDeleting.Location = new System.Drawing.Point(265, 69);
+            this.panelDeleting.Location = new System.Drawing.Point(227, 60);
             this.panelDeleting.Name = "panelDeleting";
-            this.panelDeleting.Size = new System.Drawing.Size(275, 231);
+            this.panelDeleting.Size = new System.Drawing.Size(244, 200);
             this.panelDeleting.TabIndex = 22;
             // 
             // buttonDeleteAccount
             // 
             this.buttonDeleteAccount.Enabled = false;
-            this.buttonDeleteAccount.Location = new System.Drawing.Point(96, 141);
+            this.buttonDeleteAccount.Location = new System.Drawing.Point(82, 122);
             this.buttonDeleteAccount.Name = "buttonDeleteAccount";
-            this.buttonDeleteAccount.Size = new System.Drawing.Size(74, 28);
+            this.buttonDeleteAccount.Size = new System.Drawing.Size(63, 24);
             this.buttonDeleteAccount.TabIndex = 2;
             this.buttonDeleteAccount.Text = "Удалить";
             this.buttonDeleteAccount.UseVisualStyleBackColor = true;
@@ -142,9 +142,9 @@ namespace Client
             // 
             // textBoxDeleteLogin
             // 
-            this.textBoxDeleteLogin.Location = new System.Drawing.Point(80, 96);
+            this.textBoxDeleteLogin.Location = new System.Drawing.Point(69, 83);
             this.textBoxDeleteLogin.Name = "textBoxDeleteLogin";
-            this.textBoxDeleteLogin.Size = new System.Drawing.Size(100, 23);
+            this.textBoxDeleteLogin.Size = new System.Drawing.Size(86, 20);
             this.textBoxDeleteLogin.TabIndex = 1;
             this.textBoxDeleteLogin.TextChanged += new System.EventHandler(this.textBoxDeleteLogin_TextChanged);
             this.textBoxDeleteLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxDeleteLogin_KeyPress);
@@ -152,9 +152,9 @@ namespace Client
             // labelDelete
             // 
             this.labelDelete.AutoSize = true;
-            this.labelDelete.Location = new System.Drawing.Point(3, 74);
+            this.labelDelete.Location = new System.Drawing.Point(3, 64);
             this.labelDelete.Name = "labelDelete";
-            this.labelDelete.Size = new System.Drawing.Size(254, 15);
+            this.labelDelete.Size = new System.Drawing.Size(236, 13);
             this.labelDelete.TabIndex = 0;
             this.labelDelete.Text = "Введите логин учётной записи для удаления:";
             // 
@@ -166,17 +166,17 @@ namespace Client
             this.panelEditing.Controls.Add(this.labelEditLogin);
             this.panelEditing.Controls.Add(this.textBoxEditLogin);
             this.panelEditing.Enabled = false;
-            this.panelEditing.Location = new System.Drawing.Point(232, 57);
+            this.panelEditing.Location = new System.Drawing.Point(199, 49);
             this.panelEditing.Name = "panelEditing";
-            this.panelEditing.Size = new System.Drawing.Size(392, 231);
+            this.panelEditing.Size = new System.Drawing.Size(336, 200);
             this.panelEditing.TabIndex = 19;
             // 
             // buttonEditAccount
             // 
             this.buttonEditAccount.Enabled = false;
-            this.buttonEditAccount.Location = new System.Drawing.Point(98, 154);
+            this.buttonEditAccount.Location = new System.Drawing.Point(84, 133);
             this.buttonEditAccount.Name = "buttonEditAccount";
-            this.buttonEditAccount.Size = new System.Drawing.Size(121, 37);
+            this.buttonEditAccount.Size = new System.Drawing.Size(104, 32);
             this.buttonEditAccount.TabIndex = 6;
             this.buttonEditAccount.Text = "Редактировать";
             this.buttonEditAccount.UseVisualStyleBackColor = true;
@@ -184,9 +184,9 @@ namespace Client
             // 
             // textBoxNewvalue
             // 
-            this.textBoxNewvalue.Location = new System.Drawing.Point(98, 121);
+            this.textBoxNewvalue.Location = new System.Drawing.Point(84, 105);
             this.textBoxNewvalue.Name = "textBoxNewvalue";
-            this.textBoxNewvalue.Size = new System.Drawing.Size(121, 23);
+            this.textBoxNewvalue.Size = new System.Drawing.Size(104, 20);
             this.textBoxNewvalue.TabIndex = 5;
             this.textBoxNewvalue.TextChanged += new System.EventHandler(this.textBoxNewvalue_TextChanged);
             this.textBoxNewvalue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNewvalue_KeyPress);
@@ -194,26 +194,26 @@ namespace Client
             // labelEditValue
             // 
             this.labelEditValue.AutoSize = true;
-            this.labelEditValue.Location = new System.Drawing.Point(98, 99);
+            this.labelEditValue.Location = new System.Drawing.Point(84, 86);
             this.labelEditValue.Name = "labelEditValue";
-            this.labelEditValue.Size = new System.Drawing.Size(135, 15);
+            this.labelEditValue.Size = new System.Drawing.Size(126, 13);
             this.labelEditValue.TabIndex = 4;
             this.labelEditValue.Text = "Введите новый пароль:";
             // 
             // labelEditLogin
             // 
             this.labelEditLogin.AutoSize = true;
-            this.labelEditLogin.Location = new System.Drawing.Point(98, 36);
+            this.labelEditLogin.Location = new System.Drawing.Point(84, 31);
             this.labelEditLogin.Name = "labelEditLogin";
-            this.labelEditLogin.Size = new System.Drawing.Size(266, 15);
+            this.labelEditLogin.Size = new System.Drawing.Size(246, 13);
             this.labelEditLogin.TabIndex = 1;
             this.labelEditLogin.Text = "Введите логин редактируемой учётной записи:";
             // 
             // textBoxEditLogin
             // 
-            this.textBoxEditLogin.Location = new System.Drawing.Point(98, 57);
+            this.textBoxEditLogin.Location = new System.Drawing.Point(84, 49);
             this.textBoxEditLogin.Name = "textBoxEditLogin";
-            this.textBoxEditLogin.Size = new System.Drawing.Size(121, 23);
+            this.textBoxEditLogin.Size = new System.Drawing.Size(104, 20);
             this.textBoxEditLogin.TabIndex = 0;
             this.textBoxEditLogin.TextChanged += new System.EventHandler(this.textBoxEditId_TextChanged);
             this.textBoxEditLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxEditId_KeyPress);
@@ -223,9 +223,9 @@ namespace Client
             this.panelViewing.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelViewing.Controls.Add(this.AccountsGridView);
             this.panelViewing.Enabled = false;
-            this.panelViewing.Location = new System.Drawing.Point(16, 36);
+            this.panelViewing.Location = new System.Drawing.Point(14, 31);
             this.panelViewing.Name = "panelViewing";
-            this.panelViewing.Size = new System.Drawing.Size(766, 265);
+            this.panelViewing.Size = new System.Drawing.Size(750, 230);
             this.panelViewing.TabIndex = 21;
             // 
             // AccountsGridView
@@ -233,18 +233,18 @@ namespace Client
             this.AccountsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.AccountsGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.AccountsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.AccountsGridView.Location = new System.Drawing.Point(5, 10);
+            this.AccountsGridView.Location = new System.Drawing.Point(13, 9);
             this.AccountsGridView.Name = "AccountsGridView";
             this.AccountsGridView.ReadOnly = true;
             this.AccountsGridView.RowTemplate.Height = 25;
-            this.AccountsGridView.Size = new System.Drawing.Size(755, 242);
+            this.AccountsGridView.Size = new System.Drawing.Size(722, 210);
             this.AccountsGridView.TabIndex = 1;
             // 
             // buttonBackAvianavForm
             // 
-            this.buttonBackAvianavForm.Location = new System.Drawing.Point(16, 332);
+            this.buttonBackAvianavForm.Location = new System.Drawing.Point(14, 288);
             this.buttonBackAvianavForm.Name = "buttonBackAvianavForm";
-            this.buttonBackAvianavForm.Size = new System.Drawing.Size(91, 37);
+            this.buttonBackAvianavForm.Size = new System.Drawing.Size(78, 32);
             this.buttonBackAvianavForm.TabIndex = 18;
             this.buttonBackAvianavForm.Text = "<< Назад";
             this.buttonBackAvianavForm.UseVisualStyleBackColor = true;
@@ -269,26 +269,26 @@ namespace Client
             this.panelAdding.Controls.Add(this.comboBoxAccessRight);
             this.panelAdding.Controls.Add(this.buttonRegistration);
             this.panelAdding.Enabled = false;
-            this.panelAdding.Location = new System.Drawing.Point(185, 57);
+            this.panelAdding.Location = new System.Drawing.Point(159, 49);
             this.panelAdding.Name = "panelAdding";
-            this.panelAdding.Size = new System.Drawing.Size(487, 231);
+            this.panelAdding.Size = new System.Drawing.Size(417, 200);
             this.panelAdding.TabIndex = 20;
             this.panelAdding.Paint += new System.Windows.Forms.PaintEventHandler(this.panelAdding_Paint);
             // 
             // textBoxPass
             // 
-            this.textBoxPass.Location = new System.Drawing.Point(200, 132);
+            this.textBoxPass.Location = new System.Drawing.Point(171, 114);
             this.textBoxPass.Name = "textBoxPass";
-            this.textBoxPass.Size = new System.Drawing.Size(130, 23);
+            this.textBoxPass.Size = new System.Drawing.Size(112, 20);
             this.textBoxPass.TabIndex = 21;
             this.textBoxPass.TextChanged += new System.EventHandler(this.textBoxPass_TextChanged);
             this.textBoxPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPass_KeyPress);
             // 
             // textBoxLogin
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(200, 80);
+            this.textBoxLogin.Location = new System.Drawing.Point(171, 69);
             this.textBoxLogin.Name = "textBoxLogin";
-            this.textBoxLogin.Size = new System.Drawing.Size(130, 23);
+            this.textBoxLogin.Size = new System.Drawing.Size(112, 20);
             this.textBoxLogin.TabIndex = 20;
             this.textBoxLogin.TextChanged += new System.EventHandler(this.textBoxLogin_TextChanged);
             this.textBoxLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxLogin_KeyPress);
@@ -296,27 +296,27 @@ namespace Client
             // labelPass
             // 
             this.labelPass.AutoSize = true;
-            this.labelPass.Location = new System.Drawing.Point(103, 114);
+            this.labelPass.Location = new System.Drawing.Point(88, 99);
             this.labelPass.Name = "labelPass";
-            this.labelPass.Size = new System.Drawing.Size(185, 15);
+            this.labelPass.Size = new System.Drawing.Size(172, 13);
             this.labelPass.TabIndex = 19;
             this.labelPass.Text = "Введите пароль учётной записи:";
             // 
             // labelLogin
             // 
             this.labelLogin.AutoSize = true;
-            this.labelLogin.Location = new System.Drawing.Point(103, 62);
+            this.labelLogin.Location = new System.Drawing.Point(88, 54);
             this.labelLogin.Name = "labelLogin";
-            this.labelLogin.Size = new System.Drawing.Size(178, 15);
+            this.labelLogin.Size = new System.Drawing.Size(165, 13);
             this.labelLogin.TabIndex = 18;
             this.labelLogin.Text = "Введите логин учётной записи:";
             // 
             // labelAccessRight
             // 
             this.labelAccessRight.AutoSize = true;
-            this.labelAccessRight.Location = new System.Drawing.Point(103, 18);
+            this.labelAccessRight.Location = new System.Drawing.Point(88, 16);
             this.labelAccessRight.Name = "labelAccessRight";
-            this.labelAccessRight.Size = new System.Drawing.Size(234, 15);
+            this.labelAccessRight.Size = new System.Drawing.Size(217, 13);
             this.labelAccessRight.TabIndex = 17;
             this.labelAccessRight.Text = "Выберите права доступа учётной записи:";
             // 
@@ -327,18 +327,18 @@ namespace Client
             this.comboBoxAccessRight.Items.AddRange(new object[] {
             "Администратор",
             "Диспетчер"});
-            this.comboBoxAccessRight.Location = new System.Drawing.Point(200, 36);
+            this.comboBoxAccessRight.Location = new System.Drawing.Point(171, 31);
             this.comboBoxAccessRight.Name = "comboBoxAccessRight";
-            this.comboBoxAccessRight.Size = new System.Drawing.Size(183, 23);
+            this.comboBoxAccessRight.Size = new System.Drawing.Size(157, 21);
             this.comboBoxAccessRight.TabIndex = 16;
             this.comboBoxAccessRight.SelectedIndexChanged += new System.EventHandler(this.comboBoxAccessRight_SelectedIndexChanged);
             // 
             // buttonRegistration
             // 
             this.buttonRegistration.Enabled = false;
-            this.buttonRegistration.Location = new System.Drawing.Point(200, 174);
+            this.buttonRegistration.Location = new System.Drawing.Point(171, 151);
             this.buttonRegistration.Name = "buttonRegistration";
-            this.buttonRegistration.Size = new System.Drawing.Size(130, 31);
+            this.buttonRegistration.Size = new System.Drawing.Size(111, 27);
             this.buttonRegistration.TabIndex = 15;
             this.buttonRegistration.Text = "Добавить";
             this.buttonRegistration.UseVisualStyleBackColor = true;
@@ -346,12 +346,12 @@ namespace Client
             // 
             // WorkAccountsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(799, 381);
-            this.Controls.Add(this.panelDeleting);
+            this.ClientSize = new System.Drawing.Size(798, 330);
             this.Controls.Add(this.panelEditing);
+            this.Controls.Add(this.panelDeleting);
             this.Controls.Add(this.panelAdding);
             this.Controls.Add(this.panelViewing);
             this.Controls.Add(this.buttonBackAvianavForm);

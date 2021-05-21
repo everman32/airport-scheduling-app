@@ -36,9 +36,9 @@ namespace Client
             // 
             // buttonLogForm
             // 
-            this.buttonLogForm.Location = new System.Drawing.Point(117, 38);
+            this.buttonLogForm.Location = new System.Drawing.Point(134, 66);
             this.buttonLogForm.Name = "buttonLogForm";
-            this.buttonLogForm.Size = new System.Drawing.Size(99, 29);
+            this.buttonLogForm.Size = new System.Drawing.Size(85, 33);
             this.buttonLogForm.TabIndex = 0;
             this.buttonLogForm.Text = "Авторизация";
             this.buttonLogForm.UseVisualStyleBackColor = true;
@@ -46,9 +46,9 @@ namespace Client
             // 
             // buttonRegForm
             // 
-            this.buttonRegForm.Location = new System.Drawing.Point(117, 94);
+            this.buttonRegForm.Location = new System.Drawing.Point(134, 134);
             this.buttonRegForm.Name = "buttonRegForm";
-            this.buttonRegForm.Size = new System.Drawing.Size(99, 29);
+            this.buttonRegForm.Size = new System.Drawing.Size(85, 33);
             this.buttonRegForm.TabIndex = 1;
             this.buttonRegForm.Text = "Регистрация";
             this.buttonRegForm.UseVisualStyleBackColor = true;
@@ -56,9 +56,9 @@ namespace Client
             // 
             // buttonBackMainForm
             // 
-            this.buttonBackMainForm.Location = new System.Drawing.Point(12, 123);
+            this.buttonBackMainForm.Location = new System.Drawing.Point(12, 185);
             this.buttonBackMainForm.Name = "buttonBackMainForm";
-            this.buttonBackMainForm.Size = new System.Drawing.Size(75, 33);
+            this.buttonBackMainForm.Size = new System.Drawing.Size(64, 29);
             this.buttonBackMainForm.TabIndex = 2;
             this.buttonBackMainForm.Text = "<< Назад";
             this.buttonBackMainForm.UseVisualStyleBackColor = true;
@@ -66,10 +66,10 @@ namespace Client
             // 
             // ActionChoiseForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(334, 168);
+            this.ClientSize = new System.Drawing.Size(326, 238);
             this.Controls.Add(this.buttonBackMainForm);
             this.Controls.Add(this.buttonRegForm);
             this.Controls.Add(this.buttonLogForm);

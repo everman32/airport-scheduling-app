@@ -38,9 +38,9 @@ namespace Client
             // 
             // buttonBackLogForm
             // 
-            this.buttonBackLogForm.Location = new System.Drawing.Point(12, 308);
+            this.buttonBackLogForm.Location = new System.Drawing.Point(12, 318);
             this.buttonBackLogForm.Name = "buttonBackLogForm";
-            this.buttonBackLogForm.Size = new System.Drawing.Size(91, 37);
+            this.buttonBackLogForm.Size = new System.Drawing.Size(78, 32);
             this.buttonBackLogForm.TabIndex = 0;
             this.buttonBackLogForm.Text = "<< Назад";
             this.buttonBackLogForm.UseVisualStyleBackColor = true;
@@ -48,9 +48,9 @@ namespace Client
             // 
             // buttonWorkPassengers
             // 
-            this.buttonWorkPassengers.Location = new System.Drawing.Point(163, 34);
+            this.buttonWorkPassengers.Location = new System.Drawing.Point(128, 45);
             this.buttonWorkPassengers.Name = "buttonWorkPassengers";
-            this.buttonWorkPassengers.Size = new System.Drawing.Size(197, 43);
+            this.buttonWorkPassengers.Size = new System.Drawing.Size(195, 37);
             this.buttonWorkPassengers.TabIndex = 1;
             this.buttonWorkPassengers.Text = "Работа с пассажирами";
             this.buttonWorkPassengers.UseVisualStyleBackColor = true;
@@ -58,9 +58,9 @@ namespace Client
             // 
             // buttonWorkDestinations
             // 
-            this.buttonWorkDestinations.Location = new System.Drawing.Point(163, 94);
+            this.buttonWorkDestinations.Location = new System.Drawing.Point(128, 107);
             this.buttonWorkDestinations.Name = "buttonWorkDestinations";
-            this.buttonWorkDestinations.Size = new System.Drawing.Size(197, 43);
+            this.buttonWorkDestinations.Size = new System.Drawing.Size(195, 37);
             this.buttonWorkDestinations.TabIndex = 2;
             this.buttonWorkDestinations.Text = "Работа с пунктами назначения";
             this.buttonWorkDestinations.UseVisualStyleBackColor = true;
@@ -68,9 +68,9 @@ namespace Client
             // 
             // buttonSearchBestAlternative
             // 
-            this.buttonSearchBestAlternative.Location = new System.Drawing.Point(161, 216);
+            this.buttonSearchBestAlternative.Location = new System.Drawing.Point(128, 227);
             this.buttonSearchBestAlternative.Name = "buttonSearchBestAlternative";
-            this.buttonSearchBestAlternative.Size = new System.Drawing.Size(199, 40);
+            this.buttonSearchBestAlternative.Size = new System.Drawing.Size(195, 50);
             this.buttonSearchBestAlternative.TabIndex = 3;
             this.buttonSearchBestAlternative.Text = "Поиск наилучшей альтернативы расписания для пункта назначения";
             this.buttonSearchBestAlternative.UseVisualStyleBackColor = true;
@@ -78,9 +78,9 @@ namespace Client
             // 
             // buttonWorkFlightRequests
             // 
-            this.buttonWorkFlightRequests.Location = new System.Drawing.Point(163, 152);
+            this.buttonWorkFlightRequests.Location = new System.Drawing.Point(128, 170);
             this.buttonWorkFlightRequests.Name = "buttonWorkFlightRequests";
-            this.buttonWorkFlightRequests.Size = new System.Drawing.Size(197, 44);
+            this.buttonWorkFlightRequests.Size = new System.Drawing.Size(195, 38);
             this.buttonWorkFlightRequests.TabIndex = 4;
             this.buttonWorkFlightRequests.Text = "Работа с заявками на полёты";
             this.buttonWorkFlightRequests.UseVisualStyleBackColor = true;
@@ -88,10 +88,10 @@ namespace Client
             // 
             // DispatcherForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(514, 357);
+            this.ClientSize = new System.Drawing.Size(442, 362);
             this.Controls.Add(this.buttonWorkFlightRequests);
             this.Controls.Add(this.buttonSearchBestAlternative);
             this.Controls.Add(this.buttonWorkDestinations);

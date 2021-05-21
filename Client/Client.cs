@@ -281,7 +281,7 @@ namespace Client
                 bytes = stream.Read(data, 0, data.Length);
             }
             while (stream.DataAvailable);
-            int deleted_count = BitConverter.ToInt32(data);
+            int deleted_count = BitConverter.ToInt32(data,0);
             Array.Clear(data, 0, data.Length);
             return deleted_count;
         }
@@ -456,7 +456,7 @@ namespace Client
                 bytes = stream.Read(data, 0, data.Length);
             }
             while (stream.DataAvailable);
-            int deleted_count = BitConverter.ToInt32(data);
+            int deleted_count = BitConverter.ToInt32(data,0);
             Array.Clear(data, 0, data.Length);
             return deleted_count;
         }
@@ -476,6 +476,32 @@ namespace Client
             return dataTable;
         }
         static public DataTable ReceiveSelectDestinationsNames()
+        {
+            byte[] data = new byte[10000];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveSelectFlightrequestsNames()
+        {
+            byte[] data = new byte[10000];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
+        static public DataTable ReceiveSelectSchedulesNames()
         {
             byte[] data = new byte[10000];
             int bytes = 0;
@@ -709,7 +735,7 @@ namespace Client
                 bytes = stream.Read(data, 0, data.Length);
             }
             while (stream.DataAvailable);
-            int deleted_count = BitConverter.ToInt32(data);
+            int deleted_count = BitConverter.ToInt32(data,0);
             Array.Clear(data, 0, data.Length);
             return deleted_count;
         }
@@ -1004,7 +1030,7 @@ namespace Client
                 bytes = stream.Read(data, 0, data.Length);
             }
             while (stream.DataAvailable);
-            int deleted_count = BitConverter.ToInt32(data);
+            int deleted_count = BitConverter.ToInt32(data,0);
             Array.Clear(data, 0, data.Length);
             return deleted_count;
         }
@@ -1082,7 +1108,7 @@ namespace Client
                 bytes = stream.Read(data, 0, data.Length);
             }
             while (stream.DataAvailable);
-            int deleted_count = BitConverter.ToInt32(data);
+            int deleted_count = BitConverter.ToInt32(data,0);
             Array.Clear(data, 0, data.Length);
             return deleted_count;
         }

@@ -30,8 +30,8 @@ namespace Client
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WorkCondorsetAlternative));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSearchAlternative = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonViewSchedule = new System.Windows.Forms.ToolStripButton();
@@ -45,7 +45,6 @@ namespace Client
             this.PreferencesGridView = new System.Windows.Forms.DataGridView();
             this.labelPreferences = new System.Windows.Forms.Label();
             this.buttonGetEstimatedPriorityTimes = new System.Windows.Forms.Button();
-            this.buttonPairwiseComparison = new System.Windows.Forms.Button();
             this.PriorityTimesGridView = new System.Windows.Forms.DataGridView();
             this.labelPriorityTimes = new System.Windows.Forms.Label();
             this.EstimatedTimesGridView = new System.Windows.Forms.DataGridView();
@@ -53,13 +52,12 @@ namespace Client
             this.labelDestination = new System.Windows.Forms.Label();
             this.comboBoxDestination = new System.Windows.Forms.ComboBox();
             this.panelViewing = new System.Windows.Forms.Panel();
-            this.buttonChartPopularityDestinations = new System.Windows.Forms.Button();
-            this.buttonReportFlightDetails = new System.Windows.Forms.Button();
+            this.buttonGraphDate = new System.Windows.Forms.Button();
             this.ScheduleGridView = new System.Windows.Forms.DataGridView();
             this.panelDeleting = new System.Windows.Forms.Panel();
             this.buttonDeleteSchedule = new System.Windows.Forms.Button();
-            this.textBoxDeleteId = new System.Windows.Forms.TextBox();
             this.labelDelete = new System.Windows.Forms.Label();
+            this.comboBoxDelete = new System.Windows.Forms.ComboBox();
             this.toolStrip1.SuspendLayout();
             this.panelSearchingAlternative.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PairwiseComparisonGridView)).BeginInit();
@@ -79,12 +77,14 @@ namespace Client
             this.toolStripButtonDeleteSchedule});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(731, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(877, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripButtonSearchAlternative
             // 
+            this.toolStripButtonSearchAlternative.Checked = true;
+            this.toolStripButtonSearchAlternative.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonSearchAlternative.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripButtonSearchAlternative.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSearchAlternative.Image")));
             this.toolStripButtonSearchAlternative.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -95,6 +95,8 @@ namespace Client
             // 
             // toolStripButtonViewSchedule
             // 
+            this.toolStripButtonViewSchedule.Checked = true;
+            this.toolStripButtonViewSchedule.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonViewSchedule.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripButtonViewSchedule.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonViewSchedule.Image")));
             this.toolStripButtonViewSchedule.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -105,6 +107,8 @@ namespace Client
             // 
             // toolStripButtonDeleteSchedule
             // 
+            this.toolStripButtonDeleteSchedule.Checked = true;
+            this.toolStripButtonDeleteSchedule.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonDeleteSchedule.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripButtonDeleteSchedule.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDeleteSchedule.Image")));
             this.toolStripButtonDeleteSchedule.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -115,9 +119,9 @@ namespace Client
             // 
             // buttonBackAvianavForm
             // 
-            this.buttonBackAvianavForm.Location = new System.Drawing.Point(20, 531);
+            this.buttonBackAvianavForm.Location = new System.Drawing.Point(6, 393);
             this.buttonBackAvianavForm.Name = "buttonBackAvianavForm";
-            this.buttonBackAvianavForm.Size = new System.Drawing.Size(84, 36);
+            this.buttonBackAvianavForm.Size = new System.Drawing.Size(72, 31);
             this.buttonBackAvianavForm.TabIndex = 1;
             this.buttonBackAvianavForm.Text = "<< Назад";
             this.buttonBackAvianavForm.UseVisualStyleBackColor = true;
@@ -132,23 +136,22 @@ namespace Client
             this.panelSearchingAlternative.Controls.Add(this.PreferencesGridView);
             this.panelSearchingAlternative.Controls.Add(this.labelPreferences);
             this.panelSearchingAlternative.Controls.Add(this.buttonGetEstimatedPriorityTimes);
-            this.panelSearchingAlternative.Controls.Add(this.buttonPairwiseComparison);
             this.panelSearchingAlternative.Controls.Add(this.PriorityTimesGridView);
             this.panelSearchingAlternative.Controls.Add(this.labelPriorityTimes);
             this.panelSearchingAlternative.Controls.Add(this.EstimatedTimesGridView);
             this.panelSearchingAlternative.Controls.Add(this.labelEstimatedTimes);
             this.panelSearchingAlternative.Controls.Add(this.labelDestination);
             this.panelSearchingAlternative.Controls.Add(this.comboBoxDestination);
-            this.panelSearchingAlternative.Location = new System.Drawing.Point(12, 28);
+            this.panelSearchingAlternative.Location = new System.Drawing.Point(10, 23);
             this.panelSearchingAlternative.Name = "panelSearchingAlternative";
-            this.panelSearchingAlternative.Size = new System.Drawing.Size(712, 497);
+            this.panelSearchingAlternative.Size = new System.Drawing.Size(855, 364);
             this.panelSearchingAlternative.TabIndex = 2;
             // 
             // buttonSearchAlternative
             // 
-            this.buttonSearchAlternative.Location = new System.Drawing.Point(498, 207);
+            this.buttonSearchAlternative.Location = new System.Drawing.Point(445, 305);
             this.buttonSearchAlternative.Name = "buttonSearchAlternative";
-            this.buttonSearchAlternative.Size = new System.Drawing.Size(150, 37);
+            this.buttonSearchAlternative.Size = new System.Drawing.Size(138, 48);
             this.buttonSearchAlternative.TabIndex = 12;
             this.buttonSearchAlternative.Text = "Найти альтернативы";
             this.buttonSearchAlternative.UseVisualStyleBackColor = true;
@@ -157,9 +160,9 @@ namespace Client
             // 
             // buttonReportPassengersFlight
             // 
-            this.buttonReportPassengersFlight.Location = new System.Drawing.Point(480, 425);
+            this.buttonReportPassengersFlight.Location = new System.Drawing.Point(683, 305);
             this.buttonReportPassengersFlight.Name = "buttonReportPassengersFlight";
-            this.buttonReportPassengersFlight.Size = new System.Drawing.Size(150, 54);
+            this.buttonReportPassengersFlight.Size = new System.Drawing.Size(147, 47);
             this.buttonReportPassengersFlight.TabIndex = 2;
             this.buttonReportPassengersFlight.Text = "Отчёт с подробной информацией о пассажирах рейса";
             this.buttonReportPassengersFlight.UseVisualStyleBackColor = true;
@@ -169,9 +172,9 @@ namespace Client
             // labelPairwiseComparison
             // 
             this.labelPairwiseComparison.AutoSize = true;
-            this.labelPairwiseComparison.Location = new System.Drawing.Point(431, 51);
+            this.labelPairwiseComparison.Location = new System.Drawing.Point(446, 172);
             this.labelPairwiseComparison.Name = "labelPairwiseComparison";
-            this.labelPairwiseComparison.Size = new System.Drawing.Size(180, 15);
+            this.labelPairwiseComparison.Size = new System.Drawing.Size(163, 13);
             this.labelPairwiseComparison.TabIndex = 11;
             this.labelPairwiseComparison.Text = "Матрица попарных сравнений:";
             this.labelPairwiseComparison.Visible = false;
@@ -180,73 +183,63 @@ namespace Client
             // 
             this.PairwiseComparisonGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.PairwiseComparisonGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.PairwiseComparisonGridView.Location = new System.Drawing.Point(431, 69);
+            this.PairwiseComparisonGridView.Location = new System.Drawing.Point(445, 188);
             this.PairwiseComparisonGridView.Name = "PairwiseComparisonGridView";
             this.PairwiseComparisonGridView.RowTemplate.Height = 25;
-            this.PairwiseComparisonGridView.Size = new System.Drawing.Size(274, 123);
+            this.PairwiseComparisonGridView.Size = new System.Drawing.Size(399, 107);
             this.PairwiseComparisonGridView.TabIndex = 10;
             this.PairwiseComparisonGridView.Visible = false;
+            this.PairwiseComparisonGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.PairwiseComparisonGridView_RowsAdded);
             // 
             // PreferencesGridView
             // 
             this.PreferencesGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.PreferencesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.PreferencesGridView.Location = new System.Drawing.Point(4, 343);
+            this.PreferencesGridView.Location = new System.Drawing.Point(445, 26);
             this.PreferencesGridView.Name = "PreferencesGridView";
             this.PreferencesGridView.RowTemplate.Height = 25;
-            this.PreferencesGridView.Size = new System.Drawing.Size(404, 146);
+            this.PreferencesGridView.Size = new System.Drawing.Size(399, 127);
             this.PreferencesGridView.TabIndex = 9;
             this.PreferencesGridView.Visible = false;
             // 
             // labelPreferences
             // 
             this.labelPreferences.AutoSize = true;
-            this.labelPreferences.Location = new System.Drawing.Point(4, 325);
+            this.labelPreferences.Location = new System.Drawing.Point(444, 10);
             this.labelPreferences.Name = "labelPreferences";
-            this.labelPreferences.Size = new System.Drawing.Size(256, 15);
+            this.labelPreferences.Size = new System.Drawing.Size(229, 13);
             this.labelPreferences.TabIndex = 8;
             this.labelPreferences.Text = "Матрица проранжированных предпочтений:";
             this.labelPreferences.Visible = false;
             // 
             // buttonGetEstimatedPriorityTimes
             // 
-            this.buttonGetEstimatedPriorityTimes.Location = new System.Drawing.Point(212, 25);
+            this.buttonGetEstimatedPriorityTimes.Location = new System.Drawing.Point(172, 20);
             this.buttonGetEstimatedPriorityTimes.Name = "buttonGetEstimatedPriorityTimes";
-            this.buttonGetEstimatedPriorityTimes.Size = new System.Drawing.Size(125, 23);
+            this.buttonGetEstimatedPriorityTimes.Size = new System.Drawing.Size(107, 30);
             this.buttonGetEstimatedPriorityTimes.TabIndex = 7;
-            this.buttonGetEstimatedPriorityTimes.Text = "Получить времена";
+            this.buttonGetEstimatedPriorityTimes.Text = "Получить даты";
             this.buttonGetEstimatedPriorityTimes.UseVisualStyleBackColor = true;
             this.buttonGetEstimatedPriorityTimes.Visible = false;
             this.buttonGetEstimatedPriorityTimes.Click += new System.EventHandler(this.buttonGetEstimatedPriorityTimes_Click);
-            // 
-            // buttonPairwiseComparison
-            // 
-            this.buttonPairwiseComparison.Location = new System.Drawing.Point(498, 9);
-            this.buttonPairwiseComparison.Name = "buttonPairwiseComparison";
-            this.buttonPairwiseComparison.Size = new System.Drawing.Size(150, 39);
-            this.buttonPairwiseComparison.TabIndex = 6;
-            this.buttonPairwiseComparison.Text = "Составить матрицу попарных сравнений";
-            this.buttonPairwiseComparison.UseVisualStyleBackColor = true;
-            this.buttonPairwiseComparison.Visible = false;
-            this.buttonPairwiseComparison.Click += new System.EventHandler(this.buttonPairwiseComparisonMatrix_Click);
             // 
             // PriorityTimesGridView
             // 
             this.PriorityTimesGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.PriorityTimesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.PriorityTimesGridView.Location = new System.Drawing.Point(2, 161);
+            this.PriorityTimesGridView.Location = new System.Drawing.Point(5, 156);
             this.PriorityTimesGridView.Name = "PriorityTimesGridView";
             this.PriorityTimesGridView.RowTemplate.Height = 25;
-            this.PriorityTimesGridView.Size = new System.Drawing.Size(404, 161);
+            this.PriorityTimesGridView.Size = new System.Drawing.Size(416, 140);
             this.PriorityTimesGridView.TabIndex = 5;
             this.PriorityTimesGridView.Visible = false;
             // 
             // labelPriorityTimes
             // 
             this.labelPriorityTimes.AutoSize = true;
-            this.labelPriorityTimes.Location = new System.Drawing.Point(4, 141);
+            this.labelPriorityTimes.Location = new System.Drawing.Point(6, 140);
             this.labelPriorityTimes.Name = "labelPriorityTimes";
-            this.labelPriorityTimes.Size = new System.Drawing.Size(167, 15);
+            this.labelPriorityTimes.Size = new System.Drawing.Size(152, 13);
             this.labelPriorityTimes.TabIndex = 4;
             this.labelPriorityTimes.Text = "Матрица выбранных времён";
             this.labelPriorityTimes.Visible = false;
@@ -255,38 +248,38 @@ namespace Client
             // 
             this.EstimatedTimesGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.EstimatedTimesGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.EstimatedTimesGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.EstimatedTimesGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.EstimatedTimesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.EstimatedTimesGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.EstimatedTimesGridView.Location = new System.Drawing.Point(4, 65);
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.EstimatedTimesGridView.DefaultCellStyle = dataGridViewCellStyle14;
+            this.EstimatedTimesGridView.Location = new System.Drawing.Point(6, 72);
             this.EstimatedTimesGridView.Name = "EstimatedTimesGridView";
             this.EstimatedTimesGridView.RowTemplate.Height = 25;
-            this.EstimatedTimesGridView.Size = new System.Drawing.Size(404, 73);
+            this.EstimatedTimesGridView.Size = new System.Drawing.Size(415, 63);
             this.EstimatedTimesGridView.TabIndex = 3;
             this.EstimatedTimesGridView.Visible = false;
             // 
             // labelEstimatedTimes
             // 
             this.labelEstimatedTimes.AutoSize = true;
-            this.labelEstimatedTimes.Location = new System.Drawing.Point(2, 47);
+            this.labelEstimatedTimes.Location = new System.Drawing.Point(8, 54);
             this.labelEstimatedTimes.Name = "labelEstimatedTimes";
-            this.labelEstimatedTimes.Size = new System.Drawing.Size(214, 15);
+            this.labelEstimatedTimes.Size = new System.Drawing.Size(182, 13);
             this.labelEstimatedTimes.TabIndex = 2;
-            this.labelEstimatedTimes.Text = "Предлагаемые пассажирам времена:";
+            this.labelEstimatedTimes.Text = "Предлагаемые пассажирам даты:";
             this.labelEstimatedTimes.Visible = false;
             // 
             // labelDestination
@@ -294,109 +287,101 @@ namespace Client
             this.labelDestination.AutoSize = true;
             this.labelDestination.Location = new System.Drawing.Point(3, 3);
             this.labelDestination.Name = "labelDestination";
-            this.labelDestination.Size = new System.Drawing.Size(430, 15);
+            this.labelDestination.Size = new System.Drawing.Size(399, 13);
             this.labelDestination.TabIndex = 1;
             this.labelDestination.Text = "Выберите пункт назначения из заявки для поиска наилучшей альтернативы:";
             // 
             // comboBoxDestination
             // 
             this.comboBoxDestination.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBoxDestination.FormattingEnabled = true;
-            this.comboBoxDestination.Location = new System.Drawing.Point(4, 24);
+            this.comboBoxDestination.Location = new System.Drawing.Point(3, 21);
             this.comboBoxDestination.Name = "comboBoxDestination";
-            this.comboBoxDestination.Size = new System.Drawing.Size(142, 23);
+            this.comboBoxDestination.Size = new System.Drawing.Size(152, 28);
             this.comboBoxDestination.TabIndex = 0;
             this.comboBoxDestination.SelectedIndexChanged += new System.EventHandler(this.comboBoxDestination_SelectedIndexChanged);
             // 
             // panelViewing
             // 
-            this.panelViewing.Controls.Add(this.buttonChartPopularityDestinations);
-            this.panelViewing.Controls.Add(this.buttonReportFlightDetails);
+            this.panelViewing.Controls.Add(this.buttonGraphDate);
             this.panelViewing.Controls.Add(this.ScheduleGridView);
-            this.panelViewing.Location = new System.Drawing.Point(7, 96);
+            this.panelViewing.Location = new System.Drawing.Point(6, 23);
             this.panelViewing.Name = "panelViewing";
-            this.panelViewing.Size = new System.Drawing.Size(713, 351);
+            this.panelViewing.Size = new System.Drawing.Size(859, 364);
             this.panelViewing.TabIndex = 3;
             // 
-            // buttonChartPopularityDestinations
+            // buttonGraphDate
             // 
-            this.buttonChartPopularityDestinations.Location = new System.Drawing.Point(485, 287);
-            this.buttonChartPopularityDestinations.Name = "buttonChartPopularityDestinations";
-            this.buttonChartPopularityDestinations.Size = new System.Drawing.Size(181, 54);
-            this.buttonChartPopularityDestinations.TabIndex = 3;
-            this.buttonChartPopularityDestinations.Text = "Диаграмма с популярностью пунктов назначения";
-            this.buttonChartPopularityDestinations.UseVisualStyleBackColor = true;
-            this.buttonChartPopularityDestinations.Visible = false;
-            // 
-            // buttonReportFlightDetails
-            // 
-            this.buttonReportFlightDetails.Location = new System.Drawing.Point(56, 287);
-            this.buttonReportFlightDetails.Name = "buttonReportFlightDetails";
-            this.buttonReportFlightDetails.Size = new System.Drawing.Size(165, 54);
-            this.buttonReportFlightDetails.TabIndex = 1;
-            this.buttonReportFlightDetails.Text = "Отчёт с подробной информацацией о рейсе";
-            this.buttonReportFlightDetails.UseVisualStyleBackColor = true;
-            this.buttonReportFlightDetails.Visible = false;
+            this.buttonGraphDate.Location = new System.Drawing.Point(365, 199);
+            this.buttonGraphDate.Name = "buttonGraphDate";
+            this.buttonGraphDate.Size = new System.Drawing.Size(142, 45);
+            this.buttonGraphDate.TabIndex = 1;
+            this.buttonGraphDate.Text = "Диаграмма количества пассажиров";
+            this.buttonGraphDate.UseVisualStyleBackColor = true;
+            this.buttonGraphDate.Click += new System.EventHandler(this.buttonGraphDate_Click);
             // 
             // ScheduleGridView
             // 
             this.ScheduleGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.ScheduleGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ScheduleGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ScheduleGridView.Location = new System.Drawing.Point(11, 7);
+            this.ScheduleGridView.Location = new System.Drawing.Point(15, 19);
             this.ScheduleGridView.Name = "ScheduleGridView";
             this.ScheduleGridView.RowTemplate.Height = 25;
-            this.ScheduleGridView.Size = new System.Drawing.Size(690, 227);
+            this.ScheduleGridView.Size = new System.Drawing.Size(833, 174);
             this.ScheduleGridView.TabIndex = 0;
             // 
             // panelDeleting
             // 
+            this.panelDeleting.Controls.Add(this.comboBoxDelete);
             this.panelDeleting.Controls.Add(this.buttonDeleteSchedule);
-            this.panelDeleting.Controls.Add(this.textBoxDeleteId);
             this.panelDeleting.Controls.Add(this.labelDelete);
-            this.panelDeleting.Location = new System.Drawing.Point(172, 70);
+            this.panelDeleting.Location = new System.Drawing.Point(245, 110);
             this.panelDeleting.Name = "panelDeleting";
-            this.panelDeleting.Size = new System.Drawing.Size(366, 262);
+            this.panelDeleting.Size = new System.Drawing.Size(418, 99);
             this.panelDeleting.TabIndex = 0;
             // 
             // buttonDeleteSchedule
             // 
             this.buttonDeleteSchedule.Enabled = false;
-            this.buttonDeleteSchedule.Location = new System.Drawing.Point(133, 150);
+            this.buttonDeleteSchedule.Location = new System.Drawing.Point(122, 64);
             this.buttonDeleteSchedule.Name = "buttonDeleteSchedule";
-            this.buttonDeleteSchedule.Size = new System.Drawing.Size(100, 32);
+            this.buttonDeleteSchedule.Size = new System.Drawing.Size(152, 28);
             this.buttonDeleteSchedule.TabIndex = 5;
             this.buttonDeleteSchedule.Text = "Удалить";
             this.buttonDeleteSchedule.UseVisualStyleBackColor = true;
             this.buttonDeleteSchedule.Click += new System.EventHandler(this.buttonDeleteSchedule_Click);
             // 
-            // textBoxDeleteId
-            // 
-            this.textBoxDeleteId.Location = new System.Drawing.Point(133, 113);
-            this.textBoxDeleteId.Name = "textBoxDeleteId";
-            this.textBoxDeleteId.Size = new System.Drawing.Size(100, 23);
-            this.textBoxDeleteId.TabIndex = 4;
-            this.textBoxDeleteId.TextChanged += new System.EventHandler(this.textBoxDeleteId_TextChanged);
-            this.textBoxDeleteId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxDeleteId_KeyPress);
-            // 
             // labelDelete
             // 
             this.labelDelete.AutoSize = true;
-            this.labelDelete.Location = new System.Drawing.Point(59, 95);
+            this.labelDelete.Location = new System.Drawing.Point(3, 3);
             this.labelDelete.Name = "labelDelete";
-            this.labelDelete.Size = new System.Drawing.Size(273, 15);
+            this.labelDelete.Size = new System.Drawing.Size(194, 13);
             this.labelDelete.TabIndex = 3;
-            this.labelDelete.Text = "Введите идент. номер расписания для удаления:";
+            this.labelDelete.Text = "Выберите расписание для удаления:";
+            // 
+            // comboBoxDelete
+            // 
+            this.comboBoxDelete.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxDelete.FormattingEnabled = true;
+            this.comboBoxDelete.Location = new System.Drawing.Point(0, 19);
+            this.comboBoxDelete.Name = "comboBoxDelete";
+            this.comboBoxDelete.Size = new System.Drawing.Size(374, 28);
+            this.comboBoxDelete.TabIndex = 6;
+            this.comboBoxDelete.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // WorkCondorsetAlternative
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(731, 573);
-            this.Controls.Add(this.panelViewing);
+            this.ClientSize = new System.Drawing.Size(877, 429);
             this.Controls.Add(this.panelSearchingAlternative);
             this.Controls.Add(this.panelDeleting);
+            this.Controls.Add(this.panelViewing);
             this.Controls.Add(this.buttonBackAvianavForm);
             this.Controls.Add(this.toolStrip1);
             this.Name = "WorkCondorsetAlternative";
@@ -432,7 +417,6 @@ namespace Client
         private System.Windows.Forms.Panel panelDeleting;
         private System.Windows.Forms.DataGridView ScheduleGridView;
         private System.Windows.Forms.Button buttonDeleteSchedule;
-        private System.Windows.Forms.TextBox textBoxDeleteId;
         private System.Windows.Forms.Label labelDelete;
         private System.Windows.Forms.ComboBox comboBoxDestination;
         private System.Windows.Forms.Label labelDestination;
@@ -440,7 +424,6 @@ namespace Client
         private System.Windows.Forms.Label labelEstimatedTimes;
         private System.Windows.Forms.DataGridView PriorityTimesGridView;
         private System.Windows.Forms.Label labelPriorityTimes;
-        private System.Windows.Forms.Button buttonPairwiseComparison;
         private System.Windows.Forms.Button buttonGetEstimatedPriorityTimes;
         private System.Windows.Forms.Label labelPreferences;
         private System.Windows.Forms.DataGridView PreferencesGridView;
@@ -448,7 +431,7 @@ namespace Client
         private System.Windows.Forms.Label labelPairwiseComparison;
         private System.Windows.Forms.Button buttonSearchAlternative;
         private System.Windows.Forms.Button buttonReportPassengersFlight;
-        private System.Windows.Forms.Button buttonChartPopularityDestinations;
-        private System.Windows.Forms.Button buttonReportFlightDetails;
+        private System.Windows.Forms.Button buttonGraphDate;
+        private System.Windows.Forms.ComboBox comboBoxDelete;
     }
 }

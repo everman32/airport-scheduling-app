@@ -142,7 +142,7 @@ namespace Server
         static public DataTable SelectPassenger()
         {
             SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "SELECT Id [Идентификационный номер пассажира], Surname+@space+Name+@space+Patronymic [ФИО], PhoneNumber [Телефонный номер] FROM Passenger";
+            sqlCommand.CommandText = "SELECT Surname+@space+Name+@space+Patronymic [ФИО пассажира], PhoneNumber [Телефонный номер] FROM Passenger";
             sqlCommand.Connection = sqlConnection;
             sqlCommand.Parameters.AddWithValue("@space", " ");
             SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
@@ -177,6 +177,20 @@ namespace Server
             sqlCommand.Parameters.AddWithValue("@name", newvalue);
             sqlCommand.Parameters.AddWithValue("@patronymic", newvalue);
             sqlCommand.Parameters.AddWithValue("@phonenumber", newvalue);
+
+
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+
+            return dataTable;
+        }
+        static public DataTable SelectPassenger(string phoneNumber)
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT * FROM Passenger WHERE (PhoneNumber=@phonenumber)";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@phonenumber", phoneNumber);
 
 
             SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
@@ -288,7 +302,11 @@ namespace Server
             sqlCommand.Parameters.AddWithValue("@phonenumber", newvalue);
             sqlCommand.Parameters.AddWithValue("@id", id);
 
+            DataTable dataTable_check = new DataTable();
+            dataTable_check = SQLCommander.SelectPassenger(newvalue);
             DataTable dataTable = new DataTable();
+
+            if (dataTable_check.Rows.Count==0)
             try
             {
                 sqlCommand.ExecuteNonQuery();
@@ -325,8 +343,8 @@ namespace Server
         static public DataTable SelectDestination()
         {
             SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "SELECT Id [Идентификационный номер пункта назначения], Name [Наименование], FlightDuration [Продолжительность полёта], AirplaneModel [Модель самолёта]," +
-                "EstimatedTime1 [Первое предлагаемое время], EstimatedTime2 [Второе предлагаемое время], EstimatedTime3 [Третье предлагаемое время], Status [Статус] FROM Destination";
+            sqlCommand.CommandText = "SELECT Name [Наименование], FlightDuration [Продолжительность полёта], AirplaneModel [Модель самолёта]," +
+                "EstimatedTime1 [Первое предлагаемое время], EstimatedTime2 [Второе предлагаемое время], EstimatedTime3 [Третье предлагаемое время] FROM Destination";
             sqlCommand.Connection = sqlConnection;
             SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
             DataTable dataTable = new DataTable();
@@ -643,9 +661,9 @@ namespace Server
         static public DataTable SelectFlightRequests()
         {
             SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "SELECT flightrequest.Id [Идентификационный номер заявки], pass.Surname+@space+pass.Name+@space+pass.Patronymic [ФИО пассажира], " +
-                "pass.PhoneNumber [Телефонный номер пассажира], dest.Name [Наименование пункта назначения], flightrequest.HighestPriorityTime [Самое приоритетное время], " +
-                "flightrequest.MediumPriorityTime [Время, среднее по приоритету], flightrequest.LowestPriorityTime [Время, низшее по приоритету], flightrequest.Status [Статус] " +
+            sqlCommand.CommandText = "SELECT pass.Surname+@space+pass.Name+@space+pass.Patronymic [ФИО пассажира], " +
+                "pass.PhoneNumber [Телефонный номер пассажира], dest.Name [Наименование пункта назначения], flightrequest.HighestPriorityTime [Наиболее приоритетное время], " +
+                "flightrequest.MediumPriorityTime [Время, среднее по приоритету], flightrequest.LowestPriorityTime [Время, низшее по приоритету] " +
                 "FROM FlightRequest flightrequest INNER JOIN Passenger pass ON flightrequest.IdPassenger=pass.Id INNER JOIN Destination dest ON flightrequest.IdDestination=dest.Id";
             sqlCommand.Connection = sqlConnection;
             sqlCommand.Parameters.AddWithValue("@space", " ");
@@ -757,6 +775,27 @@ namespace Server
             }
             return dataTable;
         }
+        static public DataTable SelectFlightRequestsNames()
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT flightrequest.Id, pass.Surname+@space+pass.Name+@space+pass.Patronymic+@virgule+@space+dest.Name [Заявка] " +
+                "FROM FlightRequest flightrequest INNER JOIN Passenger pass ON flightrequest.IdPassenger=pass.Id " +
+                "INNER JOIN Destination dest ON flightrequest.IdDestination=dest.Id";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@space", " ");
+            sqlCommand.Parameters.AddWithValue("@virgule", ",");
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
         static public DataTable InsertFlightRequest(string idpassenger,string iddestination,string highestprioritytime,
            string mediumprioritytime, string lowestprioritytime)
         {
@@ -840,7 +879,7 @@ namespace Server
         static public DataTable SelectDestinationsNamesCondorcet()
         {
             SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "SELECT DISTINCT dest.Id [Идентификационный номер пункта назначения], dest.Name [Наименование пункта назначения] FROM FlightRequest flightrequest " +
+            sqlCommand.CommandText = "SELECT DISTINCT dest.Id, dest.Name FROM FlightRequest flightrequest " +
                 "INNER JOIN Destination dest ON flightrequest.IdDestination = dest.Id";
             sqlCommand.Connection = sqlConnection;
             DataTable dataTable = new DataTable();
@@ -898,8 +937,9 @@ namespace Server
         static public DataTable SelectSchedule()
         {
             SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "SELECT Id [Идентификационный номер полёта], IdDestination [Идентификационный номер пункта назначения], PassengersCount [Количество пассажиров], " +
-                "FinalDate [Дата полёта], ReserveDate [Резервная дата полёта] FROM Schedule";
+            sqlCommand.CommandText = "SELECT schedule.Id [№ рейса], destination.Name [Пункт назначения], schedule.PassengersCount [Количество пассажиров], " +
+                "destination.AirplaneModel [Модель самолёта], destination.FlightDuration [Продолжительность полёта], schedule.FinalDate [Дата полёта], " +
+                "schedule.ReserveDate [Резервная дата полёта] FROM Schedule schedule INNER JOIN Destination destination ON schedule.IdDestination=destination.Id";
             sqlCommand.Connection = sqlConnection;
             DataTable dataTable = new DataTable();
             try
@@ -1030,6 +1070,28 @@ namespace Server
             }
             return dataTable;
         }
+        static public DataTable SelectSchedulesNames()
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT schedule.Id, @number + CAST(schedule.Id AS varchar(20)) + @virgule + @space + destination.Name + @virgule + @space + destination.AirplaneModel + " +
+                "@virgule + @space + CAST(destination.FlightDuration AS varchar(20))+@virgule + @space + CAST(schedule.FinalDate AS varchar(20)) [Расписание] FROM Schedule schedule " +
+                "INNER JOIN Destination destination ON schedule.IdDestination = destination.Id";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@number", "№");
+            sqlCommand.Parameters.AddWithValue("@space", " ");
+            sqlCommand.Parameters.AddWithValue("@virgule", ",");
+            DataTable dataTable = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            return dataTable;
+        }
         static public int DeleteSchedule(string id)
         {
             SqlCommand sqlCommand = new SqlCommand();
@@ -1053,7 +1115,7 @@ namespace Server
         static public DataTable SelectPassengersForReport(string id)
         {
             SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "SELECT DISTINCT flightrequest.Id [Идентификационный номер заявки], pass.Surname [Фамилия пассажира], pass.Name [Имя пассажира],pass.Patronymic [Отчество пассажира], " +
+            sqlCommand.CommandText = "SELECT DISTINCT flightrequest.Id [№ заявки], pass.Surname [Фамилия пассажира], pass.Name [Имя пассажира],pass.Patronymic [Отчество пассажира], " +
                 " pass.PhoneNumber[Телефонный номер пассажира] FROM FlightRequest flightrequest " +
                 "INNER JOIN Passenger pass ON flightrequest.IdPassenger = pass.Id " +
                 "INNER JOIN Destination dest ON flightrequest.IdDestination = @id";
