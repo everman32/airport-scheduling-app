@@ -30,8 +30,8 @@ namespace Client
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WorkCondorsetAlternative));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSearchAlternative = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonViewSchedule = new System.Windows.Forms.ToolStripButton();
@@ -55,9 +55,9 @@ namespace Client
             this.buttonGraphDate = new System.Windows.Forms.Button();
             this.ScheduleGridView = new System.Windows.Forms.DataGridView();
             this.panelDeleting = new System.Windows.Forms.Panel();
+            this.comboBoxDelete = new System.Windows.Forms.ComboBox();
             this.buttonDeleteSchedule = new System.Windows.Forms.Button();
             this.labelDelete = new System.Windows.Forms.Label();
-            this.comboBoxDelete = new System.Windows.Forms.ComboBox();
             this.toolStrip1.SuspendLayout();
             this.panelSearchingAlternative.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PairwiseComparisonGridView)).BeginInit();
@@ -101,8 +101,8 @@ namespace Client
             this.toolStripButtonViewSchedule.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonViewSchedule.Image")));
             this.toolStripButtonViewSchedule.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonViewSchedule.Name = "toolStripButtonViewSchedule";
-            this.toolStripButtonViewSchedule.Size = new System.Drawing.Size(188, 22);
-            this.toolStripButtonViewSchedule.Text = "Просмотр готового расписания";
+            this.toolStripButtonViewSchedule.Size = new System.Drawing.Size(199, 22);
+            this.toolStripButtonViewSchedule.Text = "Просмотреть готовое расписание";
             this.toolStripButtonViewSchedule.Click += new System.EventHandler(this.toolStripButtonViewSchedule_Click);
             // 
             // toolStripButtonDeleteSchedule
@@ -248,23 +248,23 @@ namespace Client
             // 
             this.EstimatedTimesGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.EstimatedTimesGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.EstimatedTimesGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.EstimatedTimesGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.EstimatedTimesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.EstimatedTimesGridView.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.EstimatedTimesGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.EstimatedTimesGridView.Location = new System.Drawing.Point(6, 72);
             this.EstimatedTimesGridView.Name = "EstimatedTimesGridView";
             this.EstimatedTimesGridView.RowTemplate.Height = 25;
@@ -342,6 +342,17 @@ namespace Client
             this.panelDeleting.Size = new System.Drawing.Size(418, 99);
             this.panelDeleting.TabIndex = 0;
             // 
+            // comboBoxDelete
+            // 
+            this.comboBoxDelete.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxDelete.FormattingEnabled = true;
+            this.comboBoxDelete.Location = new System.Drawing.Point(0, 19);
+            this.comboBoxDelete.Name = "comboBoxDelete";
+            this.comboBoxDelete.Size = new System.Drawing.Size(374, 28);
+            this.comboBoxDelete.TabIndex = 6;
+            this.comboBoxDelete.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // buttonDeleteSchedule
             // 
             this.buttonDeleteSchedule.Enabled = false;
@@ -361,17 +372,6 @@ namespace Client
             this.labelDelete.Size = new System.Drawing.Size(194, 13);
             this.labelDelete.TabIndex = 3;
             this.labelDelete.Text = "Выберите расписание для удаления:";
-            // 
-            // comboBoxDelete
-            // 
-            this.comboBoxDelete.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxDelete.FormattingEnabled = true;
-            this.comboBoxDelete.Location = new System.Drawing.Point(0, 19);
-            this.comboBoxDelete.Name = "comboBoxDelete";
-            this.comboBoxDelete.Size = new System.Drawing.Size(374, 28);
-            this.comboBoxDelete.TabIndex = 6;
-            this.comboBoxDelete.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // WorkCondorsetAlternative
             // 

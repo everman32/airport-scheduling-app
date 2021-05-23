@@ -105,6 +105,13 @@ namespace Server
             stream.Write(data, 0, data.Length);
             stream.Flush();
         }
+        public static void SendSelectingAssumbedData(NetworkStream stream)
+        {
+            DataTable dataTable = SQLCommander.SelectAssumedAccountsData();
+            byte[] data = ClientConnection.GetBinaryFormatData(dataTable);
+            stream.Write(data, 0, data.Length);
+            stream.Flush();
+        }
         public static void ReceiveDataForEditing(NetworkStream stream)
         {
             byte[] Login = new byte[64];

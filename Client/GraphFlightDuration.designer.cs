@@ -61,7 +61,7 @@ namespace Client
             this.Controls.Add(this.chart1);
             this.Name = "GraphFlightDuration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Окно диаграммы продолжительностей полётов";
+            this.Text = "Окно графика продолжительности полётов";
             this.Load += new System.EventHandler(this.DiagramFlightDuration_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);

@@ -1050,6 +1050,19 @@ namespace Client
             Array.Clear(data, 0, data.Length);
             return dataTable;
         }
+        static public DataTable ReceiveSelectAssumedAccountsData()
+        {
+            byte[] data = new byte[10000];
+            int bytes = 0;
+            do
+            {
+                bytes = stream.Read(data, 0, data.Length);
+            }
+            while (stream.DataAvailable);
+            DataTable dataTable = GetDataTable(data);
+            Array.Clear(data, 0, data.Length);
+            return dataTable;
+        }
         static public DataTable ReceiveEditAccountData(string Login, string Newvalue)
         {
             byte[] login = Encoding.Unicode.GetBytes(Login);

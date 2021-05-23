@@ -10,7 +10,7 @@ namespace Server
         static public void ConnectToDatabase()
         {
             sqlConnection = new SqlConnection();
-            sqlConnection.ConnectionString = @"Data Source = .\SQLEXPRESS; Initial Catalog = Airport; Integrated Security = True;";
+            sqlConnection.ConnectionString = @"Data Source = .\SQLEXPRESS; AttachDBFilename=|DataDirectory|Airport.mdf; Integrated Security = True;";
             sqlConnection.Open();
             
             Console.WriteLine("База данных Airport подключена");
@@ -23,6 +23,18 @@ namespace Server
             sqlCommand.CommandText = "SELECT Login [Логин учётной записи], Password [Пароль учётной записи], accessRight [Права доступа (1-админ.2-диспетчер)] FROM Account";
             sqlCommand.Connection = sqlConnection;
 
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+
+            return dataTable;
+        }
+        static public DataTable SelectAssumedAccountsData()
+        {
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.CommandText = "SELECT Login, Login+@space [Данные учётной записи] FROM Account";
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.AddWithValue("@space", " ");
             SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
             DataTable dataTable = new DataTable();
             adapter.Fill(dataTable);

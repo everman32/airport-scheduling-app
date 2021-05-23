@@ -346,7 +346,7 @@ namespace Client
                 if (svg.ShowDialog() == DialogResult.OK)
                 {
                     iTextSharp.text.Document doc = new iTextSharp.text.Document();
-                    PdfWriter.GetInstance(doc, new FileStream(svg.FileName + ".pdf", FileMode.Create));
+                    PdfWriter.GetInstance(doc, new FileStream(svg.FileName, FileMode.Create));
                     doc.Open();
 
                     BaseFont baseFont = BaseFont.CreateFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
@@ -398,7 +398,7 @@ namespace Client
                 if (svg.ShowDialog() == DialogResult.OK)
                 {
                     iTextSharp.text.Document doc = new iTextSharp.text.Document();
-                    PdfWriter.GetInstance(doc, new FileStream(svg.FileName + ".pdf", FileMode.Create));
+                    PdfWriter.GetInstance(doc, new FileStream(svg.FileName, FileMode.Create));
                     doc.Open();
 
                     BaseFont baseFont = BaseFont.CreateFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
@@ -530,7 +530,7 @@ namespace Client
                 if (svg.ShowDialog() == DialogResult.OK)
                 {
                     iTextSharp.text.Document doc = new iTextSharp.text.Document();
-                    PdfWriter.GetInstance(doc, new FileStream(svg.FileName + ".pdf", FileMode.Create));
+                    PdfWriter.GetInstance(doc, new FileStream(svg.FileName, FileMode.Create));
                     doc.Open();
 
                     BaseFont baseFont = BaseFont.CreateFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
