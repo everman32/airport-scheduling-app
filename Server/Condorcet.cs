@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
 using System.Net.Sockets;
 using System.Data;
@@ -18,7 +17,7 @@ namespace Server
         }
         public static void SendSelectEstimatedtimesCondorcet(NetworkStream stream)
         {
-            byte[] Id = new byte[64];
+            byte[] Id = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -41,7 +40,7 @@ namespace Server
         }
         public static void SendSelectPriorityTimesCondorcet(NetworkStream stream)
         {
-            byte[] Id = new byte[64];
+            byte[] Id = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -64,7 +63,7 @@ namespace Server
         }
         public static void SendSelectPreferencesCondorcet(NetworkStream stream)
         {
-            byte[] Id = new byte[64];
+            byte[] Id = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -141,7 +140,7 @@ namespace Server
         }
         public static void SendSelectPairwiseComparison(NetworkStream stream)
         {
-            byte[] Id = new byte[64];
+            byte[] Id = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -312,72 +311,82 @@ namespace Server
         }
         public static void SendSelectbestAlternative(NetworkStream stream)
         {
-            byte[] data = new byte[10000];
-            int bytes = 0;
-            do
+            try
             {
-                bytes = stream.Read(data, 0, data.Length);
-            }
-            while (stream.DataAvailable);
-
-            byte[] confirm = Encoding.Unicode.GetBytes("OK");
-            stream.Write(confirm, 0, confirm.Length);
-            stream.Flush();
-
-            DataTable dataTable = ClientConnection.GetDataTable(data);
-
-            int matrixPairwiseComparison_count = dataTable.Rows.Count;
-            int[,] matrixPairwiseComparison = new int[matrixPairwiseComparison_count, matrixPairwiseComparison_count];
-            for (int i = 0; i < matrixPairwiseComparison_count; i++)
-            {
-                for (int j = 0; j < matrixPairwiseComparison_count; j++)
+                byte[] data = new byte[Server.listener.Server.ReceiveBufferSize];
+                int bytes = 0;
+                do
                 {
-                    matrixPairwiseComparison[i, j] = Convert.ToInt32(dataTable.Rows[i][j]);
+                    bytes = stream.Read(data, 0, data.Length);
                 }
-            }
+                while (stream.DataAvailable);
 
-            ArrayList bestAlternative_list = new ArrayList();
+                byte[] confirm = Encoding.Unicode.GetBytes("OK");
+                stream.Write(confirm, 0, confirm.Length);
+                stream.Flush();
 
-            int quantity = 0;
-            int count = 0;
+                DataTable dataTable = ClientConnection.GetDataTable(data);
 
-            for (int i = 0; i < matrixPairwiseComparison_count; i++)
-            {
-                for (int j = 0; j < matrixPairwiseComparison_count; j++)
+                int matrixPairwiseComparison_count = dataTable.Rows.Count;
+                int[,] matrixPairwiseComparison = new int[matrixPairwiseComparison_count, matrixPairwiseComparison_count];
+                for (int i = 0; i < matrixPairwiseComparison_count; i++)
                 {
-                    if (matrixPairwiseComparison[i, j] >= matrixPairwiseComparison[j, i] && i != j)
+                    for (int j = 0; j < matrixPairwiseComparison_count; j++)
                     {
-                        quantity++;
-                    }
-                    if (j == matrixPairwiseComparison_count - 1)
-                    {
-                        if (quantity == matrixPairwiseComparison_count - 1)
-                        {
-                            bestAlternative_list.Add(i + 1);
-                            quantity = 0;
-                        }
-                        else
-                        {
-                            quantity = 0;
-                            count++;
-                        }
+                        matrixPairwiseComparison[i, j] = Convert.ToInt32(dataTable.Rows[i][j]);
                     }
                 }
-            }
-            if (count == 3)
-            {
-                Console.WriteLine("Наиболее предпочтительные варианты. Парадокс Кондорсе");
-            }
-            string bestAlternative_buf = "";
-            for (int i = 0; i < bestAlternative_list.Count; i++)
-            {
-                bestAlternative_buf += bestAlternative_list[i].ToString();
-            }
 
-            byte[] bestAlternative = Encoding.Unicode.GetBytes(bestAlternative_buf.ToString());
+                ArrayList bestAlternative_list = new ArrayList();
 
-            stream.Write(bestAlternative, 0, bestAlternative.Length);
-            stream.Flush();
+                int quantity = 0;
+                int count = 0;
+
+                for (int i = 0; i < matrixPairwiseComparison_count; i++)
+                {
+                    for (int j = 0; j < matrixPairwiseComparison_count; j++)
+                    {
+                        if (matrixPairwiseComparison[i, j] >= matrixPairwiseComparison[j, i] && i != j)
+                        {
+                            quantity++;
+                        }
+                        if (j == matrixPairwiseComparison_count - 1)
+                        {
+                            if (quantity == matrixPairwiseComparison_count - 1)
+                            {
+                                bestAlternative_list.Add(i + 1);
+                                quantity = 0;
+                            }
+                            else
+                            {
+                                quantity = 0;
+                                count++;
+                            }
+                        }
+                    }
+                }
+                string bestAlternative_buf = "";
+                if (count == 3)
+                {
+                    Console.WriteLine("Наиболее предпочтительные варианты. Парадокс Кондорсе");
+                    bestAlternative_buf = "0";
+                }
+                else
+                {
+                    for (int i = 0; i < bestAlternative_list.Count; i++)
+                    {
+                        bestAlternative_buf += bestAlternative_list[i].ToString();
+                    }
+                }
+                byte[] bestAlternative = Encoding.Unicode.GetBytes(bestAlternative_buf.ToString());
+
+                stream.Write(bestAlternative, 0, bestAlternative.Length);
+                stream.Flush();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
         }
     }
 }

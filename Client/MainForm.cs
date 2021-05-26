@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net.Sockets;
 
 namespace Client
 {
@@ -20,27 +12,34 @@ namespace Client
 
         private void buttonConnectClient_Click(object sender, EventArgs e)
         {
-            int port;
+            try
+            {
+                int port;
                 port = Convert.ToInt32(textBoxPort.Text);
                 if (port < 0 || port > 65535)
                 {
                     MessageBox.Show("Порт должен быть в диапазоне от 0 до 65535");
                     return;
                 }
-            try
-            {
-                Client client = new Client("127.0.0.1", port);
-                client.connectClient();
+                try
+                {
+                    Client client = new Client("127.0.0.1", port);
+                    client.connectClient();
 
-                buttonConnectClient.Enabled = false;
-                textBoxPort.Enabled = false;
-                ActionChoiseForm loginRegisterPanel = new ActionChoiseForm(this);
-                Hide();
-                loginRegisterPanel.Show();
+                    buttonConnectClient.Enabled = false;
+                    textBoxPort.Enabled = false;
+                    ActionChoiseForm loginRegisterPanel = new ActionChoiseForm(this);
+                    Hide();
+                    loginRegisterPanel.Show();
+                }
+                catch
+                {
+                    MessageBox.Show("Не удалось подключиться к серверу по порту " + port);
+                }
             }
-            catch
+            catch(Exception exception)
             {
-                MessageBox.Show("Не удалось подключиться к серверу по порту " + port);
+                MessageBox.Show(exception.Message);
             }
         }
         private bool textBoxPortCheck_empty()
@@ -60,7 +59,14 @@ namespace Client
 
         private void buttonShutdown_Click(object sender, EventArgs e)
         {
+            try
+            {
             Application.Exit();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void textBoxPort_KeyPress(object sender, KeyPressEventArgs e)

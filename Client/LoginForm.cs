@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Net.Sockets;
 
 namespace Client
 {
@@ -20,44 +15,58 @@ namespace Client
 
         private void buttonBackLoginRegister_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             form.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            Client.SendRequestToServer("Login");
-          
-            string selected_login = textBoxLogin.Text;
-            string selected_password = textBoxPass.Text;
-
-            DataTable dataTable = Client.ReceiveAuthorizeData(selected_login, selected_password);
-            if (dataTable.Rows.Count == 1)
+            try
             {
-                Client.login = textBoxLogin.Text;
-                Client.password = textBoxPass.Text;
+                Client.SendRequestToServer("Login");
 
-                if (dataTable.Rows[0][2].ToString() == "1")
-                {
-                    AdminForm adminPanel = new AdminForm(this);
-                    Hide();
-                    adminPanel.Show();
-                    Client.accessRight = 1;
-                    MessageBox.Show("Авторизация выполнена. Вы вошли как администратор " + Client.login);
-                }
-                else if (dataTable.Rows[0][2].ToString() == "2")
-                {
-                    DispatcherForm dispatcherForm = new DispatcherForm(this);
-                    Hide();
-                    dispatcherForm.Show();
-                    Client.accessRight = 2;
-                    MessageBox.Show("Авторизация выполнена. Вы вошли как диспетчер " + Client.login);
-                }
+                string login = textBoxLogin.Text;
+                string password = textBoxPass.Text;
 
+                DataTable dataTable = Client.ReceiveAuthorizeData(login, password);
+                if (dataTable.Rows.Count == 1)
+                {
+                    Client.login = textBoxLogin.Text;
+                    Client.password = textBoxPass.Text;
+
+                    if (dataTable.Rows[0][2].ToString() == "1")
+                    {
+                        AdminForm adminPanel = new AdminForm(this);
+                        Hide();
+                        adminPanel.Show();
+                        Client.accessRight = 1;
+                        MessageBox.Show("Авторизация выполнена. Вы вошли как администратор " + Client.login);
+                    }
+                    else if (dataTable.Rows[0][2].ToString() == "2")
+                    {
+                        DispatcherForm dispatcherForm = new DispatcherForm(this);
+                        Hide();
+                        dispatcherForm.Show();
+                        Client.accessRight = 2;
+                        MessageBox.Show("Авторизация выполнена. Вы вошли как диспетчер " + Client.login);
+                    }
+
+                }
+                else if (dataTable.Rows.Count == 0)
+                {
+                    MessageBox.Show("Введены недействительные данные авторизации"); ;
+                }
             }
-        else if (dataTable.Rows.Count == 0)
+            catch (Exception exception)
             {
-                MessageBox.Show("Введены недействительные данные авторизации"); ;
+                MessageBox.Show(exception.Message);
             }
         }
         private bool textBoxCheck_empty()

@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Client
 {
@@ -40,20 +33,25 @@ namespace Client
             panelDeleting.Enabled = false;
             panelDeleting.Visible = false;
         }
-        public WorkPassengersForm()
-        {
-        }
-
 
         private void buttonBackAvianavForm_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             form.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
-
-
-        private void toolStripButtonView_Click(object sender, EventArgs e)
+        public WorkPassengersForm()
+        { }
+            private void toolStripButtonView_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Select passengers");
             DataTable dataTable = Client.ReceiveSelectPassengers();
 
@@ -74,11 +72,18 @@ namespace Client
 
             PassengersGridView.RowHeadersVisible = false;
             PassengersGridView.ReadOnly = true;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
+            try
+            {
             textBoxSurname.Clear();
             textBoxName.Clear();
             textBoxPatronymic.Clear();
@@ -92,6 +97,11 @@ namespace Client
             panelEditing.Visible = false;
             panelDeleting.Enabled = false;
             panelDeleting.Visible = false;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private bool textBoxCheck_empty()
         {
@@ -159,6 +169,8 @@ namespace Client
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
+            try
+            {
             textBoxNewvalue.Clear();
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
@@ -170,13 +182,18 @@ namespace Client
             panelDeleting.Visible = false;
 
             Client.SendRequestToServer("Select passengersNames");
-            DataTable dataTable_passenger = Client.ReceiveSelectPassengersNames();
-            comboBoxEdit.DataSource = dataTable_passenger;
+            DataTable dataTable = Client.ReceiveSelectPassengersNames();
+            comboBoxEdit.DataSource = dataTable;
             comboBoxEdit.DisplayMember = "ФИО пассажира";
             comboBoxEdit.ValueMember = "Id";
 
             comboBoxEdit.SelectedIndex = -1;
             comboBoxEditCriteria.SelectedIndex = -1;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private bool textBoxComboboxCheck_empty()
         {
@@ -243,7 +260,8 @@ namespace Client
 
         private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
-
+            try
+            {
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = false;
@@ -254,12 +272,17 @@ namespace Client
             panelDeleting.Visible = true;
 
             Client.SendRequestToServer("Select passengersNames");
-            DataTable dataTable_passenger = Client.ReceiveSelectPassengersNames();
-            comboBoxDelete.DataSource = dataTable_passenger;
+            DataTable dataTable = Client.ReceiveSelectPassengersNames();
+            comboBoxDelete.DataSource = dataTable;
             comboBoxDelete.DisplayMember = "ФИО пассажира";
             comboBoxDelete.ValueMember = "Id";
 
             comboBoxDelete.SelectedIndex = -1;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void comboBoxDelete_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -282,6 +305,8 @@ namespace Client
 
         private void buttonAddPassenger_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Add passenger");
 
             string surname = textBoxSurname.Text;
@@ -298,9 +323,16 @@ namespace Client
             {
                 MessageBox.Show("Пассажир с таким ФИО или номером телефона существует");
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void buttonEdit_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Edit passenger");
 
             string command = "";
@@ -347,9 +379,16 @@ namespace Client
             {
                 MessageBox.Show("Пассажир с такими данными существует");
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void buttonDeletePassenger_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Delete passenger");
 
             string id = comboBoxDelete.SelectedValue.ToString();
@@ -362,6 +401,11 @@ namespace Client
             else if (deleted_count == 0)
             {
                 MessageBox.Show("Не найден пассажир с такими данными");
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
             }
         }
         private void WorkPassengersForm_FormClosed(object sender, FormClosedEventArgs e)

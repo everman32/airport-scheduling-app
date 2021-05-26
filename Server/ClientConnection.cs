@@ -23,7 +23,7 @@ namespace Server
             try
             {
                 stream = client.GetStream();
-                byte[] data= new byte[64];
+                byte[] data= new byte[Server.listener.Server.ReceiveBufferSize];
                 StringBuilder builder= new StringBuilder();
                 int bytes = 0;
                 do
@@ -85,12 +85,7 @@ namespace Server
                              (builder.ToString() == "Select AssumedAccountsData")||
                              (builder.ToString() == "Edit account")||
                              (builder.ToString() == "Delete account")||
-                             (builder.ToString() == "Build report")
-
-
-
-
-                         )
+                             (builder.ToString() == "Build report"))
                     {
                         command = builder.ToString();
                     }
@@ -257,13 +252,7 @@ namespace Server
                 if (client != null)
                     client.Close();
             }*/
-          
         }
-
-
-
-
-
         public static byte[] GetBinaryFormatData(DataTable dataTable)
         {
             BinaryFormatter bFormat = new BinaryFormatter();
@@ -285,7 +274,5 @@ namespace Server
             }
             return dataTable;
         }
-
     }
-  
 }

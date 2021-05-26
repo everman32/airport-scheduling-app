@@ -9,7 +9,7 @@ namespace Server
     {
         public static void ReceiveAuthorizationData(NetworkStream stream)
         {
-            byte[] Login = new byte[64];
+            byte[] Login = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -25,7 +25,7 @@ namespace Server
 
             string login = builder.ToString();
 
-            byte[] Password = new byte[64];
+            byte[] Password = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -47,7 +47,7 @@ namespace Server
         }
         public static void ReceiveRegistrationData(NetworkStream stream)
         {
-            byte[] Login = new byte[64];
+            byte[] Login = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -63,7 +63,7 @@ namespace Server
 
             string login = builder.ToString();
 
-            byte[] Password = new byte[64];
+            byte[] Password = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -78,7 +78,7 @@ namespace Server
 
             string password = builder.ToString();
 
-            byte[] AccessRight = new byte[64];
+            byte[] AccessRight = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -114,7 +114,7 @@ namespace Server
         }
         public static void ReceiveDataForEditing(NetworkStream stream)
         {
-            byte[] Login = new byte[64];
+            byte[] Login = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -130,7 +130,7 @@ namespace Server
 
             string login = builder.ToString();
 
-            byte[] Newvalue = new byte[64];
+            byte[] Newvalue = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -154,7 +154,7 @@ namespace Server
         }
         public static void ReceiveDataForDeleting(NetworkStream stream)
         {
-            byte[] Login = new byte[64];
+            byte[] Login = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -178,7 +178,7 @@ namespace Server
 
         public static void ReceiveDataForBuildReport(NetworkStream stream)
         {
-            byte[] Id = new byte[64];
+            byte[] Id = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do

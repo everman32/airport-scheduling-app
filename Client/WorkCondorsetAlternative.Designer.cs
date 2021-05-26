@@ -379,8 +379,8 @@ namespace Client
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(877, 429);
-            this.Controls.Add(this.panelSearchingAlternative);
             this.Controls.Add(this.panelDeleting);
+            this.Controls.Add(this.panelSearchingAlternative);
             this.Controls.Add(this.panelViewing);
             this.Controls.Add(this.buttonBackAvianavForm);
             this.Controls.Add(this.toolStrip1);

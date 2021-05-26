@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Client
@@ -19,8 +14,15 @@ namespace Client
 
         private void buttonBackMainForm_Click(object sender, EventArgs e)
         {
-            Hide();
-            mainPanel.Show();
+            try
+            {
+                Hide();
+                mainPanel.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void LoginRegisterPanel_Load(object sender, EventArgs e)
@@ -30,18 +32,32 @@ namespace Client
 
         private void buttonAuthorizationPanel_Click(object sender, EventArgs e)
         {
+            try
+            {
             LoginForm loginPanel;
             loginPanel = new LoginForm(this);
             Hide();
             loginPanel.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void buttonRegForm_Click(object sender, EventArgs e)
         {
+            try
+            {
             RegistrationForm registrationForm;
             registrationForm = new RegistrationForm(this);
             Hide();
             registrationForm.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void LogRegForm_FormClosed(object sender, FormClosedEventArgs e)

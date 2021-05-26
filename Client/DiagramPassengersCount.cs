@@ -1,16 +1,8 @@
-﻿using Client;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace ClientSide
+namespace Client
 {
     public partial class DiagramPassengersCount : Form
     {
@@ -22,12 +14,6 @@ namespace ClientSide
             form = workCondorsetAlternative;
             dataGridView = ScheduleGridView;
         }
-
-        private void chart1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void GraphDate_Load(object sender, EventArgs e)
         {
             try

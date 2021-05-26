@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
-using ClientSide;
+using Client;
 
 namespace Client
 {
@@ -38,11 +38,19 @@ namespace Client
             panelDeleting.Enabled = false;
             panelDeleting.Visible = false;
         }
-
+        public WorkCondorsetAlternative()
+        { }
         private void buttonBackAvianavForm_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             form.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void WorkCondorsetAlternative_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -52,6 +60,8 @@ namespace Client
 
         private void toolStripButtonSearchAlternative_Click(object sender, EventArgs e)
         {
+            try
+            {
             panelSearchingAlternative.Enabled = true;
             panelSearchingAlternative.Visible = true;
             panelViewing.Enabled = false;
@@ -64,6 +74,11 @@ namespace Client
             comboBoxDestination.DataSource = dataTable_destination;
             comboBoxDestination.DisplayMember = "Name";
             comboBoxDestination.ValueMember = "Id";
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void comboBoxDestination_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -84,6 +99,8 @@ namespace Client
 
         private void toolStripButtonViewSchedule_Click(object sender, EventArgs e)
         {
+            try
+            {
             panelSearchingAlternative.Enabled = false;
             panelSearchingAlternative.Visible = false;
             panelViewing.Enabled = true;
@@ -102,11 +119,18 @@ namespace Client
 
             ScheduleGridView.RowHeadersVisible = false;
             ScheduleGridView.ReadOnly = true;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
 
         private void toolStripButtonDeleteSchedule_Click(object sender, EventArgs e)
         {
+            try
+            {
             panelSearchingAlternative.Enabled = false;
             panelSearchingAlternative.Visible = false;
             panelViewing.Enabled = false;
@@ -121,6 +145,11 @@ namespace Client
             comboBoxDelete.ValueMember = "Id";
 
             comboBoxDelete.SelectedIndex = -1;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -142,6 +171,8 @@ namespace Client
 
         private void buttonGetEstimatedPriorityTimes_Click(object sender, EventArgs e)
         {
+            try
+            {
             labelEstimatedTimes.Visible = true;
 
             string id = comboBoxDestination.SelectedValue.ToString();
@@ -229,6 +260,11 @@ namespace Client
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void buttonSearchAlternative_Click(object sender, EventArgs e)
         {
@@ -245,32 +281,36 @@ namespace Client
             int[] bestAlternative_buf = Client.ReceiveSearchBestAlternative(matrixPairwiseComparison, matrixPairwiseComparison_count);
             ArrayList bestAlternative = new ArrayList(bestAlternative_buf);
   
-            if (bestAlternative.Count==3)
+
+            if (bestAlternative.Count == 1)
             {
-                MessageBox.Show("Наиболее предпочтительные варианты. Парадокс Кондорсе");
-            }
-            else if (bestAlternative.Count == 1)
-            {
-                MessageBox.Show("Наиболее предпочтительные варианты. Наилучшей альтернативой является: а" + bestAlternative[0] + " (" +
-                EstimatedTimesGridView.Rows[0].Cells[Convert.ToInt32(bestAlternative[0])].Value + ") ");
-
-                string IdDestination = comboBoxDestination.SelectedValue.ToString();
-                string finalDate = EstimatedTimesGridView.Rows[0].Cells[Convert.ToInt32(bestAlternative[0])].Value.ToString();
-
-                Client.SendRequestToServer("Add schedule");
-                DataTable dataTable = Client.ReceiveAddScheduleData(IdDestination, finalDate);
-
-                if (dataTable.Rows.Count == 1)
+                if (bestAlternative[0].Equals(0))
                 {
-                    string DestinationName = comboBoxDestination.Text;
-                    MessageBox.Show("Расписание для пункта назначения " + DestinationName + " составлено. Время отправления: " +
-                      finalDate);
-                    writetoPdf(DestinationName, finalDate);
-                    buttonReportPassengersFlight.Visible = true;
+                    MessageBox.Show("Наиболее предпочтительные варианты. Парадокс Кондорсе");
                 }
-                else if (dataTable.Rows.Count == 0)
+                else
                 {
-                    MessageBox.Show("Не удалось добавить расписание для пункта назначения, расписание для этого пункта назначения существует");
+                    MessageBox.Show("Наиболее предпочтительные варианты. Наилучшей альтернативой является: а" + bestAlternative[0] + " (" +
+                    EstimatedTimesGridView.Rows[0].Cells[Convert.ToInt32(bestAlternative[0])].Value + ") ");
+
+                    string IdDestination = comboBoxDestination.SelectedValue.ToString();
+                    string finalDate = EstimatedTimesGridView.Rows[0].Cells[Convert.ToInt32(bestAlternative[0])].Value.ToString();
+
+                    Client.SendRequestToServer("Add schedule");
+                    DataTable dataTable = Client.ReceiveAddScheduleData(IdDestination, finalDate);
+
+                    if (dataTable.Rows.Count == 1)
+                    {
+                        string DestinationName = comboBoxDestination.Text;
+                        MessageBox.Show("Расписание для пункта назначения " + DestinationName + " составлено. Время отправления: " +
+                          finalDate);
+                        writetoPdf(DestinationName, finalDate);
+                        buttonReportPassengersFlight.Visible = true;
+                    }
+                    else if (dataTable.Rows.Count == 0)
+                    {
+                        MessageBox.Show("Не удалось добавить расписание для пункта назначения, расписание для этого пункта назначения существует");
+                    }
                 }
             }
             else if (bestAlternative.Count == 2)
@@ -299,7 +339,7 @@ namespace Client
                     MessageBox.Show("Не удалось добавить расписание для пункта назначения, расписание для этого пункта назначения существует");
                 }
             }
-            
+          
         }
         private void buttonGraphDate_Click(object sender, EventArgs e)
         {
@@ -309,6 +349,8 @@ namespace Client
         }
         private void buttonDeleteSchedule_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Delete schedule");
 
             string id = comboBoxDelete.SelectedValue.ToString();
@@ -322,11 +364,18 @@ namespace Client
             {
                 MessageBox.Show("Такого расписания на полёт не существует");
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
 
          private void buttonReportPassengersFlight_Click(object sender, EventArgs e)
         {
+            try
+            {
                 Client.SendRequestToServer("Build report");
 
                 string id = comboBoxDestination.SelectedValue.ToString();
@@ -334,6 +383,11 @@ namespace Client
 
                 string name = comboBoxDestination.Text;
                 writePassengerstoPdf(id, name, dataTable);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void writePassengerstoPdf(string id, string name, DataTable dataTable)
         {
@@ -452,7 +506,7 @@ namespace Client
     {
         PdfPTable table = new PdfPTable(PriorityTimesGridView.Columns.Count);
         PdfPCell cell = new PdfPCell(new Phrase("\nМатрица приоритетных дат", font));
-            cell.Colspan = EstimatedTimesGridView.Columns.Count;
+            cell.Colspan = PriorityTimesGridView.Columns.Count;
             cell.HorizontalAlignment = 1;
             cell.Border = 0;
             table.AddCell(cell);
@@ -476,7 +530,7 @@ namespace Client
         {
             PdfPTable table = new PdfPTable(PreferencesGridView.Columns.Count);
             PdfPCell cell = new PdfPCell(new Phrase("\nМатрица предпочтений", font));
-            cell.Colspan = EstimatedTimesGridView.Columns.Count;
+            cell.Colspan = PreferencesGridView.Columns.Count;
             cell.HorizontalAlignment = 1;
             cell.Border = 0;
             table.AddCell(cell);
@@ -499,7 +553,7 @@ namespace Client
         {
             PdfPTable table = new PdfPTable(PairwiseComparisonGridView.Columns.Count);
             PdfPCell cell = new PdfPCell(new Phrase("\nМатрица попарных сравнений", font));
-            cell.Colspan = EstimatedTimesGridView.Columns.Count;
+            cell.Colspan = PairwiseComparisonGridView.Columns.Count;
             cell.HorizontalAlignment = 1;
             cell.Border = 0;
             table.AddCell(cell);

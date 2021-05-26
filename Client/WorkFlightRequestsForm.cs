@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Client
@@ -43,19 +39,30 @@ namespace Client
             panelDeleting.Enabled = false;
             panelDeleting.Visible = false;
         }
+        public WorkFlightRequestsForm()
+        { }
+
         private void WorkFlightRequestsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
         private void buttonBackAvianavForm_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             form1.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
-
 
         private void toolStripButtonView_Click (object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Select flightrequests");
             DataTable dataTable = Client.ReceiveSelectFlightRequests();
 
@@ -76,11 +83,18 @@ namespace Client
 
             FlightRequestsGridView.RowHeadersVisible = false;
             FlightRequestsGridView.ReadOnly = true;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
+            try
+            {
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = true;
@@ -108,6 +122,11 @@ namespace Client
             comboBoxHighestPriorityTime.SelectedIndex = -1;
             comboBoxMediumPriorityTime.SelectedIndex = -1;
             comboBoxLowestPriorityTime.SelectedIndex = -1;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void comboBoxDestination_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -198,6 +217,8 @@ namespace Client
         }
         private void buttonGetTime_Click(object sender, EventArgs e)
         {
+            try
+            {
             labelHighestPriorityTime.Visible = true;
             labelMediumPriorityTime.Visible = true;
             labelLowestPriorityTime.Visible = true;
@@ -225,11 +246,18 @@ namespace Client
             comboBoxHighestPriorityTime.SelectedIndex = -1;
             comboBoxMediumPriorityTime.SelectedIndex = -1;
             comboBoxLowestPriorityTime.SelectedIndex = -1;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
+            try
+            {
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = false;
@@ -240,8 +268,8 @@ namespace Client
             panelDeleting.Visible = false;
 
             Client.SendRequestToServer("Select flightrequestsNames");
-            DataTable dataTable_flightrequest = Client.ReceiveSelectFlightrequestsNames();
-            comboBoxEdit.DataSource = dataTable_flightrequest;
+            DataTable dataTable = Client.ReceiveSelectFlightrequestsNames();
+            comboBoxEdit.DataSource = dataTable;
             comboBoxEdit.DisplayMember = "Заявка";
             comboBoxEdit.ValueMember = "Id";
 
@@ -249,6 +277,11 @@ namespace Client
             comboBoxEditHighestPriorityTime.SelectedIndex = -1;
             comboBoxEditMediumPriorityTime.SelectedIndex = -1;
             comboBoxEditLowestPriorityTime.SelectedIndex = -1;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void comboBoxEdit_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -323,6 +356,8 @@ namespace Client
         }
         private void buttonEditGetTime_Click(object sender, EventArgs e)
         {
+            try
+            {
             string id = comboBoxEdit.SelectedValue.ToString();
 
             Client.SendRequestToServer("Select prioritytimes");
@@ -359,11 +394,18 @@ namespace Client
             {
                 MessageBox.Show("Такой заявки не существует");
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
 
         private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
+            try
+            {
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = false;
@@ -374,12 +416,17 @@ namespace Client
             panelDeleting.Visible = true;
 
             Client.SendRequestToServer("Select flightrequestsNames");
-            DataTable dataTable_flightrequest = Client.ReceiveSelectFlightrequestsNames();
-            comboBoxDelete.DataSource = dataTable_flightrequest;
+            DataTable dataTable = Client.ReceiveSelectFlightrequestsNames();
+            comboBoxDelete.DataSource = dataTable;
             comboBoxDelete.DisplayMember = "Заявка";
             comboBoxDelete.ValueMember = "Id";
 
             comboBoxDelete.SelectedIndex = -1;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private bool comboBoxDeleteCheck_empty()
         {
@@ -402,6 +449,8 @@ namespace Client
 
         private void buttonAddDestination_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Add flightrequest");
 
             string idpassenger = comboBoxPassenger.SelectedValue.ToString();
@@ -422,9 +471,16 @@ namespace Client
             {
                 MessageBox.Show("Заявка на полёт с такими данными существует");
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void buttonEditFlightRequest_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Edit flightrequest");
 
             string id = comboBoxEdit.SelectedValue.ToString();
@@ -444,9 +500,16 @@ namespace Client
             {
                 MessageBox.Show("Такой заявки не существует");
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void buttonDeleteDestination_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Delete flightrequest");
 
             string id = comboBoxDelete.SelectedValue.ToString();
@@ -459,6 +522,11 @@ namespace Client
             else if (deleted_count == 0)
             {
                 MessageBox.Show("Такой заявки не существует");
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
             }
         }
 

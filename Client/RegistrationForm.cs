@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Client
@@ -18,14 +14,16 @@ namespace Client
         }
         private void buttonRegistration_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Register");
 
                 int accessRight = 2;
 
-            string selected_login = textBoxLogin.Text;
-            string selected_password = textBoxPass.Text;
+            string login = textBoxLogin.Text;
+            string password = textBoxPass.Text;
            
-            DataTable dataTable = Client.ReceiveRegisterData(selected_login, selected_password, accessRight);
+            DataTable dataTable = Client.ReceiveRegisterData(login, password, accessRight);
             if (dataTable.Rows.Count == 1)
             {
                 if (dataTable.Rows[0][2].ToString() == "1")
@@ -44,17 +42,29 @@ namespace Client
                 }
                 Client.login = textBoxLogin.Text;
                 Client.password = textBoxPass.Text;
-                MessageBox.Show("Регистрация выполнена. Вы вошли как "+Client.login);
+                MessageBox.Show("Регистрация выполнена. Вы вошли как диспетчер "+Client.login);
             }
             else if (dataTable.Rows.Count == 0)
             {
                 MessageBox.Show("Учётная запись с такими данными существует"); ;
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void buttonBackLogRegForm_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             form.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private bool textBoxCheck_empty()
         {

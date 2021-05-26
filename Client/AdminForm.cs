@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Client
@@ -31,8 +26,15 @@ namespace Client
 
         private void buttonBackLogin_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             form.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
@@ -47,36 +49,71 @@ namespace Client
 
         private void buttonWorkPassengers_Click(object sender, EventArgs e)
         {
-            Hide();
-            workPassengersForm.Show();
+            try
+            {
+                Hide();
+                workPassengersForm.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void buttonWorkDestinations_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             workDestinationsForm.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void buttonWorkFlightRequests_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             workFlightRequestsForm.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void buttonSearchBestAlternative_Click(object sender, EventArgs e)
         {
+            try
+            {
             WorkCondorsetAlternative workCondorsetAlternative;
             workCondorsetAlternative = new WorkCondorsetAlternative(this);
 
             Hide();
             workCondorsetAlternative.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void buttonWorkAccounts_Click(object sender, EventArgs e)
         {
-            WorkAccountsForm workAccountsForm;
-            workAccountsForm = new WorkAccountsForm(this);
-            workAccountsForm.Show();
+            try
+            {
+                WorkAccountsForm workAccountsForm;
+                workAccountsForm = new WorkAccountsForm(this);
+                workAccountsForm.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }

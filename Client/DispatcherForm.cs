@@ -28,28 +28,60 @@ namespace Client
         {
             InitializeComponent();
             form = registrationForm;
+
+            workPassengersForm = new WorkPassengersForm(this);
+            workDestinationsForm = new WorkDestinationsForm(this);
+            workFlightRequestsForm = new WorkFlightRequestsForm(this, workPassengersForm, workDestinationsForm);
         }
 
         private void buttonBackLogReg_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             form.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void buttonWorkClients_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             workPassengersForm.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void buttonWorkDestinations_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             workDestinationsForm.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void buttonWorkFlightRequests_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             workFlightRequestsForm.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void AvianavigationSpecialistForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -59,11 +91,18 @@ namespace Client
 
         private void buttonSearchBestAlternative_Click(object sender, EventArgs e)
         {
+            try
+            {
             WorkCondorsetAlternative workCondorsetAlternative;
             workCondorsetAlternative = new WorkCondorsetAlternative(this);
 
             Hide();
             workCondorsetAlternative.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }

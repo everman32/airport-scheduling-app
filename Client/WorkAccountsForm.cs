@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Client
@@ -24,14 +20,24 @@ namespace Client
             panelDeleting.Enabled = false;
             panelDeleting.Visible = false;
         }
-
+        public WorkAccountsForm()
+        { }
         private void buttonBackAvianavForm_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             form.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void toolStripButtonView_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Select accounts");
             DataTable dataTable = Client.ReceiveSelectAccounts();
 
@@ -52,11 +58,18 @@ namespace Client
 
             AccountsGridView.RowHeadersVisible = false;
             AccountsGridView.ReadOnly = true;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
+            try
+            {
             textBoxLogin.Clear();
             textBoxPass.Clear();
 
@@ -70,6 +83,11 @@ namespace Client
             panelDeleting.Visible = false;
 
             comboBoxAccessRight.SelectedIndex = -1;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void textBoxLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -118,6 +136,8 @@ namespace Client
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
+            try
+            {
             textBoxNewvalue.Clear();
 
             panelViewing.Enabled = false;
@@ -130,12 +150,17 @@ namespace Client
             panelDeleting.Visible = false;
 
             Client.SendRequestToServer("Select AssumedAccountsData");
-            DataTable dataTable_account = Client.ReceiveSelectAssumedAccountsData();
-            comboBoxEditLogin.DataSource = dataTable_account;
+            DataTable dataTable = Client.ReceiveSelectAssumedAccountsData();
+            comboBoxEditLogin.DataSource = dataTable;
             comboBoxEditLogin.DisplayMember = "Данные учётной записи";
             comboBoxEditLogin.ValueMember = "Login";
 
             comboBoxEditLogin.SelectedIndex = -1;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void textBoxNewvalue_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -171,6 +196,8 @@ namespace Client
 
         private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
+            try
+            {
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = false;
@@ -181,12 +208,17 @@ namespace Client
             panelDeleting.Visible = true;
 
             Client.SendRequestToServer("Select AssumedAccountsData");
-            DataTable dataTable_account = Client.ReceiveSelectAssumedAccountsData();
-            comboBoxDelete.DataSource = dataTable_account;
+            DataTable dataTable = Client.ReceiveSelectAssumedAccountsData();
+            comboBoxDelete.DataSource = dataTable;
             comboBoxDelete.DisplayMember = "Данные учётной записи";
             comboBoxDelete.ValueMember = "Login";
 
             comboBoxDelete.SelectedIndex = -1;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void comboBoxDelete_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -210,6 +242,8 @@ namespace Client
 
         private void buttonRegistration_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Register");
 
             int accessRight = 0;
@@ -233,6 +267,11 @@ namespace Client
             {
                 MessageBox.Show("Учётная запись с таким логином существует"); ;
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
 
@@ -244,6 +283,8 @@ namespace Client
 
         private void buttonEditPassenger_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Edit account");
 
 
@@ -259,10 +300,17 @@ namespace Client
             {
                 MessageBox.Show("Учётной записи с таким логином не существует");
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void buttonDeleteAccount_Click(object sender, EventArgs e)
         {
+            try
+            {
             if (Client.login == comboBoxDelete.SelectedValue.ToString())
             {
                 MessageBox.Show("Нельзя удалить учётную запись, с которой выполнен вход в систему");
@@ -271,20 +319,23 @@ namespace Client
             {
                 Client.SendRequestToServer("Delete account");
 
-                string selected_login = comboBoxDelete.SelectedValue.ToString();
+                string login = comboBoxDelete.SelectedValue.ToString();
 
-                int deleted_count = Client.ReceiveDeleteAccountData(selected_login);
+                int deleted_count = Client.ReceiveDeleteAccountData(login);
                 if (deleted_count == 1)
                 {
-                    MessageBox.Show("Удаление учётной записи с логином " + selected_login + " выполнено");
+                    MessageBox.Show("Удаление учётной записи с логином " + login + " выполнено");
                 }
                 else if (deleted_count == 0)
                 {
                     MessageBox.Show("Учётная запись с таким логином не существует");
                 }
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
-
-
     }
 }

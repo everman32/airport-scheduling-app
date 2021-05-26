@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Client
@@ -38,17 +34,23 @@ namespace Client
             panelDeleting.Visible = false;
         }
         public WorkDestinationsForm()
-        {
-        }
+        { }
         private void buttonBackAvianavForm_Click(object sender, EventArgs e)
         {
+            try
+            {
             Hide();
             form.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
-
-
         private void toolStripButtonView_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Select destinations");
             DataTable dataTable = Client.ReceiveSelectDestinations();
 
@@ -69,11 +71,18 @@ namespace Client
 
             DestinationsGridView.RowHeadersVisible = false;
             DestinationsGridView.ReadOnly = true;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
+            try
+            {
             textBoxName.Clear();
             textBoxFlightDuration.Clear();
             textBoxAirplaneModel.Clear();
@@ -89,6 +98,11 @@ namespace Client
             panelEditing.Visible = false;
             panelDeleting.Enabled = false;
             panelDeleting.Visible = false;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private bool textBoxCheck_empty()
         {
@@ -157,6 +171,8 @@ namespace Client
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
+            try
+            {
             maskedTextBoxNewvalueDate.Clear();
             textBoxNewvalue.Clear();
             panelViewing.Enabled = false;
@@ -169,13 +185,18 @@ namespace Client
             panelDeleting.Visible = false;
 
             Client.SendRequestToServer("Select destinationsNames");
-            DataTable dataTable_destination = Client.ReceiveSelectDestinationsNames();
-            comboBoxEdit.DataSource = dataTable_destination;
+            DataTable dataTable = Client.ReceiveSelectDestinationsNames();
+            comboBoxEdit.DataSource = dataTable;
             comboBoxEdit.DisplayMember = "Name";
             comboBoxEdit.ValueMember = "Id";
 
             comboBoxEdit.SelectedIndex = -1;
             comboBoxEditCriteria.SelectedIndex = -1;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private bool textBoxComboboxCheck_empty()
         {
@@ -272,6 +293,8 @@ namespace Client
 
         private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
+            try
+            {
             panelViewing.Enabled = false;
             panelViewing.Visible = false;
             panelAdding.Enabled = false;
@@ -282,12 +305,17 @@ namespace Client
             panelDeleting.Visible = true;
 
             Client.SendRequestToServer("Select destinationsNames");
-            DataTable dataTable_destination = Client.ReceiveSelectDestinationsNames();
-            comboBoxDelete.DataSource = dataTable_destination;
+            DataTable dataTable = Client.ReceiveSelectDestinationsNames();
+            comboBoxDelete.DataSource = dataTable;
             comboBoxDelete.DisplayMember = "Name";
             comboBoxDelete.ValueMember = "Id";
 
             comboBoxDelete.SelectedIndex = -1;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -310,6 +338,8 @@ namespace Client
 
         private void buttonAddDestination_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Add destination");
 
             string name = textBoxName.Text;
@@ -331,9 +361,16 @@ namespace Client
             {
                 MessageBox.Show("Пункт назначения с такими данными существует");
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void buttonEditDestination_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Edit destination");
 
             string command = "";
@@ -403,9 +440,16 @@ namespace Client
             {
                 MessageBox.Show("Пункта назначения с такими данными не существует");
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void buttonDeletePassenger_Click(object sender, EventArgs e)
         {
+            try
+            {
             Client.SendRequestToServer("Delete destination");
 
             string id = comboBoxDelete.SelectedValue.ToString();
@@ -419,20 +463,28 @@ namespace Client
             {
                 MessageBox.Show("Пункта назначения с такими данными не существует");
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void WorkDestinationsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
-
-
         private void buttonFlightDurations_Click(object sender, EventArgs e)
         {
-            GraphFlightDuration diagramFlightDuration;
-            diagramFlightDuration = new GraphFlightDuration(this, DestinationsGridView);
-            diagramFlightDuration.Show();
+            try
+            {
+            GraphFlightDuration graphFlightDuration;
+            graphFlightDuration = new GraphFlightDuration(this, DestinationsGridView);
+            graphFlightDuration.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
-
-
     }
 }

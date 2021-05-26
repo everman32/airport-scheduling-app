@@ -16,7 +16,7 @@ namespace Server
         }
         public static void ReceiveDataForAdditing(NetworkStream stream)
         {
-            byte[] idDestination = new byte[64];
+            byte[] idDestination = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -32,7 +32,7 @@ namespace Server
 
             string iddestination = builder.ToString();
 
-            byte[] finalDate = new byte[64];
+            byte[] finalDate = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -54,7 +54,7 @@ namespace Server
         }
         public static void ReceiveDataForAdditingWithReserve(NetworkStream stream)
         {
-            byte[] idDestination = new byte[64];
+            byte[] idDestination = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -70,7 +70,7 @@ namespace Server
 
             string iddestination = builder.ToString();
 
-            byte[] finalDate = new byte[64];
+            byte[] finalDate = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -85,7 +85,7 @@ namespace Server
 
             string finaldate = builder.ToString();
 
-            byte[] reserveDate = new byte[64];
+            byte[] reserveDate = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -107,7 +107,7 @@ namespace Server
         }
         public static void ReceiveDataForDeleting(NetworkStream stream)
         {
-            byte[] Id = new byte[64];
+            byte[] Id = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -135,8 +135,5 @@ namespace Server
             stream.Write(data, 0, data.Length);
             stream.Flush();
         }
-
-
-
     }
 }

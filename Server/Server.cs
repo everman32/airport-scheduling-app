@@ -8,8 +8,8 @@ namespace Server
 {
     class Server
     {
-        static TcpListener listener;
-        static public int client_count=0;
+        static public TcpListener listener;
+        static public int client_count =0;
         static public int port = 0;
        static public void Run(int selected_port)
         {

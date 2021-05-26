@@ -16,7 +16,7 @@ namespace Server
         }
         public static void ReceiveDataForAdditing(NetworkStream stream)
         {
-            byte[] Surname = new byte[64];
+            byte[] Surname = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -32,7 +32,7 @@ namespace Server
 
             string surname = builder.ToString();
 
-            byte[] Name = new byte[64];
+            byte[] Name = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -47,7 +47,7 @@ namespace Server
 
             string name = builder.ToString();
 
-            byte[] Patronymic = new byte[64];
+            byte[] Patronymic = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -62,7 +62,7 @@ namespace Server
 
             string patronymic = builder.ToString();
 
-            byte[] PhoneNumber = new byte[64];
+            byte[] PhoneNumber = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -84,7 +84,7 @@ namespace Server
         }
         public static void ReceiveDataForEditing(NetworkStream stream)
         {
-            byte[] Id = new byte[64];
+            byte[] Id = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -100,7 +100,7 @@ namespace Server
 
             string id = builder.ToString();
 
-            byte[] Newvalue = new byte[64];
+            byte[] Newvalue = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -115,7 +115,7 @@ namespace Server
 
             string newvalue = builder.ToString();
 
-            byte[] Command = new byte[64];
+            byte[] Command = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -155,7 +155,7 @@ namespace Server
         }
         public static void ReceiveDataForDeleting(NetworkStream stream)
         {
-            byte[] Id = new byte[64];
+            byte[] Id = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do

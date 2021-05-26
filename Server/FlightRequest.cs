@@ -37,7 +37,7 @@ namespace Server
         }
         public static void SendSelectingEstimatedtimes(NetworkStream stream)
         {
-            byte[] Id = new byte[64];
+            byte[] Id = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -60,7 +60,7 @@ namespace Server
         }
         public static void SendSelectingPriorityTimes(NetworkStream stream)
         {
-            byte[] Id = new byte[64];
+            byte[] Id = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -84,7 +84,7 @@ namespace Server
 
         public static void ReceiveDataForAdditing(NetworkStream stream)
         {
-            byte[] idPassenger = new byte[64];
+            byte[] idPassenger = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -100,7 +100,7 @@ namespace Server
 
             string idpassenger = builder.ToString();
 
-            byte[] idDestination = new byte[64];
+            byte[] idDestination = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -115,7 +115,7 @@ namespace Server
 
             string iddestination = builder.ToString();
 
-            byte[] highestPrioritytime = new byte[64];
+            byte[] highestPrioritytime = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -130,7 +130,7 @@ namespace Server
 
             string highestprioritytime = builder.ToString();
 
-            byte[] mediumPrioritytime = new byte[64];
+            byte[] mediumPrioritytime = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -145,7 +145,7 @@ namespace Server
 
             string mediumprioritytime = builder.ToString();
 
-            byte[] lowestPrioritytime = new byte[64];
+            byte[] lowestPrioritytime = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -167,7 +167,7 @@ namespace Server
         }
         public static void ReceiveDataForEditing(NetworkStream stream)
         {
-            byte[] Id = new byte[64];
+            byte[] Id = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do
@@ -183,7 +183,7 @@ namespace Server
 
             string id = builder.ToString();
 
-            byte[] highestPriorityTime = new byte[64];
+            byte[] highestPriorityTime = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -198,7 +198,7 @@ namespace Server
 
             string highestprioritytime = builder.ToString();
 
-            byte[] mediumPriorityTime = new byte[64];
+            byte[] mediumPriorityTime = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -213,7 +213,7 @@ namespace Server
 
             string mediumprioritytime = builder.ToString();
 
-            byte[] lowestPriorityTime = new byte[64];
+            byte[] lowestPriorityTime = new byte[Server.listener.Server.ReceiveBufferSize];
             builder = new StringBuilder();
             bytes = 0;
             do
@@ -237,7 +237,7 @@ namespace Server
         }
         public static void ReceiveDataForDeleting(NetworkStream stream)
         {
-            byte[] Id = new byte[64];
+            byte[] Id = new byte[Server.listener.Server.ReceiveBufferSize];
             StringBuilder builder = new StringBuilder();
             int bytes = 0;
             do

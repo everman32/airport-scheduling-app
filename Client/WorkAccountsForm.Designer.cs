@@ -236,7 +236,7 @@ namespace Client
             this.panelViewing.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelViewing.Controls.Add(this.AccountsGridView);
             this.panelViewing.Enabled = false;
-            this.panelViewing.Location = new System.Drawing.Point(109, 46);
+            this.panelViewing.Location = new System.Drawing.Point(109, 53);
             this.panelViewing.Name = "panelViewing";
             this.panelViewing.Size = new System.Drawing.Size(581, 230);
             this.panelViewing.TabIndex = 21;
@@ -365,9 +365,9 @@ namespace Client
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(795, 339);
-            this.Controls.Add(this.panelAdding);
             this.Controls.Add(this.panelEditing);
             this.Controls.Add(this.panelDeleting);
+            this.Controls.Add(this.panelAdding);
             this.Controls.Add(this.panelViewing);
             this.Controls.Add(this.buttonBackAvianavForm);
             this.Controls.Add(this.toolStrip1);

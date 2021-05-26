@@ -75,7 +75,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -124,7 +124,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -138,7 +138,7 @@ namespace Client
 
         static public DataTable ReceiveSelectPassengers()
         {
-            byte[] data = new byte[100000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             int bytes = 0;
             do
             {
@@ -199,7 +199,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
 
             do
@@ -249,7 +249,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -274,7 +274,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[64];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -289,7 +289,7 @@ namespace Client
 
         static public DataTable ReceiveSelectDestinations()
         {
-            byte[] data = new byte[100000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             int bytes = 0;
             do
             {
@@ -374,7 +374,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
 
             do
@@ -424,7 +424,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -449,7 +449,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[64];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -464,7 +464,7 @@ namespace Client
 
         static public DataTable ReceiveSelectFlightRequests()
         {
-            byte[] data = new byte[100000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             int bytes = 0;
             do
             {
@@ -477,7 +477,7 @@ namespace Client
         }
         static public DataTable ReceiveSelectDestinationsNames()
         {
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             int bytes = 0;
             do
             {
@@ -490,7 +490,7 @@ namespace Client
         }
         static public DataTable ReceiveSelectFlightrequestsNames()
         {
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             int bytes = 0;
             do
             {
@@ -503,7 +503,7 @@ namespace Client
         }
         static public DataTable ReceiveSelectSchedulesNames()
         {
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             int bytes = 0;
             do
             {
@@ -516,7 +516,7 @@ namespace Client
         }
         static public DataTable ReceiveSelectPassengersNames()
         {
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             int bytes = 0;
             do
             {
@@ -541,7 +541,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -615,7 +615,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
 
             do
@@ -678,7 +678,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -703,7 +703,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -728,7 +728,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[64];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -743,7 +743,7 @@ namespace Client
 
         static public DataTable ReceiveSelectDestinationsNamesCondorcet()
         {
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             int bytes = 0;
             do
             {
@@ -768,7 +768,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -793,7 +793,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -818,7 +818,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -844,7 +844,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -886,7 +886,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[64];
+            byte[] data = new byte[client.ReceiveBufferSize];
             StringBuilder builder= new StringBuilder();
             bytes = 0;
             do
@@ -934,7 +934,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
 
             do
@@ -984,7 +984,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
 
             do
@@ -998,7 +998,7 @@ namespace Client
         }
         static public DataTable ReceiveSelectSchedule()
         {
-            byte[] data = new byte[100000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             int bytes = 0;
             do
             {
@@ -1023,7 +1023,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[64];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -1039,7 +1039,7 @@ namespace Client
 
         static public DataTable ReceiveSelectAccounts()
         {
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             int bytes = 0;
             do
             {
@@ -1052,7 +1052,7 @@ namespace Client
         }
         static public DataTable ReceiveSelectAssumedAccountsData()
         {
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             int bytes = 0;
             do
             {
@@ -1089,7 +1089,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[10000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -1114,7 +1114,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[64];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -1153,7 +1153,7 @@ namespace Client
             }
             while (stream.DataAvailable);
 
-            byte[] data = new byte[100000];
+            byte[] data = new byte[client.ReceiveBufferSize];
             bytes = 0;
             do
             {
@@ -1174,9 +1174,5 @@ namespace Client
             }
             return dataTable;
         }
-
-
-
-
     }
 }
