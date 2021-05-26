@@ -95,7 +95,7 @@ namespace Client
             this.panelDeleting.Enabled = false;
             this.panelDeleting.Location = new System.Drawing.Point(229, 70);
             this.panelDeleting.Name = "panelDeleting";
-            this.panelDeleting.Size = new System.Drawing.Size(299, 160);
+            this.panelDeleting.Size = new System.Drawing.Size(346, 160);
             this.panelDeleting.TabIndex = 23;
             // 
             // comboBoxDelete
@@ -105,7 +105,7 @@ namespace Client
             this.comboBoxDelete.FormattingEnabled = true;
             this.comboBoxDelete.Location = new System.Drawing.Point(4, 50);
             this.comboBoxDelete.Name = "comboBoxDelete";
-            this.comboBoxDelete.Size = new System.Drawing.Size(289, 28);
+            this.comboBoxDelete.Size = new System.Drawing.Size(339, 28);
             this.comboBoxDelete.TabIndex = 3;
             this.comboBoxDelete.SelectedIndexChanged += new System.EventHandler(this.comboBoxDelete_SelectedIndexChanged);
             // 
@@ -114,7 +114,7 @@ namespace Client
             this.buttonDeleteFlightRequest.Enabled = false;
             this.buttonDeleteFlightRequest.Location = new System.Drawing.Point(10, 114);
             this.buttonDeleteFlightRequest.Name = "buttonDeleteFlightRequest";
-            this.buttonDeleteFlightRequest.Size = new System.Drawing.Size(153, 32);
+            this.buttonDeleteFlightRequest.Size = new System.Drawing.Size(179, 32);
             this.buttonDeleteFlightRequest.TabIndex = 2;
             this.buttonDeleteFlightRequest.Text = "Удалить";
             this.buttonDeleteFlightRequest.UseVisualStyleBackColor = true;
@@ -147,7 +147,7 @@ namespace Client
             this.panelEditing.Enabled = false;
             this.panelEditing.Location = new System.Drawing.Point(234, 54);
             this.panelEditing.Name = "panelEditing";
-            this.panelEditing.Size = new System.Drawing.Size(433, 274);
+            this.panelEditing.Size = new System.Drawing.Size(467, 274);
             this.panelEditing.TabIndex = 22;
             // 
             // comboBoxEdit
@@ -157,7 +157,7 @@ namespace Client
             this.comboBoxEdit.FormattingEnabled = true;
             this.comboBoxEdit.Location = new System.Drawing.Point(6, 21);
             this.comboBoxEdit.Name = "comboBoxEdit";
-            this.comboBoxEdit.Size = new System.Drawing.Size(289, 28);
+            this.comboBoxEdit.Size = new System.Drawing.Size(335, 28);
             this.comboBoxEdit.TabIndex = 34;
             this.comboBoxEdit.SelectedIndexChanged += new System.EventHandler(this.comboBoxEdit_SelectedIndexChanged);
             // 
@@ -196,7 +196,7 @@ namespace Client
             // buttonEditGetTime
             // 
             this.buttonEditGetTime.Enabled = false;
-            this.buttonEditGetTime.Location = new System.Drawing.Point(323, 20);
+            this.buttonEditGetTime.Location = new System.Drawing.Point(347, 20);
             this.buttonEditGetTime.Name = "buttonEditGetTime";
             this.buttonEditGetTime.Size = new System.Drawing.Size(101, 29);
             this.buttonEditGetTime.TabIndex = 30;
@@ -211,7 +211,7 @@ namespace Client
             this.comboBoxEditLowestPriorityTime.FormattingEnabled = true;
             this.comboBoxEditLowestPriorityTime.Location = new System.Drawing.Point(10, 182);
             this.comboBoxEditLowestPriorityTime.Name = "comboBoxEditLowestPriorityTime";
-            this.comboBoxEditLowestPriorityTime.Size = new System.Drawing.Size(148, 28);
+            this.comboBoxEditLowestPriorityTime.Size = new System.Drawing.Size(157, 28);
             this.comboBoxEditLowestPriorityTime.TabIndex = 29;
             this.comboBoxEditLowestPriorityTime.Visible = false;
             this.comboBoxEditLowestPriorityTime.SelectedIndexChanged += new System.EventHandler(this.comboBoxEditLowestPriorityTime_SelectedIndexChanged);
@@ -223,7 +223,7 @@ namespace Client
             this.comboBoxEditMediumPriorityTime.FormattingEnabled = true;
             this.comboBoxEditMediumPriorityTime.Location = new System.Drawing.Point(9, 130);
             this.comboBoxEditMediumPriorityTime.Name = "comboBoxEditMediumPriorityTime";
-            this.comboBoxEditMediumPriorityTime.Size = new System.Drawing.Size(149, 28);
+            this.comboBoxEditMediumPriorityTime.Size = new System.Drawing.Size(158, 28);
             this.comboBoxEditMediumPriorityTime.TabIndex = 28;
             this.comboBoxEditMediumPriorityTime.Visible = false;
             this.comboBoxEditMediumPriorityTime.SelectedIndexChanged += new System.EventHandler(this.comboBoxEditMediumPriorityTime_SelectedIndexChanged);
@@ -235,7 +235,7 @@ namespace Client
             this.comboBoxEditHighestPriorityTime.FormattingEnabled = true;
             this.comboBoxEditHighestPriorityTime.Location = new System.Drawing.Point(9, 79);
             this.comboBoxEditHighestPriorityTime.Name = "comboBoxEditHighestPriorityTime";
-            this.comboBoxEditHighestPriorityTime.Size = new System.Drawing.Size(149, 28);
+            this.comboBoxEditHighestPriorityTime.Size = new System.Drawing.Size(158, 28);
             this.comboBoxEditHighestPriorityTime.TabIndex = 27;
             this.comboBoxEditHighestPriorityTime.Visible = false;
             this.comboBoxEditHighestPriorityTime.SelectedIndexChanged += new System.EventHandler(this.comboBoxEditHighestPriorityTime_SelectedIndexChanged);
@@ -274,7 +274,7 @@ namespace Client
             this.buttonEditFlightRequest.Enabled = false;
             this.buttonEditFlightRequest.Location = new System.Drawing.Point(10, 230);
             this.buttonEditFlightRequest.Name = "buttonEditFlightRequest";
-            this.buttonEditFlightRequest.Size = new System.Drawing.Size(148, 32);
+            this.buttonEditFlightRequest.Size = new System.Drawing.Size(157, 32);
             this.buttonEditFlightRequest.TabIndex = 6;
             this.buttonEditFlightRequest.Text = "Редактировать";
             this.buttonEditFlightRequest.UseVisualStyleBackColor = true;
@@ -443,7 +443,7 @@ namespace Client
             this.panelViewing.Controls.Add(this.FlightRequestsGridView);
             this.panelViewing.Location = new System.Drawing.Point(6, 24);
             this.panelViewing.Name = "panelViewing";
-            this.panelViewing.Size = new System.Drawing.Size(836, 270);
+            this.panelViewing.Size = new System.Drawing.Size(836, 257);
             this.panelViewing.TabIndex = 20;
             // 
             // FlightRequestsGridView
@@ -454,7 +454,7 @@ namespace Client
             this.FlightRequestsGridView.Location = new System.Drawing.Point(6, 10);
             this.FlightRequestsGridView.Name = "FlightRequestsGridView";
             this.FlightRequestsGridView.RowTemplate.Height = 25;
-            this.FlightRequestsGridView.Size = new System.Drawing.Size(817, 246);
+            this.FlightRequestsGridView.Size = new System.Drawing.Size(827, 241);
             this.FlightRequestsGridView.TabIndex = 0;
             // 
             // toolStripWorkDestinations
@@ -527,8 +527,8 @@ namespace Client
             this.ClientSize = new System.Drawing.Size(851, 339);
             this.Controls.Add(this.panelDeleting);
             this.Controls.Add(this.panelEditing);
-            this.Controls.Add(this.panelAdding);
             this.Controls.Add(this.panelViewing);
+            this.Controls.Add(this.panelAdding);
             this.Controls.Add(this.toolStripWorkDestinations);
             this.Controls.Add(this.buttonBackAvianavForm);
             this.MaximizeBox = false;

@@ -82,11 +82,11 @@ namespace Client
             this.PassengersGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.PassengersGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.PassengersGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.PassengersGridView.Location = new System.Drawing.Point(7, 0);
+            this.PassengersGridView.Location = new System.Drawing.Point(9, 3);
             this.PassengersGridView.Name = "PassengersGridView";
             this.PassengersGridView.ReadOnly = true;
             this.PassengersGridView.RowTemplate.Height = 25;
-            this.PassengersGridView.Size = new System.Drawing.Size(401, 219);
+            this.PassengersGridView.Size = new System.Drawing.Size(495, 219);
             this.PassengersGridView.TabIndex = 1;
             // 
             // toolStripWorkPassengers
@@ -261,9 +261,9 @@ namespace Client
             this.panelViewing.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelViewing.Controls.Add(this.PassengersGridView);
             this.panelViewing.Enabled = false;
-            this.panelViewing.Location = new System.Drawing.Point(154, 48);
+            this.panelViewing.Location = new System.Drawing.Point(108, 48);
             this.panelViewing.Name = "panelViewing";
-            this.panelViewing.Size = new System.Drawing.Size(413, 226);
+            this.panelViewing.Size = new System.Drawing.Size(515, 226);
             this.panelViewing.TabIndex = 16;
             // 
             // panelEditing
@@ -276,9 +276,9 @@ namespace Client
             this.panelEditing.Controls.Add(this.comboBoxEditCriteria);
             this.panelEditing.Controls.Add(this.labelEditId);
             this.panelEditing.Enabled = false;
-            this.panelEditing.Location = new System.Drawing.Point(222, 56);
+            this.panelEditing.Location = new System.Drawing.Point(226, 56);
             this.panelEditing.Name = "panelEditing";
-            this.panelEditing.Size = new System.Drawing.Size(269, 200);
+            this.panelEditing.Size = new System.Drawing.Size(269, 218);
             this.panelEditing.TabIndex = 15;
             // 
             // comboBoxEdit
@@ -295,7 +295,7 @@ namespace Client
             // buttonEditPassenger
             // 
             this.buttonEditPassenger.Enabled = false;
-            this.buttonEditPassenger.Location = new System.Drawing.Point(7, 162);
+            this.buttonEditPassenger.Location = new System.Drawing.Point(7, 172);
             this.buttonEditPassenger.Name = "buttonEditPassenger";
             this.buttonEditPassenger.Size = new System.Drawing.Size(194, 32);
             this.buttonEditPassenger.TabIndex = 6;
@@ -361,9 +361,9 @@ namespace Client
             this.panelDeleting.Controls.Add(this.buttonDeletePassenger);
             this.panelDeleting.Controls.Add(this.labelDelete);
             this.panelDeleting.Enabled = false;
-            this.panelDeleting.Location = new System.Drawing.Point(224, 54);
+            this.panelDeleting.Location = new System.Drawing.Point(224, 112);
             this.panelDeleting.Name = "panelDeleting";
-            this.panelDeleting.Size = new System.Drawing.Size(260, 200);
+            this.panelDeleting.Size = new System.Drawing.Size(260, 163);
             this.panelDeleting.TabIndex = 17;
             // 
             // comboBoxDelete
@@ -371,7 +371,7 @@ namespace Client
             this.comboBoxDelete.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBoxDelete.FormattingEnabled = true;
-            this.comboBoxDelete.Location = new System.Drawing.Point(5, 30);
+            this.comboBoxDelete.Location = new System.Drawing.Point(5, 22);
             this.comboBoxDelete.Name = "comboBoxDelete";
             this.comboBoxDelete.Size = new System.Drawing.Size(252, 28);
             this.comboBoxDelete.TabIndex = 3;
@@ -380,9 +380,9 @@ namespace Client
             // buttonDeletePassenger
             // 
             this.buttonDeletePassenger.Enabled = false;
-            this.buttonDeletePassenger.Location = new System.Drawing.Point(5, 69);
+            this.buttonDeletePassenger.Location = new System.Drawing.Point(10, 113);
             this.buttonDeletePassenger.Name = "buttonDeletePassenger";
-            this.buttonDeletePassenger.Size = new System.Drawing.Size(185, 37);
+            this.buttonDeletePassenger.Size = new System.Drawing.Size(185, 34);
             this.buttonDeletePassenger.TabIndex = 2;
             this.buttonDeletePassenger.Text = "Удалить";
             this.buttonDeletePassenger.UseVisualStyleBackColor = true;
@@ -404,10 +404,10 @@ namespace Client
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(711, 339);
-            this.Controls.Add(this.panelEditing);
-            this.Controls.Add(this.panelDeleting);
-            this.Controls.Add(this.panelAdding);
             this.Controls.Add(this.panelViewing);
+            this.Controls.Add(this.panelDeleting);
+            this.Controls.Add(this.panelEditing);
+            this.Controls.Add(this.panelAdding);
             this.Controls.Add(this.toolStripWorkPassengers);
             this.Controls.Add(this.buttonBackAvianavForm);
             this.MaximizeBox = false;

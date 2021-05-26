@@ -170,10 +170,10 @@ namespace Client
             this.DestinationsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DestinationsGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DestinationsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DestinationsGridView.Location = new System.Drawing.Point(12, 14);
+            this.DestinationsGridView.Location = new System.Drawing.Point(10, 9);
             this.DestinationsGridView.Name = "DestinationsGridView";
             this.DestinationsGridView.RowTemplate.Height = 25;
-            this.DestinationsGridView.Size = new System.Drawing.Size(891, 199);
+            this.DestinationsGridView.Size = new System.Drawing.Size(896, 205);
             this.DestinationsGridView.TabIndex = 0;
             // 
             // panelAdding
@@ -434,9 +434,9 @@ namespace Client
             this.panelDeleting.Controls.Add(this.buttonDeleteDestination);
             this.panelDeleting.Controls.Add(this.labelDelete);
             this.panelDeleting.Enabled = false;
-            this.panelDeleting.Location = new System.Drawing.Point(332, 97);
+            this.panelDeleting.Location = new System.Drawing.Point(345, 98);
             this.panelDeleting.Name = "panelDeleting";
-            this.panelDeleting.Size = new System.Drawing.Size(225, 121);
+            this.panelDeleting.Size = new System.Drawing.Size(225, 153);
             this.panelDeleting.TabIndex = 18;
             // 
             // comboBoxDelete
@@ -444,7 +444,7 @@ namespace Client
             this.comboBoxDelete.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBoxDelete.FormattingEnabled = true;
-            this.comboBoxDelete.Location = new System.Drawing.Point(6, 30);
+            this.comboBoxDelete.Location = new System.Drawing.Point(6, 28);
             this.comboBoxDelete.Name = "comboBoxDelete";
             this.comboBoxDelete.Size = new System.Drawing.Size(170, 28);
             this.comboBoxDelete.TabIndex = 3;
@@ -453,7 +453,7 @@ namespace Client
             // buttonDeleteDestination
             // 
             this.buttonDeleteDestination.Enabled = false;
-            this.buttonDeleteDestination.Location = new System.Drawing.Point(5, 72);
+            this.buttonDeleteDestination.Location = new System.Drawing.Point(5, 109);
             this.buttonDeleteDestination.Name = "buttonDeleteDestination";
             this.buttonDeleteDestination.Size = new System.Drawing.Size(170, 34);
             this.buttonDeleteDestination.TabIndex = 2;
@@ -476,9 +476,9 @@ namespace Client
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(926, 339);
+            this.Controls.Add(this.panelDeleting);
             this.Controls.Add(this.panelAdding);
             this.Controls.Add(this.panelEditing);
-            this.Controls.Add(this.panelDeleting);
             this.Controls.Add(this.panelViewing);
             this.Controls.Add(this.buttonBackAvianavForm);
             this.Controls.Add(this.toolStripWorkDestinations);

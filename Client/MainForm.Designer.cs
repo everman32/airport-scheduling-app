@@ -57,7 +57,7 @@ namespace Client
             // buttonConnectClient
             // 
             this.buttonConnectClient.Enabled = false;
-            this.buttonConnectClient.Location = new System.Drawing.Point(204, 53);
+            this.buttonConnectClient.Location = new System.Drawing.Point(204, 52);
             this.buttonConnectClient.Name = "buttonConnectClient";
             this.buttonConnectClient.Size = new System.Drawing.Size(93, 39);
             this.buttonConnectClient.TabIndex = 2;

@@ -30,8 +30,8 @@ namespace Client
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WorkCondorsetAlternative));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSearchAlternative = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonViewSchedule = new System.Windows.Forms.ToolStripButton();
@@ -186,7 +186,7 @@ namespace Client
             this.PairwiseComparisonGridView.Location = new System.Drawing.Point(445, 188);
             this.PairwiseComparisonGridView.Name = "PairwiseComparisonGridView";
             this.PairwiseComparisonGridView.RowTemplate.Height = 25;
-            this.PairwiseComparisonGridView.Size = new System.Drawing.Size(399, 107);
+            this.PairwiseComparisonGridView.Size = new System.Drawing.Size(399, 114);
             this.PairwiseComparisonGridView.TabIndex = 10;
             this.PairwiseComparisonGridView.Visible = false;
             this.PairwiseComparisonGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.PairwiseComparisonGridView_RowsAdded);
@@ -195,17 +195,17 @@ namespace Client
             // 
             this.PreferencesGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.PreferencesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.PreferencesGridView.Location = new System.Drawing.Point(445, 26);
+            this.PreferencesGridView.Location = new System.Drawing.Point(445, 19);
             this.PreferencesGridView.Name = "PreferencesGridView";
             this.PreferencesGridView.RowTemplate.Height = 25;
-            this.PreferencesGridView.Size = new System.Drawing.Size(399, 127);
+            this.PreferencesGridView.Size = new System.Drawing.Size(399, 150);
             this.PreferencesGridView.TabIndex = 9;
             this.PreferencesGridView.Visible = false;
             // 
             // labelPreferences
             // 
             this.labelPreferences.AutoSize = true;
-            this.labelPreferences.Location = new System.Drawing.Point(444, 10);
+            this.labelPreferences.Location = new System.Drawing.Point(444, 3);
             this.labelPreferences.Name = "labelPreferences";
             this.labelPreferences.Size = new System.Drawing.Size(229, 13);
             this.labelPreferences.TabIndex = 8;
@@ -230,7 +230,7 @@ namespace Client
             this.PriorityTimesGridView.Location = new System.Drawing.Point(5, 156);
             this.PriorityTimesGridView.Name = "PriorityTimesGridView";
             this.PriorityTimesGridView.RowTemplate.Height = 25;
-            this.PriorityTimesGridView.Size = new System.Drawing.Size(416, 140);
+            this.PriorityTimesGridView.Size = new System.Drawing.Size(427, 146);
             this.PriorityTimesGridView.TabIndex = 5;
             this.PriorityTimesGridView.Visible = false;
             // 
@@ -248,27 +248,27 @@ namespace Client
             // 
             this.EstimatedTimesGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.EstimatedTimesGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.EstimatedTimesGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.EstimatedTimesGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.EstimatedTimesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.EstimatedTimesGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.EstimatedTimesGridView.DefaultCellStyle = dataGridViewCellStyle16;
             this.EstimatedTimesGridView.Location = new System.Drawing.Point(6, 72);
             this.EstimatedTimesGridView.Name = "EstimatedTimesGridView";
             this.EstimatedTimesGridView.RowTemplate.Height = 25;
-            this.EstimatedTimesGridView.Size = new System.Drawing.Size(415, 63);
+            this.EstimatedTimesGridView.Size = new System.Drawing.Size(426, 63);
             this.EstimatedTimesGridView.TabIndex = 3;
             this.EstimatedTimesGridView.Visible = false;
             // 
@@ -313,7 +313,7 @@ namespace Client
             // 
             // buttonGraphDate
             // 
-            this.buttonGraphDate.Location = new System.Drawing.Point(365, 199);
+            this.buttonGraphDate.Location = new System.Drawing.Point(365, 251);
             this.buttonGraphDate.Name = "buttonGraphDate";
             this.buttonGraphDate.Size = new System.Drawing.Size(142, 45);
             this.buttonGraphDate.TabIndex = 1;
@@ -326,10 +326,10 @@ namespace Client
             this.ScheduleGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.ScheduleGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ScheduleGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ScheduleGridView.Location = new System.Drawing.Point(15, 19);
+            this.ScheduleGridView.Location = new System.Drawing.Point(15, 45);
             this.ScheduleGridView.Name = "ScheduleGridView";
             this.ScheduleGridView.RowTemplate.Height = 25;
-            this.ScheduleGridView.Size = new System.Drawing.Size(833, 174);
+            this.ScheduleGridView.Size = new System.Drawing.Size(833, 188);
             this.ScheduleGridView.TabIndex = 0;
             // 
             // panelDeleting
@@ -339,7 +339,7 @@ namespace Client
             this.panelDeleting.Controls.Add(this.labelDelete);
             this.panelDeleting.Location = new System.Drawing.Point(245, 110);
             this.panelDeleting.Name = "panelDeleting";
-            this.panelDeleting.Size = new System.Drawing.Size(418, 99);
+            this.panelDeleting.Size = new System.Drawing.Size(418, 117);
             this.panelDeleting.TabIndex = 0;
             // 
             // comboBoxDelete
@@ -358,7 +358,7 @@ namespace Client
             this.buttonDeleteSchedule.Enabled = false;
             this.buttonDeleteSchedule.Location = new System.Drawing.Point(122, 64);
             this.buttonDeleteSchedule.Name = "buttonDeleteSchedule";
-            this.buttonDeleteSchedule.Size = new System.Drawing.Size(152, 28);
+            this.buttonDeleteSchedule.Size = new System.Drawing.Size(152, 34);
             this.buttonDeleteSchedule.TabIndex = 5;
             this.buttonDeleteSchedule.Text = "Удалить";
             this.buttonDeleteSchedule.UseVisualStyleBackColor = true;
